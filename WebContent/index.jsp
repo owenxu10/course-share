@@ -2,10 +2,11 @@
 	pageEncoding="utf-8"%>
 <%
   String path = request.getContextPath();
+  System.out.println(path);
 %>
 <html>
 <head>
-<title>Insert title here</title>
+<title>index of system</title>
 </head>
 <body>
 	<h1>计算机系统结构资源——快速入口</h1>
