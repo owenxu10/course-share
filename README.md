@@ -1,4 +1,0 @@
-course-share
-============
-
-Graduation project

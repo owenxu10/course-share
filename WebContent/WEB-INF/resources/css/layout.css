@@ -1,0 +1,383 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  padding-top: 50px;
+  background-image: url(/course-share/img/bg-grid2.png);
+  background-position: 0 40px;
+}
+
+.container {
+  max-width: 1024px;
+}
+
+#cs-header {
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+#cs-header-brand {
+  color: white;
+  padding: 5px 0 3px 0;
+  margin-left: 0;
+}
+
+#cs-header-subtitle {
+  clear: left;
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.navbar-collapse {
+  padding: 0;
+}
+
+#cs-header-nav a {
+  padding: 15px 10px 15px 10px;
+  font-size: 16px;
+}
+
+#cs-body,#cs-body-content {
+  height: 100%;
+  clear: both;
+}
+
+#cs-body-content {
+  width: 1024px;
+}
+
+#cs-north-frame {
+  margin: 15px auto;
+  clear: both;
+  overflow: hidden;
+  padding: 10px;
+}
+
+#cs-west-frame {
+  margin: 0 10px 10px 0;
+  float: left;
+  width: 160px;
+  padding: 15px;
+}
+
+#cs-center-frame {
+  margin: 0 0 10px 0;
+  float: right;
+  width: 820px;
+  padding: 0;
+}
+
+#cs-center-dialog {
+  margin: 0 0 10px 0;
+  clear: both;
+  padding: 0;
+}
+
+#cs-footer {
+  border-top: 1px solid #e5e5e5;
+  margin: 10px auto;
+  padding-top: 10px;
+}
+
+#cs-footer p {
+  text-align: center;
+  color: #333;
+}
+
+/***** Customed Style *****/
+.cs-frame-default {
+  border: 1px solid #e1e1e8;
+  background-color: #f7f7f9;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-grey {
+  border: 1px solid #dddddd;
+  background-color: #eeeeee;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-blue {
+  border: 1px solid #d0e3f0;
+  background-color: #f0f7fd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-white {
+  border: 1px solid #dddddd;
+  background-color: #fff;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-green {
+  border: 1px solid #d6e9c6;
+  background-color: #dff0d8;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-yellow {
+  border: 1px solid #faebcc;
+  background-color: #fcf8e3;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-frame-red {
+  border: 1px solid #ebccd1;
+  background-color: #f2dede;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+.cs-checkbox-text {
+  font-size: 12px;
+  padding: 2px 8px 2px 8px;
+  width: 100px;
+  text-align: left;
+}
+
+.cs-style-grey5 {
+  color: #fff;
+  background-color: #4e4e4e;
+  border-color: #2f2f2f;
+}
+
+.cs-style-grey5:hover {
+  color: #fff;
+  background-color: #3e3e3e;
+  border-color: #2f2f2f;
+}
+
+.cs-style-grey4 {
+  color: #fff;
+  background-color: #707070;
+  border-color: #434343;
+}
+
+.cs-style-grey4:hover {
+  color: #fff;
+  background-color: #5a5a5a;
+  border-color: #434343;
+}
+
+.cs-style-grey3 {
+  color: #fff;
+  background-color: #8d8d8d;
+  border-color: #55555;
+}
+
+.cs-style-grey3:hover {
+  color: #fff;
+  background-color: #717171;
+  border-color: #55555;
+}
+
+.cs-style-grey2 {
+  color: #fff;
+  background-color: #adadad;
+  border-color: #686868;
+}
+
+.cs-style-grey2:hover {
+  color: #fff;
+  background-color: #8a8a8a;
+  border-color: #686868;
+}
+
+.cs-style-grey1 {
+  color: #fff;
+  background-color: #cacaca;
+  border-color: #797979;
+}
+
+.cs-style-grey1:hover {
+  color: #fff;
+  background-color: #a2a2a2;
+  border-color: #797979;
+}
+
+.loading {
+  background: #c1c39a;
+  color: #303030;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  display: none;
+  border-radius: 5px;
+}
+
+.cs-border-red {
+  border: 2px solid #d9534f;
+}
+
+.hover_style .qtip-content {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/***** Problemset CSS *****/
+#cs-problemset-navbar {
+  width: 100%;
+}
+
+#ps-searchbar {
+  width: 480px;
+  float: left;
+  margin-right: 10px;
+}
+
+#ps-search,#ps-basket {
+  float: left;
+  margin-right: 10px;
+}
+
+#ps-pswbar {
+  width: 200px;
+  float: left;
+  margin: 0 10px 0 10px;
+}
+
+#ps-passwd-instruct {
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  padding: 3px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(/course-share/js/lib/PIE.htc);
+}
+
+#ps-passwd-error {
+  color: red;
+  float: left;
+  font-size: 14px;
+  padding-top: 7px;
+}
+
+#ps-passwd-hide {
+  float: left;
+  margin: 0 10px 0 10px;
+}
+
+.ps-hidden {
+  display: none;
+}
+
+.ps-row {
+  overflow: hidden;
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 8px;
+}
+
+.ps-col {
+  font-size: 12px;
+  float: left;
+}
+
+.ps-col p {
+  margin: 0;
+  padding: 0;
+}
+
+.ps-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0367b0;
+}
+
+.ps-type {
+  width: 75px;
+}
+
+.ps-diff {
+  width: 55px;
+}
+
+.ps-content {
+  width: 400px;
+  padding-right: 10px;
+}
+
+.ps-know {
+  width: 150px;
+}
+
+.ps-problem {
+  width: 100%;
+  clear: both;
+  overflow: hidden;
+}
+
+.ps-action {
+  float: right;
+}
+
+.ps-type-style,.ps-diff-style {
+  font-size: 12px;
+  padding: 2px 10px 2px 10px;
+}
+
+.ps-btn-style {
+  font-size: 12px;
+  padding: 2px 10px 2px 10px;
+  float: right;
+  margin-left: 4px;
+}
+
+.ps-key {
+  width: 100%;
+  clear: both;
+  border-top: 1px solid #ddd;
+  margin-top: 5px;
+  padding-top: 5px;
+  overflow: hidden;
+}
+
+.ps-key-left {
+  width: 130px;
+  font-size: 12px;
+  float: left;
+  padding-left: 55px;
+  color: #0367b0;
+}
+
+.ps-key-right {
+  width: 500px;
+  float: left;
+}
+
+.ps-key-right p {
+  margin: 0;
+  padding: 0;
+}
+
+#ps-basket-title {
+  float: left;
+  font-size: 18px;
+  margin: 4px 20px 0 10px;
+}
+
+#ps-basket-paper,#ps-basket-clear,#ps-basket-quit {
+  float: right;
+  margin-right: 10px;
+}
