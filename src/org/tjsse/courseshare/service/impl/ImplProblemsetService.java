@@ -176,7 +176,9 @@ public class ImplProblemsetService implements ProblemsetService {
         ProblemResource pr = new ProblemResource();
         pr.setType(pictureType.getExtension().toLowerCase());
         pr.setUri(PRES_PATH);
+        System.out.println("SetPictureManager");
         pr = problemResourceDao.save(pr);
+        System.out.println("SAVE");
         if (pr == null) {
           return "";
         }

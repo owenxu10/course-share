@@ -10,7 +10,7 @@ public final class Config {
   static {
     String os = System.getProperty("os.name").toLowerCase();
     if (os.startsWith("windows")) {
-      ROOT_PATH = "D:/course-share";
+      ROOT_PATH = "C:/course-share";
     } else {
       ROOT_PATH = "/var/tmp/course-share";
     }

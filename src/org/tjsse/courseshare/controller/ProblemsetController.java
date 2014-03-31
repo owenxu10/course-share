@@ -84,9 +84,12 @@ public class ProblemsetController {
       }
       String docPath = String.format("%s/%s.doc", PROBLEM_PATH, p);
       String htmlPath = String.format("%s/%s.html", PROBLEM_PATH, p);
+      System.out.println(docPath);
+      System.out.println(htmlPath);
       if (!problemsetService.convertDoc2Html(docPath, htmlPath)) {
         continue;
       }
+      System.out.println("convert");
       int c = problemsetService.splitProblem(htmlPath);
       if (c > 0) {
         count += c;

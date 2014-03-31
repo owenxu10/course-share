@@ -222,12 +222,14 @@ public class JdbcBaseDao implements BaseDao {
 
   @Override
   public <E extends Object> E save(E bean) {
-    StringBuffer attrs = new StringBuffer();
-    StringBuffer values = new StringBuffer();
-    Method[] methods = bean.getClass().getMethods();
+	  System.out.println(bean.getClass());
+    StringBuffer attrs = new StringBuffer();	//string variable
+    StringBuffer values = new StringBuffer();	//string variable
+    Method[] methods = bean.getClass().getMethods(); 
     for (Method m : methods) {
+    	System.out.println( m.getName());
       if (!m.getName().startsWith("get") || m.getName().equals("getClass")) {
-        continue;
+    	 continue;
       }
       String attr = mapBean2Table(m.getName().substring(3));
       Object value = null;
@@ -267,6 +269,7 @@ public class JdbcBaseDao implements BaseDao {
       return null;
     }
     if (result == 1) {
+    	System.out.println("result=1");
       return (E) setBeanId(bean, keyHolder.getKey().intValue());
     }
     return null;
