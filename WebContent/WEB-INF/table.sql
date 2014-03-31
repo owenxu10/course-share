@@ -2,7 +2,8 @@
 SQLyog v10.2 
 MySQL - 5.5.28 : Database - courseshare
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -40,13 +41,16 @@ DROP TABLE IF EXISTS `problem`;
 CREATE TABLE `problem` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `problem_type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `problem_media_type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `problem_file_format` varchar(20) COLLATE utf8_bin NOT NULL,
-  `problem_url` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `problem_media_type` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT 'swf',
+  `problem_file_format` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT 'doc',
+  `problem_url` varchar(1000) COLLATE utf8_bin NOT NULL DEFAULT 'html',
+  `problem_content` varchar(2000) COLLATE utf8_bin NOT NULL,
   `difficulty` int(11) NOT NULL,
-  `key_media_type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `key_file_format` varchar(20) COLLATE utf8_bin NOT NULL,
-  `key_url` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `key_media_type` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT 'swf',
+  `key_file_format` varchar(20) COLLATE utf8_bin NOT NULL  DEFAULT 'doc',
+  `key_url` varchar(1000) COLLATE utf8_bin NOT NULL DEFAULT 'html', 
+  `key_content` varchar(2000) COLLATE utf8_bin NOT NULL,
+  `knowledge` varchar(20) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -77,6 +81,15 @@ CREATE TABLE `user` (
   `type` varchar(20) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `problem_resource`;
+
+CREATE TABLE `problem_resource` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uri` varchar(50) COLLATE utf8_bin NOT NULL,
+  `type` varchar(20) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
