@@ -222,12 +222,10 @@ public class JdbcBaseDao implements BaseDao {
 
   @Override
   public <E extends Object> E save(E bean) {
-	  System.out.println(bean.getClass());
     StringBuffer attrs = new StringBuffer();	//string variable
     StringBuffer values = new StringBuffer();	//string variable
     Method[] methods = bean.getClass().getMethods(); 
     for (Method m : methods) {
-    	System.out.println( m.getName());
       if (!m.getName().startsWith("get") || m.getName().equals("getClass")) {
     	 continue;
       }
