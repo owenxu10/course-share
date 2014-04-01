@@ -8,6 +8,6 @@ generate test paper automatically.
 
 My work is to help to improve the existing project. Add some new functions in it. 
 
-Hope I can do it well！
+Hope I can do it well!
 
 Owen (Project Owner & only programmer)
