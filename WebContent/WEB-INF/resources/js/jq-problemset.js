@@ -296,7 +296,7 @@ $(function() {
   
   $('#ps-passwd-instruct').qtip({
     content : {
-      text : '任课教师请发送邮件获取密码: xzhang2000@sohu.com'
+      text : '任课教师请发送邮件获取密码: xzhang2000@sohu.com666888'
     },
     style : {
       classes: 'hover_style',
