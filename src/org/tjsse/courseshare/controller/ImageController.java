@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.Image;
+import org.tjsse.courseshare.bean.Problem;
 import org.tjsse.courseshare.service.ImageService;
 import org.tjsse.courseshare.util.Config;
+import org.tjsse.courseshare.util.LibType;
 
 @Controller
 @RequestMapping("/image")
@@ -28,10 +31,17 @@ public class ImageController {
   @Autowired
   private ImageService imageService;
 
+  /* 
+   * Action: '/index', Method: GET
+   * Default index page.
+   */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ModelAndView index() {
-    return new ModelAndView("image", "pageTitle", "素材库");
+  public ModelAndView index() { 
+    ModelMap imageMap = new ModelMap();
+    imageMap.addAttribute("libType", LibType.RESOURCE);
+    return new ModelAndView("image", imageMap);
   }
+
 
   @RequestMapping(value = "/import", method = RequestMethod.GET)
   @ResponseBody

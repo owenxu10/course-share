@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<% String path = request.getContextPath(); %>
+<% String path = request.getContextPath();System.out.println(path);%>
 
 <jsp:include page="layout.jsp" flush="true" />
 

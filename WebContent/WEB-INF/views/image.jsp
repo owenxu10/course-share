@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<% String path = request.getContextPath(); %>
+<%@ page import="org.tjsse.courseshare.util.LibType"%>
 
-<jsp:include page="layout.jsp" flush="true" />
+<%   String path = request.getContextPath(); 
+	 LibType libType = (LibType) request.getAttribute("libType");
+%>
+
+
+
+<jsp:include page="layout-header.jsp" flush="true" />
 
 <script type="text/javascript" src="<%=path %>/js/image.js"></script>

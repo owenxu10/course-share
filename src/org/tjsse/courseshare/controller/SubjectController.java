@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.Subject;
 import org.tjsse.courseshare.service.SubjectService;
 import org.tjsse.courseshare.util.Config;
+import org.tjsse.courseshare.util.LibType;
 
 @Controller
 @RequestMapping("/subject")
@@ -23,7 +25,9 @@ public class SubjectController {
 
   @RequestMapping(value = "", method = RequestMethod.GET)
   public ModelAndView index() {
-    return new ModelAndView("subject", "pageTitle", "专题库");
+    ModelMap subjectMap = new ModelMap();
+    subjectMap.addAttribute("libType", LibType.SUBJECT);
+    return new ModelAndView("subject", subjectMap);
   }
 
   @RequestMapping(value = "/import", method = RequestMethod.GET)

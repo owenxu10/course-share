@@ -1,7 +1,7 @@
 package org.tjsse.courseshare.util;
 
 public enum LibType {
-  PROBLEMSET("题库", 1), SUBJECT("专题库", 2), FLASH("动画库", 3), IMAGE("资源库", 4);
+  PROBLEMSET("题库", 1), SUBJECT("专题库", 2),  RESOURCE("资源库", 3);
   
   private String name;
   private int index;

@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%
   String path = request.getContextPath();
-  System.out.println(path);
+  //System.out.println(path);
 %>
 <html>
 <head>

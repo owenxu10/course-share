@@ -59,10 +59,10 @@ public class ProblemsetController {
     if (problems == null) {
       problems = new ArrayList<Problem>();
     }
-    ModelMap map = new ModelMap();
-    map.addAttribute("problems", problems);
-    map.addAttribute("libType", LibType.PROBLEMSET);
-    return new ModelAndView("problemset", map);
+    ModelMap problemMap = new ModelMap();
+    problemMap.addAttribute("problems", problems);
+    problemMap.addAttribute("libType", LibType.PROBLEMSET);
+    return new ModelAndView("problemset", problemMap);
   }
 
   /* 

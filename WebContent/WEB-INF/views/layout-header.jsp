@@ -42,26 +42,24 @@
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
         <ul id="cs-header-nav" class="nav navbar-nav">
-          <li class="<%=libType.isEqual(LibType.IMAGE, "active") %>">
-            <a href="<%=path%>/image">
-              <span class="glyphicon glyphicon-picture"></span> <%=LibType.IMAGE.getName() %>
-            </a>
-          </li>
-          <li class="<%=libType.isEqual(LibType.FLASH, "active") %>">
-            <a href="<%=path%>/flash">
-              <span class="glyphicon glyphicon-film"></span> <%=LibType.FLASH.getName() %>
-            </a>
-          </li> 
           <li class="<%=libType.isEqual(LibType.SUBJECT, "active") %>">
             <a href="<%=path%>/subject">
               <span class="glyphicon glyphicon-list-alt"></span> <%=LibType.SUBJECT.getName() %>
             </a>
           </li>
-          <li class="<%=libType.isEqual(LibType.PROBLEMSET, "active") %>">
+          
+           <li class="<%=libType.isEqual(LibType.PROBLEMSET, "active") %>">
             <a href="<%=path%>/problemset">
               <span class="glyphicon glyphicon-book"></span> <%=LibType.PROBLEMSET.getName() %>
             </a>
           </li>
+          
+           <li class="<%=libType.isEqual(LibType.RESOURCE, "active") %>">
+            <a href="<%=path%>/image">
+              <span class="glyphicon glyphicon-inbox"></span> <%=LibType.RESOURCE.getName() %>
+            </a>
+          </li>
+         
         </ul> <!-- #cs-header-nav -->
       </div> <!-- #cs-header-collapse -->
     </div> <!-- .container -->
