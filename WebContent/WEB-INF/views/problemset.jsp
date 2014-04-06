@@ -56,6 +56,7 @@
     <input type="text" class="form-control" id="filter-know" placeholder="知识点">
   </div>
   <hr>
+
   <%
   String types[][] = {
     {"type-all", "checked='checked'", "btn-default", "所有题型"},
@@ -91,6 +92,14 @@
     </label>
   </div>
   <% } %>
+  
+  <hr>
+  <div class="btn-group ">
+  	  <button type="button" id="upload" class="btn btn-success btn-lg">
+      <span class="glyphicon glyphicon-upload"></span> 上传题目
+    </button>
+  </div>
+
 </div> <!-- #cs-west-frame -->
 
 <div id="cs-center-frame">
