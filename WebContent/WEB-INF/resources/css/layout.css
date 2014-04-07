@@ -377,7 +377,9 @@ body {
   margin: 4px 20px 0 10px;
 }
 
-#ps-basket-paper,#ps-basket-clear,#ps-basket-quit {
+#ps-basket-paper,#ps-basket-clear,#ps-basket-quit,#ps-uploadproblem-quit,#ps-uploadproblem-upload{
   float: right;
   margin-right: 10px;
 }
+
+

@@ -38,6 +38,7 @@
     <span id="ps-passwd-error" class="ps-hidden">密码错误</span>
     <button type="button" id="ps-passwd-hide" class="btn btn-primary ps-hidden">隐藏答案</button>
   </div>  
+  
   <div id="cs-paperbasket-navbar" class="ps-hidden">
     <span id="ps-basket-title">试题篮</span>
     <button type="button" id="ps-basket-quit" class="btn btn-primary">退出</button>
@@ -47,6 +48,14 @@
     <button type="button" id="ps-basket-paper" class="btn btn-primary">
       <span class="glyphicon glyphicon-print"></span> 自动组卷
     </button>    
+  </div>
+  
+    <div id="cs-uploadproblem-navbar" class="ps-hidden">
+    <span id="ps-basket-title">上传题目</span>
+    <button type="button" id="ps-uploadproblem-quit" class="btn btn-primary">退出</button>
+    <button type="button" id="ps-uploadproblem-upload" class="btn btn-primary">
+      <span class="glyphicon glyphicon-upload"></span> 上传
+    </button>  
   </div>
 </div> <!-- #problemset-header -->
 
@@ -95,7 +104,7 @@
   
   <hr>
   <div class="btn-group ">
-  	  <button type="button" id="upload" class="btn btn-success btn-lg">
+  	  <button type="button" id="ps-upload" class="btn btn-success btn-lg">
       <span class="glyphicon glyphicon-upload"></span> 上传题目
     </button>
   </div>
