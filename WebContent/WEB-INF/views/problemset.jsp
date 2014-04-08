@@ -200,6 +200,20 @@
   <div id="paperbasket-list"></div>
 </div>
 
+
+<div id="cs-uploadproblem-dialog" class="ps-hidden">
+  <div class="input-group ">
+  <span class="input-group-addon">题目：</span>
+  <input type="text" class="form-control" placeholder="题目">
+   </div>
+   
+   <div class="input-group ">
+  <span class="input-group-addon">体型、难度、知识点、答案：</span>
+  <input type="text" class="form-control" placeholder="。。。。">
+   </div>
+
+</div>
+
 <script type="text/template" id="problem-tpl">
 <div class="ps-row <@=typeCls @>" id="<@=id @>">
   <div id="<@=id @>" class="ps-problem">
