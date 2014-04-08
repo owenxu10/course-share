@@ -206,7 +206,7 @@
   <span class="input-group-addon">题目：</span>
   <input type="text" class="form-control" placeholder="题目">
    </div>
-   
+   <br/>
    <div class="input-group ">
   <span class="input-group-addon">体型、难度、知识点、答案：</span>
   <input type="text" class="form-control" placeholder="。。。。">
