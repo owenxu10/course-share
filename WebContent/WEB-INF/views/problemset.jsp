@@ -50,13 +50,6 @@
     </button>    
   </div>
   
-    <div id="cs-uploadproblem-navbar" class="ps-hidden">
-    <span id="ps-basket-title">上传题目</span>
-    <button type="button" id="ps-uploadproblem-quit" class="btn btn-primary">退出</button>
-    <button type="button" id="ps-uploadproblem-upload" class="btn btn-primary">
-      <span class="glyphicon glyphicon-upload"></span> 上传
-    </button>  
-  </div>
 </div> <!-- #problemset-header -->
 
 <div id="cs-west-frame" class="cs-frame-default">
@@ -104,12 +97,97 @@
   
   <hr>
   <div class="btn-group ">
-  	  <button type="button" id="ps-upload" class="btn btn-success btn-lg">
+  	  <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal" data-target="#uploadModal">
       <span class="glyphicon glyphicon-upload"></span> 上传题目
     </button>
   </div>
-
 </div> <!-- #cs-west-frame -->
+
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="uploadModalLabel">上传题目</h4>
+      </div>
+      <div class="modal-body">
+        
+	 <!-- form of uploading problem -->
+		<form role="form">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">题目</label>
+		    <input type="text" class="form-control" id="inputProblem" placeholder="输入题目...">
+		  </div>
+	    <label >题型</label>
+	    <div>
+		 <%
+		  String typediffs[][] = {
+		    {"concept",  "cs-frame-grey", "概念题"},
+		    {"blankfill", "cs-frame-blue", "填空题"},
+		    {"choice",  "cs-frame-green", "选择题"},
+		    {"question",  "cs-frame-yellow", "问答题"},
+		    {"integrate", "cs-frame-red", "综合题"}
+		  };
+		  for(String[] d : typediffs) { %>
+		   <label class="radio-inline">
+		      <input type="radio" name="typeRadio"  value="<%=d[0] %>" id="<%=d[0] %>" >
+		      <span class="btn cs-radio-text <%=d[1] %>"><%=d[2] %></span>
+		   </label>
+ 		 <% } %>
+		 </div>
+	    
+		<label >难度</label>
+		<div>
+		 <%
+		  String uploaddiffs[][] = {
+		    {"btn-primary", "1级", "1"},
+		    {"btn-info", "2级", "2"},
+		    {"btn-success", "3级", "3"},
+		    {"btn-warning", "4级", "4"},
+		    {"btn-danger", "5级", "5"}
+		  };
+		  for(String[] d : uploaddiffs) { %>
+		   <label class="radio-inline">
+		      <input type="radio" name="diffRadio"  value="<%=d[1] %>" id="<%=d[2] %>">
+		      <span class="btn cs-radio-text <%=d[0] %>"><%=d[1] %></span>
+		   </label>
+ 		 <% } %>
+		 </div>
+		 
+		
+		
+		  <br/>
+		  <div class="form-group">
+		    <label for="exampleInputFile">File input</label>
+		    <input type="file" id="exampleInputFile">
+		    <p class="help-block">Example block-level help text here.</p>
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Check me out
+		    </label>
+		  </div>
+		</form>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
+        <button type="button" class="btn btn-primary">上传</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+ <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+ <script src="<%=path %>/js/lib/jquery.js"></script>
+ <!-- Include all compiled plugins (below), or include individual files as needed -->
+ <script src="<%=path %>/js/lib/bootstrap.min.js"></script>
+
+
+
 
 <div id="cs-center-frame">
   <div class="ps-row cs-frame-default">
@@ -200,19 +278,6 @@
   <div id="paperbasket-list"></div>
 </div>
 
-
-<div id="cs-uploadproblem-dialog" class="ps-hidden">
-  <div class="input-group ">
-  <span class="input-group-addon">题目：</span>
-  <input type="text" class="form-control" placeholder="题目">
-   </div>
-   <br/>
-   <div class="input-group ">
-  <span class="input-group-addon">体型、难度、知识点、答案：</span>
-  <input type="text" class="form-control" placeholder="。。。。">
-   </div>
-
-</div>
 
 <script type="text/template" id="problem-tpl">
 <div class="ps-row <@=typeCls @>" id="<@=id @>">

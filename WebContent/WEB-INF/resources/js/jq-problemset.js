@@ -446,18 +446,14 @@ $(function() {
    * Click to show upload problem.
    */
   $('button#ps-upload').click(function() {
-	    _hide('#cs-problemset-navbar', '#cs-west-frame', '#cs-center-frame');
-	    _show('#cs-uploadproblem-navbar','#cs-uploadproblem-dialog');
-	   
+	  
   });
 
   
   
   /* Events in upload problem */
   $('button#ps-uploadproblem-quit').click(function() {
-	    _show('#cs-problemset-navbar', '#cs-west-frame', '#cs-center-frame');
-	    _hide('#cs-uploadproblem-navbar', '#cs-uploadproblem-dialog');
-	    return;
+	  
 	  });
 
 });

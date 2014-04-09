@@ -66,6 +66,10 @@ body {
   padding: 15px;
 }
 
+#cs-uploadproblem-frame{
+
+}
+
 #cs-center-frame {
   margin: 0 0 10px 0;
   float: right;
@@ -151,6 +155,13 @@ body {
   font-size: 12px;
   padding: 2px 8px 2px 8px;
   width: 100px;
+  text-align: left;
+}
+
+.cs-radio-text {
+  font-size: 12px;
+  padding: 2px 8px 2px 8px;
+  width: 75px;
   text-align: left;
 }
 
