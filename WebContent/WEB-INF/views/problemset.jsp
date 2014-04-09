@@ -135,8 +135,8 @@
 		      <span class="btn cs-radio-text <%=d[1] %>"><%=d[2] %></span>
 		   </label>
  		 <% } %>
-		 </div>
-	    
+		</div>
+	    <br/>
 		<label >难度</label>
 		<div>
 		 <%
@@ -154,20 +154,22 @@
 		   </label>
  		 <% } %>
 		 </div>
-		 
 		
-		
+		 <br/>
+		 <div class="form-group">
+		    <label for="exampleInputEmail1">题目内容</label>
+		    <textarea class="form-control" id="inputProblem" rows="5" placeholder="输入题目内容..."></textarea>
+		  </div>
+		  
 		  <br/>
+		  
 		  <div class="form-group">
 		    <label for="exampleInputFile">File input</label>
 		    <input type="file" id="exampleInputFile">
 		    <p class="help-block">Example block-level help text here.</p>
 		  </div>
-		  <div class="checkbox">
-		    <label>
-		      <input type="checkbox"> Check me out
-		    </label>
-		  </div>
+		  
+
 		</form>
 
 
