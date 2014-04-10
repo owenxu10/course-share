@@ -445,15 +445,32 @@ $(function() {
   /**
    * Click to show upload problem.
    */
-  $('button#ps-upload').click(function() {
-	  
+  $('button#problemUpload').click(function() {
+	  alert('click');
   });
+
+  
 
   
   
   /* Events in upload problem */
-  $('button#ps-uploadproblem-quit').click(function() {
-	  
-	  });
+  $("#textkey").click(function(){
+	  if ($("#textkey").is(":checked"))          
+		  _show('#textareakey');
+	  else
+		  _hide('#textareakey');
+	});
+  
+  $("#filekey").click(function(){
+	  if ($("#filekey").is(":checked"))      
+		  _show('#uploadkey');
+	  else
+		  _hide('#uploadkey');
+  });
 
+  
+  
 });
+
+
+

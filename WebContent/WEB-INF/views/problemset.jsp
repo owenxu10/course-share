@@ -154,19 +154,43 @@
 		   </label>
  		 <% } %>
 		 </div>
-		
-		 <br/>
+		<br/>
 		 <div class="form-group">
-		    <label for="exampleInputEmail1">题目内容</label>
+		    <label >知识点</label>
+		    <input type="text" class="form-control" id="inputknowledge" placeholder="知识点...">
+		  </div>
+		  
+		 <div class="form-group">
+		    <label >题目内容</label>
 		    <textarea class="form-control" id="inputProblem" rows="5" placeholder="输入题目内容..."></textarea>
 		  </div>
 		  
-		  <br/>
+		  <hr>
 		  
-		  <div class="form-group">
-		    <label for="exampleInputFile">File input</label>
-		    <input type="file" id="exampleInputFile">
-		    <p class="help-block">Example block-level help text here.</p>
+		  <label >答案信息</label>
+		  
+		  <div>
+		   <label class="checkbox-inline">
+		      <input type="checkbox" name="keyCheckbox"  value="text" id="textkey"> 
+		      <span class="cs-typecheckbox-text">文字类型</span>
+		   </label>
+		   <label class="checkbox-inline">
+		      <input type="checkbox" name="keyCheckbox"  value="file" id="filekey"> 
+		      <span class="cs-typecheckbox-text ">文件类型</span>
+		   </label>
+		 </div>
+		 
+		 <br/>
+		 
+		  <div class="form-group ps-hidden" id="textareakey">
+		    <label for="exampleInputEmail1">答案内容</label>
+		    <textarea class="form-control" id="inputProblem" rows="5" placeholder="输入题目内容..."></textarea>
+		  </div>
+		
+		  <div class="form-group ps-hidden"  id="uploadkey">
+		    <label for="exampleInputFile">答案文件</label>
+		    <input type="file" id="uploadFile">
+		    <p class="help-block">请上传包含答案的文件</p>
 		  </div>
 		  
 
@@ -176,8 +200,7 @@
 
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
-        <button type="button" class="btn btn-primary">上传</button>
+        <button type="button" class="btn btn-primary" id='problemUpload'>上传</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

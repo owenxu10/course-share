@@ -165,6 +165,12 @@ body {
   text-align: left;
 }
 
+.cs-typecheckbox-text{
+  font-size: 12px;
+  padding: 2px 40px 2px 8px;
+  text-align: center;
+}
+
 .cs-style-grey5 {
   color: #fff;
   background-color: #4e4e4e;
