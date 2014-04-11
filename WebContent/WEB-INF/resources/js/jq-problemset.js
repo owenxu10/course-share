@@ -450,8 +450,6 @@ $(function() {
   });
 
   
-
-  
   
   /* Events in upload problem */
   $("#textkey").click(function(){
