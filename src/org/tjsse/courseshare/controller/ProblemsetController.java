@@ -106,10 +106,15 @@ public class ProblemsetController {
    */
   @RequestMapping(value = "/upload", method = RequestMethod.GET)
   @ResponseBody
-  public String uploadProblems() {
+  public ModelAndView uploadProblems(@RequestParam(value = "pinfo") String pinfo) {
 	
-	System.out.println("aa");
-	return "upload function";
+	String result = "false";
+	System.out.println(pinfo);
+	ModelAndView mav = this.index();
+	//if success 
+	result= "true";
+	mav.addObject("upload", result);
+	return mav;
   }
   
   

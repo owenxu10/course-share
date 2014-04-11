@@ -1,4 +1,5 @@
 $(function() {
+	
 
   /***** Global variables. *****/
 
@@ -446,7 +447,8 @@ $(function() {
    * Click to show upload problem.
    */
   $('button#problemUpload').click(function() {
-	  window.location.href = ROOT + 'problemset/upload';
+	  window.location.href = ROOT + 'problemset/upload?pinfo=abcd';
+
   });
 
   
@@ -466,8 +468,6 @@ $(function() {
 		  _hide('#uploadkey');
   });
 
-  
-  
 });
 
 

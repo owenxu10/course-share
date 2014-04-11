@@ -2,8 +2,10 @@
 <%@ page import="org.tjsse.courseshare.bean.Problem" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <% 
+
   String path = request.getContextPath();
   List<Problem> problems = (List<Problem>) request.getAttribute("problems");
+  
   int offset = 0;
   if (problems.size() > 0) {
     for (Problem p : problems) {
@@ -12,6 +14,7 @@
       }
     }
     ++offset;
+    
   }
 %>
 <jsp:include page="layout-header.jsp" flush="true" />
@@ -97,9 +100,24 @@
   
   <hr>
   <div class="btn-group ">
-  	  <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal" data-target="#uploadModal">
-      <span class="glyphicon glyphicon-upload"></span> 上传题目
+   <% 
+   String targetModal;
+   String result = (String) request.getAttribute("upload");
+  	  if(result==null) 
+	  	result="false";
+  	  
+  	  System.out.println(result);
+   	  if(result == "false") 
+   		targetModal="#uploadModal";
+   		else
+   			targetModal ="#successModal";
+   	%>
+    <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal" 
+    data-target="<%= targetModal %>">
+     <span class="glyphicon glyphicon-upload"></span> 上传题目
     </button>
+
+     
   </div>
 </div> <!-- #cs-west-frame -->
 
@@ -191,17 +209,28 @@
 		    <label for="exampleInputFile">答案文件</label>
 		    <input type="file" id="uploadFile">
 		    <p class="help-block">请上传包含答案的文件</p>
-		  </div>
-		  
-
+		  </div> 
 		</form>
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id='problemUpload'>上传</button>
       </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="uploadModalLabel">上传成功</h4>
+	     </div>
+      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
