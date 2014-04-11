@@ -446,7 +446,7 @@ $(function() {
    * Click to show upload problem.
    */
   $('button#problemUpload').click(function() {
-	  alert('click');
+	  window.location.href = ROOT + 'problemset/upload';
   });
 
   

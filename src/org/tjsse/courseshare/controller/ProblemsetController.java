@@ -99,6 +99,22 @@ public class ProblemsetController {
     return count + " problems are imported";
   }
   
+  
+  /* 
+   * Action: '/upload', Method: GET
+   * Upload problems from web page.
+   */
+  @RequestMapping(value = "/upload", method = RequestMethod.GET)
+  @ResponseBody
+  public String uploadProblems() {
+	
+	System.out.println("aa");
+	return "upload function";
+  }
+  
+  
+  
+  
   /*
    * Action: '/clear', Method: GET
    * Clear all problem records in DB and files on disk.
