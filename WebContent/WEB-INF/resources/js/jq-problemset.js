@@ -442,15 +442,27 @@ $(function() {
     return;
   });
   
-  
   /**
    * Click to show upload problem.
    */
   $('button#problemUpload').click(function() {
-	  window.location.href = ROOT + 'problemset/upload?pinfo=abcd';
+
+	var updateAddress = ROOT + 'problemset/upload';
+	console.log(updateAddress);
+	  $.get(updateAddress,
+			    {
+		  		  pinfo:"abcd"
+			    },
+			    function(data,status){
+			      alert("aaa");
+			    });
+	});
+
+ 
+  $('button#closeUploadSuccess').click(function() {
+	  window.location.href = ROOT + 'problemset/';
 
   });
-
   
   
   /* Events in upload problem */
