@@ -100,8 +100,7 @@
   
   <hr>
   <div class="btn-group ">
-    <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal" 
-    data-target="#uploadModal">
+    <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal">
      <span class="glyphicon glyphicon-upload"></span> 上传题目
     </button>
   </div>

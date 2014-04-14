@@ -445,7 +445,19 @@ $(function() {
   /**
    * Click to show upload problem.
    */
+  
+
+  $('button#ps-upload').click(function(){
+	  $('#uploadModal').modal({
+		    backdrop:true,
+		    keyboard:true,
+		    show:true
+		});
+  });
+  
+  
   $('button#problemUpload').click(function() {
+	  
 
 	var updateAddress = ROOT + 'problemset/upload';
 	console.log(updateAddress);
@@ -454,25 +466,13 @@ $(function() {
 		  		  pinfo:"abcd"
 			    },
 			    function(data,status){
-			    	$('#uploadModal').modal('hide');
-			    	$('#uploadModal').on('hidden.bs.modal', function (e) {
-			    		$('#successModal').modal({
-				    	    backdrop:true,
-				    	    keyboard:true,
-				    	    show:true
-				    	});
-			    	});
-			  /*
-			    	$('#successModal').modal({
+              	    $('#uploadModal').modal('hide');
+		    		$('#successModal').modal({
 			    	    backdrop:true,
 			    	    keyboard:true,
 			    	    show:true
 			    	});
-			    	
-			    	
-			    	
-	*/
-		});
+			   });
 	});
 
  
