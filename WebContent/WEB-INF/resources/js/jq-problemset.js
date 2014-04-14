@@ -454,15 +454,15 @@ $(function() {
 		  		  pinfo:"abcd"
 			    },
 			    function(data,status){
-			    	$('button#ps-uploadClose').click();
-			//    	$('#uploadModal').modal('hide');
-/*  	    		$('#successModal').modal({
+			    	$('#uploadModal').modal('hide');
+			    	$('#uploadModal').on('hidden.bs.modal', function (e) {
+			    		$('#successModal').modal({
 				    	    backdrop:true,
 				    	    keyboard:true,
 				    	    show:true
 				    	});
 			    	});
-			
+			  /*
 			    	$('#successModal').modal({
 			    	    backdrop:true,
 			    	    keyboard:true,
