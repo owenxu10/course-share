@@ -100,33 +100,23 @@
   
   <hr>
   <div class="btn-group ">
-   <% 
-   String targetModal;
-   String result = (String) request.getAttribute("upload");
-  	  if(result==null) 
-	  	result="false";
-  	  
-  	  System.out.println(result);
-   	  if(result == "false") 
-   		targetModal="#uploadModal";
-   		else
-   			targetModal ="#successModal";
-   	%>
     <button type="button" id="ps-upload" class="btn btn-success btn-lg" data-toggle="modal" 
-    data-target="<%= targetModal %>">
+    data-target="#uploadModal">
      <span class="glyphicon glyphicon-upload"></span> 上传题目
     </button>
-
-     
   </div>
 </div> <!-- #cs-west-frame -->
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" id="ps-uploadClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="uploadModalLabel">上传题目</h4>
       </div>
       <div class="modal-body">

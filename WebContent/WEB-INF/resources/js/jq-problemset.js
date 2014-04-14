@@ -454,11 +454,30 @@ $(function() {
 		  		  pinfo:"abcd"
 			    },
 			    function(data,status){
-			      alert("aaa");
-			    });
+			    	$('button#ps-uploadClose').click();
+			//    	$('#uploadModal').modal('hide');
+/*  	    		$('#successModal').modal({
+				    	    backdrop:true,
+				    	    keyboard:true,
+				    	    show:true
+				    	});
+			    	});
+			
+			    	$('#successModal').modal({
+			    	    backdrop:true,
+			    	    keyboard:true,
+			    	    show:true
+			    	});
+			    	
+			    	
+			    	
+	*/
+		});
 	});
 
  
+  
+  
   $('button#closeUploadSuccess').click(function() {
 	  window.location.href = ROOT + 'problemset/';
 
