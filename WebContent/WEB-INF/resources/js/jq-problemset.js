@@ -457,13 +457,32 @@ $(function() {
   
   
   $('button#problemUpload').click(function() {
-	  
-
+	 //get the data from page
+	 var problemTitle = $("#problemTitle").val();
+	 var problemType= $("input[name='typeRadio']:checked").val();
+	 var problemDiff= $("input[name='diffRadio']:checked").val();
+	 var problemKnowledge= $("#inputknowledge").val();
+	 var problemContent = $("#problemContent").val();
+	 var keyCheckbox = [];
+	 var keyContent = $("#keyContent").val(); 
+	 var uploadFile = $("#uploadFile").val();
+	 
+	 $("input[name='keyCheckbox']:checked").each(function() {
+		 keyCheckbox.push($(this).val()); 
+	    });
+	//console.log(problemType );
 	var updateAddress = ROOT + 'problemset/upload';
 	console.log(updateAddress);
 	  $.get(updateAddress,
 			    {
-		  		  pinfo:"abcd"
+		  		  problemTitle:problemTitle,
+		  		  problemType:problemTypes,
+		  	 	  problemDiff:problemDiff,
+		  	 	  problemKnowledge:problemKnowledge,
+		  	 	  problemContent:problemContent,
+		  	 	  keyCheckbox:keyCheckbox,
+		  	 	  keyContent:keyContent,
+		  	 	  uploadFile:uploadFile
 			    },
 			    function(data,status){
               	    $('#uploadModal').modal('hide');

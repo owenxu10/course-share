@@ -124,7 +124,7 @@
 		<form role="form">
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">题目</label>
-		    <input type="text" class="form-control" id="inputProblem" placeholder="输入题目...">
+		    <input type="text" class="form-control" id="problemTitle" placeholder="输入题目...">
 		  </div>
 	    <label >题型</label>
 	    <div>
@@ -169,7 +169,7 @@
 		  
 		 <div class="form-group">
 		    <label >题目内容</label>
-		    <textarea class="form-control" id="inputProblem" rows="5" placeholder="输入题目内容..."></textarea>
+		    <textarea class="form-control" id="problemContent" rows="5" placeholder="输入题目内容..."></textarea>
 		  </div>
 		  
 		  <hr>
@@ -191,7 +191,7 @@
 		 
 		  <div class="form-group ps-hidden" id="textareakey">
 		    <label for="exampleInputEmail1">答案内容</label>
-		    <textarea class="form-control" id="inputProblem" rows="5" placeholder="输入题目内容..."></textarea>
+		    <textarea class="form-control" id="keyContent" rows="5" placeholder="输入答案内容..."></textarea>
 		  </div>
 		
 		  <div class="form-group ps-hidden"  id="uploadkey">

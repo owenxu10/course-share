@@ -106,10 +106,14 @@ public class ProblemsetController {
    */
   @RequestMapping(value = "/upload", method = RequestMethod.GET)
   @ResponseBody
-  public String uploadProblems(@RequestParam(value = "pinfo") String pinfo) {
+  public String uploadProblems(@RequestParam("problemTitle") String problemTitle,
+		  						@RequestParam("problemDiff") String problemDiff,
+		  						@RequestParam("problemType") String problemType) {
 	
 	String result = "false";
-	System.out.println(pinfo);
+	System.out.println(problemTitle);
+	System.out.println(problemDiff);
+	System.out.println(problemType);
 	//if success 
 	result= "true";
 	return result;
