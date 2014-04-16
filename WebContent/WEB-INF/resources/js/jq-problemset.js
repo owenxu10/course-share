@@ -457,45 +457,47 @@ $(function() {
   
   
   $('button#problemUpload').click(function() {
-	 //get the data from page
-	 var problemTitle = $("#problemTitle").val();
-	 var problemType= $("input[name='typeRadio']:checked").val();
-	 var problemDiff= $("input[name='diffRadio']:checked").val();
-	 var problemKnowledge= $("#inputknowledge").val();
-	 var problemContent = $("#problemContent").val();
-	 var keyCheckbox = [];
-	 var keyContent = $("#keyContent").val(); 
-	 var uploadFile = $("#uploadFile").val();
-	 
-	 $("input[name='keyCheckbox']:checked").each(function() {
-		 keyCheckbox.push($(this).val()); 
-	    });
-	//console.log(problemType );
-	var updateAddress = ROOT + 'problemset/upload';
-	console.log(updateAddress);
-	  $.get(updateAddress,
-			    {
-		  		  problemTitle:problemTitle,
-		  		  problemType:problemTypes,
-		  	 	  problemDiff:problemDiff,
-		  	 	  problemKnowledge:problemKnowledge,
-		  	 	  problemContent:problemContent,
-		  	 	  keyCheckbox:keyCheckbox,
-		  	 	  keyContent:keyContent,
-		  	 	  uploadFile:uploadFile
-			    },
-			    function(data,status){
-              	    $('#uploadModal').modal('hide');
-		    		$('#successModal').modal({
-			    	    backdrop:true,
-			    	    keyboard:true,
-			    	    show:true
-			    	});
-			   });
-	});
+	//get the data from page
+		 var problemTitle = $("#problemTitle").val();
+		 var problemType= $("input[name='typeRadio']:checked").val();
+		 var problemDiff= $("input[name='diffRadio']:checked").val();
+		 var problemKnowledge= $("#inputknowledge").val();
+		 var problemContent = $("#problemContent").val();
+		 var keyTypeText = "null";
+		 var keyTypeFile = "null";
+		 var keyContent = $("#keyContent").val(); 
+		 var uploadFile = $("#uploadFile").val();
+		 
+		 $("input[name='keyCheckbox']:checked").each(function() {
+			 console.log($(this).val());
+			 if($(this).val()=="text") keyTypeText="text";
+			 if($(this).val()=="file") keyTypeFile="file";
+		    });
+		 console.log(keyTypeText);
+		 console.log(keyTypeFile);
+		 
+		var updateAddress = ROOT + 'problemset/upload';
+		  $.get(updateAddress, {  problemTitle: problemTitle,
+								  problemType:problemType,
+								  problemDiff:problemDiff,
+								  problemKnowledge:problemKnowledge,
+								  problemContent:problemContent,
+								  keyTypeText:keyTypeText,
+								  keyTypeFile: keyTypeFile,
+								  keyContent:keyContent,
+								  uploadFile:uploadFile
+								  })
+				     .done(function( data ) {
+				    	$('#uploadModal').modal('hide');
+				 		$('#successModal').modal({
+				   	    backdrop:true,
+				   	    keyboard:true,
+				   	    show:true
+				 		});
+				     });
+		  
+});
 
- 
-  
   
   $('button#closeUploadSuccess').click(function() {
 	  window.location.href = ROOT + 'problemset/';

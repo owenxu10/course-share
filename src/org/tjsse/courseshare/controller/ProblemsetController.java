@@ -106,14 +106,31 @@ public class ProblemsetController {
    */
   @RequestMapping(value = "/upload", method = RequestMethod.GET)
   @ResponseBody
-  public String uploadProblems(@RequestParam("problemTitle") String problemTitle,
+  public String uploadProblems( @RequestParam("problemTitle") String problemTitle,
+		  						@RequestParam("problemType") String problemType,
 		  						@RequestParam("problemDiff") String problemDiff,
-		  						@RequestParam("problemType") String problemType) {
+		  						@RequestParam("problemKnowledge") String problemKnowledge,
+		  						@RequestParam("problemContent") String problemContent,
+		  						@RequestParam("keyTypeText") String keyTypeText,
+		  						@RequestParam("keyTypeFile") String keyTypeFile,
+		  						@RequestParam("keyContent") String keyContent,
+		  						@RequestParam("uploadFile") String uploadFile
+		  						) {
 	
 	String result = "false";
 	System.out.println(problemTitle);
 	System.out.println(problemDiff);
 	System.out.println(problemType);
+	System.out.println(problemKnowledge);
+	System.out.println(problemContent);
+	System.out.println(keyTypeText);
+	System.out.println(keyTypeFile);
+	System.out.println(keyContent);
+	System.out.println(uploadFile);
+	
+	
+	
+	
 	//if success 
 	result= "true";
 	return result;

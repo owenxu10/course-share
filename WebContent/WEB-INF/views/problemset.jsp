@@ -148,15 +148,15 @@
 		<div>
 		 <%
 		  String uploaddiffs[][] = {
-		    {"btn-primary", "1级", "1"},
-		    {"btn-info", "2级", "2"},
-		    {"btn-success", "3级", "3"},
-		    {"btn-warning", "4级", "4"},
-		    {"btn-danger", "5级", "5"}
+		    {"btn-primary", "1"},
+		    {"btn-info", "2"},
+		    {"btn-success", "3"},
+		    {"btn-warning", "4"},
+		    {"btn-danger", "5"}
 		  };
 		  for(String[] d : uploaddiffs) { %>
 		   <label class="radio-inline">
-		      <input type="radio" name="diffRadio"  value="<%=d[1] %>" id="<%=d[2] %>">
+		      <input type="radio" name="diffRadio"  value="<%=d[1] %>" id="<%=d[1] %>">
 		      <span class="btn cs-radio-text <%=d[0] %>"><%=d[1] %></span>
 		   </label>
  		 <% } %>
