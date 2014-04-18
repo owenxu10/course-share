@@ -111,15 +111,12 @@
 </div> <!-- #cs-west-frame -->
 
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
      <!-- form of uploading problem -->
-		<form role="form" id="uploadForm" enctype="multipart/form-data">
+		<form role="form" id="uploadForm" " method="POST" enctype="multipart/form-data" action="/course-share/problemset/upload">
       <div class="modal-header">
         <button type="button" id="ps-uploadClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="uploadModalLabel">上传题目</h4>

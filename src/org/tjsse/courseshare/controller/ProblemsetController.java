@@ -1,6 +1,8 @@
 package org.tjsse.courseshare.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -102,31 +104,51 @@ public class ProblemsetController {
     return count + " problems are imported";
   }
   
+  
+
+  
   /* 
-   * Action: '/upload', Method: GET
+   * Action: '/upload', Method: POST
    * Upload problems from web page.
    */
-  @RequestMapping(value = "/upload", method = RequestMethod.POST)
-  @ResponseBody
-  public String uploadProblems( /*@RequestParam("typeRadio") String problemType,
-		  						@RequestParam("diffRadio") String problemDiff,
-		  						@RequestParam("inputknowledge") String problemKnowledge,
-		  						@RequestParam("problemContent") String problemContent,
-		  						@RequestParam("keyText") String keyTypeText,
-		  						@RequestParam("keyPic") String keyTypePic,
-		  						@RequestParam("keyContent") String keyContent*/
-		  						@RequestParam("uploadFile") MultipartFile uploadFile
-		  						) {
+  @RequestMapping(value="/upload", method=RequestMethod.POST)
+  public @ResponseBody String uploadProblems(@RequestParam("typeRadio") String problemType,
+											@RequestParam("diffRadio") String problemDiff,
+											@RequestParam("inputknowledge") String problemKnowledge,
+											@RequestParam("problemContent") String problemContent,
+											@RequestParam("keyText") String keyTypeText,
+											@RequestParam("keyPic") String keyTypePic,
+											@RequestParam("keyContent") String keyContent,
+								            @RequestParam("uploadFile") MultipartFile file){
+ 
 	
 	String result = "false";
 	
-	//System.out.println(problemDiff);
-	//	System.out.println(problemType);
-	//	System.out.println(problemKnowledge);
-	//	System.out.println(problemContent);
-	//	System.out.println(keyTypeText);
-	//	System.out.println(keyContent);
-	System.out.println(uploadFile);
+	System.out.println(problemDiff);
+		System.out.println(problemType);
+	System.out.println(problemKnowledge);
+		System.out.println(problemContent);
+	System.out.println(keyTypeText);
+		System.out.println(keyContent);
+	 if (!file.isEmpty()) {
+         try {
+             byte[] bytes = file.getBytes();
+             BufferedOutputStream stream =
+                     new BufferedOutputStream(new FileOutputStream(new File(problemContent + "-uploaded")));
+             stream.write(bytes);
+             stream.close(); // 获取文件类型  
+             System.out.println(file.getContentType());  
+             // 获取文件大小  
+             System.out.println(file.getSize());  
+             // 获取文件名称  
+             System.out.println(file.getOriginalFilename());  
+             return "You successfully uploaded " + problemContent + " into " + problemContent + "-uploaded !";
+         } catch (Exception e) {
+             return "You failed to upload " + problemContent + " => " + e.getMessage();
+         }
+     } else {
+         return "You failed to upload " + problemContent + " because the file was empty.";
+     }
 	
 	/*
 	problemsetService.uploadProblem(problemType,
@@ -140,8 +162,8 @@ public class ProblemsetController {
 	*/
 	
 	//if success 
-	result= "true";
-	return result;
+	// result= "true";
+	//return result;
   }
   
   

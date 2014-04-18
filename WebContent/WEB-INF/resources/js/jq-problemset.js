@@ -471,9 +471,11 @@ $(function() {
 		}
 			
 	});
-  
 	
   $('button#problemUpload').click(function() {
+	  console.log("aa");
+	  $('#uploadForm').submit();
+	  
 	/*get the data from page
 		 var problemType= $("input[name='typeRadio']:checked").val();
 		 var problemDiff= $("input[name='diffRadio']:checked").val();
@@ -489,7 +491,7 @@ $(function() {
 			 if($(this).val()=="text") keyTypeText="text";
 			 if($(this).val()=="pic") keyTypePic="pic";
 		    });
-		    */ 
+		   
 		 console.log($('#uploadFile').val());
 		
 		var updateAddress = ROOT + 'problemset/upload';
