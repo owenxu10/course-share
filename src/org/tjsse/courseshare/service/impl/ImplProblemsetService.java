@@ -36,6 +36,7 @@ import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.tjsse.courseshare.bean.DSPicture;
 import org.tjsse.courseshare.bean.Problem;
 import org.tjsse.courseshare.bean.ProblemResource;
@@ -176,9 +177,7 @@ public class ImplProblemsetService implements ProblemsetService {
         ProblemResource pr = new ProblemResource();
         pr.setType(pictureType.getExtension().toLowerCase());
         pr.setUri(PRES_PATH);
-        System.out.println("SetPictureManager");
         pr = problemResourceDao.save(pr);
-        System.out.println("SAVE");
         if (pr == null) {
           return "";
         }
@@ -187,6 +186,10 @@ public class ImplProblemsetService implements ProblemsetService {
             pr.getType());
         // Web URI to access problem resources.
         String presUrl = String.format("%s%d", PRES_URL, pr.getId());
+
+        System.out.println("bbb");
+        System.out.println(presUrl);
+        
         return writeFile(content, presPath) ? presUrl : "";
       }
     });
@@ -285,6 +288,37 @@ public class ImplProblemsetService implements ProblemsetService {
     }
     return count;
   }
+  
+  @Override
+  public boolean uploadProblem( String problemType,
+						    String problemDiff,
+							String problemKnowledge,
+						    String problemContent,
+							String keyTypeText,
+							String keyTypePic,
+							String keyContent,
+							String uploadFile) {
+	  
+	  
+    System.out.println(problemType);
+	System.out.println(problemDiff);
+	System.out.println(problemKnowledge);
+	System.out.println(problemContent);
+	System.out.println(keyTypeText);
+	System.out.println(keyTypePic);
+	System.out.println(keyContent);
+	System.out.println(uploadFile);
+	
+	//key have picture
+	if(keyTypePic!="null"){
+		//save this picure into the DB and FS
+	}
+	
+		
+	  return true;
+	  
+  }
+  
 
   // @Override
   // public List<Problem> findProblems() {

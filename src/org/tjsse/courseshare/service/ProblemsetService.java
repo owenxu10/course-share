@@ -13,7 +13,15 @@ public interface ProblemsetService {
   public int splitProblem(String htmlPath);
   
   public void removeAll();
-
+  
+  public boolean uploadProblem( String problemType,
+		    String problemDiff,
+			String problemKnowledge,
+		    String problemContent,
+			String keyTypeText,
+			String keyTypePic,
+			String keyContent,
+			String uploadFile) ;
 //  public List<Problem> findProblems();
 
 //  public List<Problem> findProblems(String[] contents);

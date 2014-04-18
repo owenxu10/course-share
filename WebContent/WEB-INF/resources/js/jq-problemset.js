@@ -2,7 +2,8 @@ $(function() {
 	
 
   /***** Global variables. *****/
-
+  var FileReader = window.FileReader;
+  var base64Image;
   var CLS_P_TYPE = {
     '概念题' : 'cs-frame-grey',
     '填空题' : 'cs-frame-blue',
@@ -454,36 +455,70 @@ $(function() {
 		    show:true
 		});
   });
+	
   
+
+	$("#uploadFile").change(function() {
+		
+		if (FileReader) {
+			var reader = new FileReader();
+				file = this.files[0];
+			reader.onload = function(e) {
+				base64Image = e.target.result;
+			};
+			reader.readAsDataURL(file);
+			
+		}
+			
+	});
   
+	
   $('button#problemUpload').click(function() {
-	//get the data from page
-		 var problemTitle = $("#problemTitle").val();
+	/*get the data from page
 		 var problemType= $("input[name='typeRadio']:checked").val();
 		 var problemDiff= $("input[name='diffRadio']:checked").val();
 		 var problemKnowledge= $("#inputknowledge").val();
 		 var problemContent = $("#problemContent").val();
 		 var keyTypeText = "null";
-		 var keyTypeFile = "null";
+		 var keyTypePic = "null";
 		 var keyContent = $("#keyContent").val(); 
-		 var uploadFile = $("#uploadFile").val();
+		 var uploadFile = document.getElementById("#uploadAddress").value;/// $("#uploadAddress").val();
 		 
 		 $("input[name='keyCheckbox']:checked").each(function() {
 			 console.log($(this).val());
 			 if($(this).val()=="text") keyTypeText="text";
-			 if($(this).val()=="file") keyTypeFile="file";
+			 if($(this).val()=="pic") keyTypePic="pic";
 		    });
-		 console.log(keyTypeText);
-		 console.log(keyTypeFile);
-		 
+		    */ 
+		 console.log($('#uploadFile').val());
+		
 		var updateAddress = ROOT + 'problemset/upload';
-		  $.get(updateAddress, {  problemTitle: problemTitle,
-								  problemType:problemType,
+		console.log(updateAddress);
+		$.ajax({
+            cache: true,
+            type: "POST",
+            url: updateAddress,
+            data: {uploadFile:$('#uploadFile').val()},
+           // async: false,
+            error: function(request) {
+            	console.log(request);
+                alert("Connection error");
+            },
+            success: function(data) {
+            	$('#uploadModal').modal('hide');
+		 		$('#successModal').modal({
+		   	    backdrop:true,
+		   	    keyboard:true,
+		   	    show:true
+		 		});
+            }
+        });
+		/*  $.get(updateAddress, {  problemType:problemType,
 								  problemDiff:problemDiff,
 								  problemKnowledge:problemKnowledge,
 								  problemContent:problemContent,
 								  keyTypeText:keyTypeText,
-								  keyTypeFile: keyTypeFile,
+								  keyTypePic:keyTypePic,
 								  keyContent:keyContent,
 								  uploadFile:uploadFile
 								  })
@@ -495,10 +530,11 @@ $(function() {
 				   	    show:true
 				 		});
 				     });
+				     */
 		  
 });
 
-  
+ 
   $('button#closeUploadSuccess').click(function() {
 	  window.location.href = ROOT + 'problemset/';
 

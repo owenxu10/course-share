@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.DSPicture;
 import org.tjsse.courseshare.bean.Problem;
@@ -62,7 +63,9 @@ public class ProblemsetController {
     ModelMap problemMap = new ModelMap();
     problemMap.addAttribute("problems", problems);
     problemMap.addAttribute("libType", LibType.PROBLEMSET);
+    problemMap.addAttribute("path",PROBLEM_PATH);
     return new ModelAndView("problemset", problemMap);
+    
   }
 
   /* 
@@ -99,37 +102,42 @@ public class ProblemsetController {
     return count + " problems are imported";
   }
   
-  
   /* 
    * Action: '/upload', Method: GET
    * Upload problems from web page.
    */
-  @RequestMapping(value = "/upload", method = RequestMethod.GET)
+  @RequestMapping(value = "/upload", method = RequestMethod.POST)
   @ResponseBody
-  public String uploadProblems( @RequestParam("problemTitle") String problemTitle,
-		  						@RequestParam("problemType") String problemType,
-		  						@RequestParam("problemDiff") String problemDiff,
-		  						@RequestParam("problemKnowledge") String problemKnowledge,
+  public String uploadProblems( /*@RequestParam("typeRadio") String problemType,
+		  						@RequestParam("diffRadio") String problemDiff,
+		  						@RequestParam("inputknowledge") String problemKnowledge,
 		  						@RequestParam("problemContent") String problemContent,
-		  						@RequestParam("keyTypeText") String keyTypeText,
-		  						@RequestParam("keyTypeFile") String keyTypeFile,
-		  						@RequestParam("keyContent") String keyContent,
-		  						@RequestParam("uploadFile") String uploadFile
+		  						@RequestParam("keyText") String keyTypeText,
+		  						@RequestParam("keyPic") String keyTypePic,
+		  						@RequestParam("keyContent") String keyContent*/
+		  						@RequestParam("uploadFile") MultipartFile uploadFile
 		  						) {
 	
 	String result = "false";
-	System.out.println(problemTitle);
-	System.out.println(problemDiff);
-	System.out.println(problemType);
-	System.out.println(problemKnowledge);
-	System.out.println(problemContent);
-	System.out.println(keyTypeText);
-	System.out.println(keyTypeFile);
-	System.out.println(keyContent);
+	
+	//System.out.println(problemDiff);
+	//	System.out.println(problemType);
+	//	System.out.println(problemKnowledge);
+	//	System.out.println(problemContent);
+	//	System.out.println(keyTypeText);
+	//	System.out.println(keyContent);
 	System.out.println(uploadFile);
 	
-	
-	
+	/*
+	problemsetService.uploadProblem(problemType,
+		    problemDiff,
+			problemKnowledge,
+		    problemContent,
+			keyTypeText,
+			keyTypePic,
+			keyContent,
+			uploadFile);
+	*/
 	
 	//if success 
 	result= "true";
