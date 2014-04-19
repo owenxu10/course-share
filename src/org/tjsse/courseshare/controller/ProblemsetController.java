@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,45 +113,45 @@ public class ProblemsetController {
    * Upload problems from web page.
    */
   @RequestMapping(value="/upload", method=RequestMethod.POST)
-  public @ResponseBody String uploadProblems(@RequestParam("typeRadio") String problemType,
-											@RequestParam("diffRadio") String problemDiff,
-											@RequestParam("inputknowledge") String problemKnowledge,
+  public @ResponseBody boolean uploadProblems( @RequestParam("problemType") String problemType,
+											@RequestParam("problemDiff") String problemDiff,
+											@RequestParam("problemKnowledge") String problemKnowledge,
 											@RequestParam("problemContent") String problemContent,
-											@RequestParam("keyText") String keyTypeText,
-											@RequestParam("keyPic") String keyTypePic,
+											@RequestParam("keyTypeText") String keyTypeText,
+											@RequestParam("keyTypePic") String keyTypePic,
 											@RequestParam("keyContent") String keyContent,
 								            @RequestParam("uploadFile") MultipartFile file){
  
+	 
+	boolean result = false;
 	
-	String result = "false";
-	
+	/*
 	System.out.println(problemDiff);
-		System.out.println(problemType);
+	System.out.println(problemType);
 	System.out.println(problemKnowledge);
-		System.out.println(problemContent);
+	System.out.println(problemContent);
 	System.out.println(keyTypeText);
-		System.out.println(keyContent);
-	 if (!file.isEmpty()) {
+	System.out.println(keyTypePic);
+	System.out.println(keyContent);
+	 // 获取文件类型  
+    System.out.println(file.getContentType());  
+    // 获取文件大小  
+    System.out.println(file.getSize());  
+    // 获取文件名称  
+    System.out.println(file.getOriginalFilename());  
+	*/
+	if (!file.isEmpty()) {
          try {
              byte[] bytes = file.getBytes();
              BufferedOutputStream stream =
                      new BufferedOutputStream(new FileOutputStream(new File(problemContent + "-uploaded")));
              stream.write(bytes);
-             stream.close(); // 获取文件类型  
-             System.out.println(file.getContentType());  
-             // 获取文件大小  
-             System.out.println(file.getSize());  
-             // 获取文件名称  
-             System.out.println(file.getOriginalFilename());  
-             return "You successfully uploaded " + problemContent + " into " + problemContent + "-uploaded !";
-         } catch (Exception e) {
-             return "You failed to upload " + problemContent + " => " + e.getMessage();
-         }
-     } else {
-         return "You failed to upload " + problemContent + " because the file was empty.";
-     }
+             stream.close(); 
+            
+         } catch (Exception e) {}
+     } else {}
 	
-	/*
+	
 	problemsetService.uploadProblem(problemType,
 		    problemDiff,
 			problemKnowledge,
@@ -158,12 +159,12 @@ public class ProblemsetController {
 			keyTypeText,
 			keyTypePic,
 			keyContent,
-			uploadFile);
-	*/
+			file);
+
 	
 	//if success 
-	// result= "true";
-	//return result;
+	result= true;
+	return result;
   }
   
   

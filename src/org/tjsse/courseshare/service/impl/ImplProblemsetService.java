@@ -37,6 +37,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.tjsse.courseshare.bean.DSPicture;
 import org.tjsse.courseshare.bean.Problem;
 import org.tjsse.courseshare.bean.ProblemResource;
@@ -187,7 +188,6 @@ public class ImplProblemsetService implements ProblemsetService {
         // Web URI to access problem resources.
         String presUrl = String.format("%s%d", PRES_URL, pr.getId());
 
-        System.out.println("bbb");
         System.out.println(presUrl);
         
         return writeFile(content, presPath) ? presUrl : "";
@@ -291,13 +291,13 @@ public class ImplProblemsetService implements ProblemsetService {
   
   @Override
   public boolean uploadProblem( String problemType,
-						    String problemDiff,
-							String problemKnowledge,
-						    String problemContent,
-							String keyTypeText,
-							String keyTypePic,
-							String keyContent,
-							String uploadFile) {
+							    String problemDiff,
+								String problemKnowledge,
+							    String problemContent,
+								String keyTypeText,
+								String keyTypePic,
+								String keyContent,
+								MultipartFile file) {
 	  
 	  
     System.out.println(problemType);
@@ -307,16 +307,52 @@ public class ImplProblemsetService implements ProblemsetService {
 	System.out.println(keyTypeText);
 	System.out.println(keyTypePic);
 	System.out.println(keyContent);
-	System.out.println(uploadFile);
+	System.out.println(file.getOriginalFilename());  
 	
+	ProblemInfo pi = new ProblemInfo();
+	
+	String result;
 	//key have picture
 	if(keyTypePic!="null"){
 		//save this picure into the DB and FS
+		 	ProblemResource pr = new ProblemResource();
+	        String[] contentType = file.getContentType().split("/");
+	        String pictureType = contentType[1];
+	        System.out.println(pictureType);
+	        byte[] content;
+			try {
+				content = file.getBytes();
+				System.out.println(content);
+				pr.setType(pictureType);
+		        pr.setUri(PRES_PATH);
+		        pr = problemResourceDao.save(pr);
+		        if (pr == null) {
+		        	result = " ";
+		        }
+		        // Absolute path of problem resources on disk.
+		        String presPath = String.format("%s/%d.%s", PRES_PATH, pr.getId(),
+		            pr.getType());
+		        // Web URI to access problem resources.
+		        String presUrl = String.format("%s%d", PRES_URL, pr.getId());
+	
+		        System.out.println(presPath);
+		        
+		        result = writeFile(content, presPath) ? presUrl : "";
+		        System.out.println(result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
 	}
 	
+	pi.difficulty = Integer.parseInt(problemDiff);
+	pi.problemType = problemType;
+	pi.problemContent = new StringBuffer(problemContent);
+	pi.keyContent = new StringBuffer(keyContent);
+	pi.knowledge = problemKnowledge; 
+	
+	return problemDao.save(pi.toProblem()) == null ?true : false;
 		
-	  return true;
-	  
   }
   
 

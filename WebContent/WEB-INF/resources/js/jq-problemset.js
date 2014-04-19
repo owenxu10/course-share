@@ -456,84 +456,70 @@ $(function() {
 		});
   });
 	
-  
-
-	$("#uploadFile").change(function() {
-		
-		if (FileReader) {
-			var reader = new FileReader();
-				file = this.files[0];
-			reader.onload = function(e) {
-				base64Image = e.target.result;
-			};
-			reader.readAsDataURL(file);
-			
-		}
-			
+  $('input[name=typeRadio]').change(function() {       
+	    alert("a");
 	});
+
+ $("#uploadFile").change(function() {
+	  var ext = $('#uploadFile').val().split('.').pop().toLowerCase();
+	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+	      alert('invalid extension!');
+	  }
+ });
 	
   $('button#problemUpload').click(function() {
-	  console.log("aa");
-	  $('#uploadForm').submit();
 	  
-	/*get the data from page
-		 var problemType= $("input[name='typeRadio']:checked").val();
-		 var problemDiff= $("input[name='diffRadio']:checked").val();
-		 var problemKnowledge= $("#inputknowledge").val();
-		 var problemContent = $("#problemContent").val();
-		 var keyTypeText = "null";
-		 var keyTypePic = "null";
-		 var keyContent = $("#keyContent").val(); 
-		 var uploadFile = document.getElementById("#uploadAddress").value;/// $("#uploadAddress").val();
-		 
-		 $("input[name='keyCheckbox']:checked").each(function() {
+	  var updateAddress = ROOT + 'problemset/upload';
+	  var uploadForm = new FormData();
+	  
+	  //get the data from page
+	  var problemType= $("input[name='typeRadio']:checked").val();
+	  var problemDiff= $("input[name='diffRadio']:checked").val();
+	  var problemKnowledge= $("#inputknowledge").val();
+	  var problemContent = $("#problemContent").val();
+	 // alert(problemContent);
+	//  problemContent= encodeURI(encodeURI(problemContent));
+	  
+	  var keyTypeText = "null";
+	  var keyTypePic = "null";
+	  var keyContent = $("#keyContent").val(); 
+	  
+	  $("input[name='keyCheckbox']:checked").each(function() {
 			 console.log($(this).val());
 			 if($(this).val()=="text") keyTypeText="text";
 			 if($(this).val()=="pic") keyTypePic="pic";
 		    });
-		   
-		 console.log($('#uploadFile').val());
-		
-		var updateAddress = ROOT + 'problemset/upload';
-		console.log(updateAddress);
-		$.ajax({
-            cache: true,
-            type: "POST",
-            url: updateAddress,
-            data: {uploadFile:$('#uploadFile').val()},
-           // async: false,
-            error: function(request) {
-            	console.log(request);
-                alert("Connection error");
-            },
-            success: function(data) {
-            	$('#uploadModal').modal('hide');
+		 
+	  
+	  uploadForm.append("problemType", problemType);
+	  uploadForm.append("problemDiff", problemDiff);
+	  uploadForm.append("problemKnowledge", problemKnowledge);
+	  uploadForm.append("problemContent", problemContent);
+	  uploadForm.append("keyTypeText", keyTypeText);
+	  uploadForm.append("keyTypePic", keyTypePic);
+	  uploadForm.append("keyContent", keyContent);
+	  uploadForm.append("uploadFile", uploadFile.files[0]);
+	  
+	  $.ajax({
+		    url: updateAddress,
+		    data: uploadForm,
+		    dataType: 'text',
+		    processData: false,
+		    contentType: false,
+		    type: 'POST',
+		    success: function(data){
+		    	$('#uploadModal').modal('hide');
 		 		$('#successModal').modal({
 		   	    backdrop:true,
 		   	    keyboard:true,
 		   	    show:true
 		 		});
+		    },
+		    error: function(request) {
+                alert("Connection error");
             }
-        });
-		/*  $.get(updateAddress, {  problemType:problemType,
-								  problemDiff:problemDiff,
-								  problemKnowledge:problemKnowledge,
-								  problemContent:problemContent,
-								  keyTypeText:keyTypeText,
-								  keyTypePic:keyTypePic,
-								  keyContent:keyContent,
-								  uploadFile:uploadFile
-								  })
-				     .done(function( data ) {
-				    	$('#uploadModal').modal('hide');
-				 		$('#successModal').modal({
-				   	    backdrop:true,
-				   	    keyboard:true,
-				   	    show:true
-				 		});
-				     });
-				     */
-		  
+		  });
+	
 });
 
  

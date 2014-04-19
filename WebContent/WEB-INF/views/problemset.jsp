@@ -175,11 +175,11 @@
 		  
 		  <div>
 		   <label class="checkbox-inline">
-		      <input type="checkbox" name="keyText"  value="text" id="textkey"> 
+		      <input type="checkbox" name="keyCheckbox"  value="text" id="textkey"> 
 		      <span class="cs-typecheckbox-text">文字类型</span>
 		   </label>
 		   <label class="checkbox-inline">
-		      <input type="checkbox" name="keyPic"  value="pic" id="filekey"> 
+		      <input type="checkbox" name="keyCheckbox"  value="pic" id="filekey"> 
 		      <span class="cs-typecheckbox-text ">图片类型</span>
 		   </label>
 		 </div>
@@ -193,7 +193,7 @@
 		
 		  <div class="form-group ps-hidden"  id="uploadkey" >
 		    <label for="exampleInputFile" >答案文件</label>
-		    <input type="file" id="uploadFile" name="uploadFile" >
+		    <input type="file" id="uploadFile" name="uploadFile"  accept="image/*|video/*" required>
 		    <p class="help-block">请上传包含答案的文件</p>
 		  </div> 
       </div>
