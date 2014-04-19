@@ -135,7 +135,7 @@
 		  };
 		  for(String[] d : typediffs) { %>
 		   <label class="radio-inline">
-		      <input type="radio" name="typeRadio"  value="<%=d[0] %>" id="<%=d[0] %>" >
+		      <input type="radio" name="typeRadio"  value="<%=d[2] %>" id="<%=d[0] %>" >
 		      <span class="btn cs-radio-text <%=d[1] %>"><%=d[2] %></span>
 		   </label>
  		 <% } %>

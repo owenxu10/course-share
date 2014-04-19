@@ -311,7 +311,7 @@ public class ImplProblemsetService implements ProblemsetService {
 	
 	ProblemInfo pi = new ProblemInfo();
 	
-	String result;
+	String imagePath="";
 	//key have picture
 	if(keyTypePic!="null"){
 		//save this picure into the DB and FS
@@ -327,7 +327,7 @@ public class ImplProblemsetService implements ProblemsetService {
 		        pr.setUri(PRES_PATH);
 		        pr = problemResourceDao.save(pr);
 		        if (pr == null) {
-		        	result = " ";
+		        	imagePath = " ";
 		        }
 		        // Absolute path of problem resources on disk.
 		        String presPath = String.format("%s/%d.%s", PRES_PATH, pr.getId(),
@@ -337,18 +337,25 @@ public class ImplProblemsetService implements ProblemsetService {
 	
 		        System.out.println(presPath);
 		        
-		        result = writeFile(content, presPath) ? presUrl : "";
-		        System.out.println(result);
+		        imagePath = writeFile(content, presPath) ? presUrl : "";
+		        //System.out.println(path);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		
 	}
 	
+	String prefix = "<p class='p1' style='text-align:justify;hyphenate:auto;font-family:Times New Roman;font-size:10pt;'>";
+	String suffix = "</p>";
+	String TextPrefix = "<span class='s1' style='color:black;'>";
+	String TextSuffix =	"</span>";	
+	String ImagePrefix ="<img src='";
+	String ImageSuffix = "'vertical-align:text-bottom;'/></p>";
+		
 	pi.difficulty = Integer.parseInt(problemDiff);
 	pi.problemType = problemType;
-	pi.problemContent = new StringBuffer(problemContent);
-	pi.keyContent = new StringBuffer(keyContent);
+	pi.problemContent = new StringBuffer(prefix+TextPrefix+problemContent+TextSuffix+suffix);
+	pi.keyContent = new StringBuffer(prefix+TextPrefix+keyContent+TextSuffix+ImagePrefix+imagePath+ImageSuffix+suffix);
 	pi.knowledge = problemKnowledge; 
 	
 	return problemDao.save(pi.toProblem()) == null ?true : false;
