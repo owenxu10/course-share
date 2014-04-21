@@ -722,31 +722,64 @@ public class ImplProblemsetService implements ProblemsetService {
     //get image address
     Problem beanforImage = problemDao.read(id);
     String problemContent = beanforImage.getProblemContent();
-    String keyContent = beanforImage.getProblemContent();
+    String keyContent = beanforImage.getKeyContent();
    
-    problemContent=" <p class='p1' style='text-align:justify;hyphenate:auto;font-family:Times New Roman;font-size:10pt;'> <img src='/course-share/problemset/resource/21' style='width:5.736111in;height:3.1527777in;vertical-align:text-bottom;' /></p>";
-    int flag =  problemContent.indexOf("/course-share/problemset/resource/");
-    String temp = problemContent.substring(flag+1);
-    flag = temp.indexOf("'");
-    String imageID = temp.substring(33,flag);
-   
-    System.out.println(temp);
+    
+    
+    int problemID = getImageID(problemContent);
+    int keyID = getImageID(keyContent);
+  
+    System.out.println(problemID);
+    System.out.println(keyID);
+    
 
-    System.out.println(imageID);
+    if(problemID!=0){
 
+        ProblemResource PRbean = problemResourceDao.read(problemID);
+        
+    	String resoursePATH = PRbean.getUri() +"/"+ PRbean.getId() + "."+ PRbean.getType();
+    	System.out.println(resoursePATH);
+		File image = new File(resoursePATH);
+	    image.delete();
+	    problemResourceDao.delete(problemID);
+    }
+    
+    if(keyID!=0){
+
+        ProblemResource PRbean = problemResourceDao.read(keyID);
+        
+    	String resoursePATH = PRbean.getUri() +"/"+ PRbean.getId() + "."+ PRbean.getType();
+    	System.out.println(resoursePATH);
+		File image = new File(resoursePATH);
+	    image.delete();
+	    problemResourceDao.delete(keyID);
+    }
     //get image name/id
-    //problemResourceDao.delete(id);
-    //problemDao.delete(id);
-    /*
-    File dir = new File(PRES_PATH);
-    if (!dir.exists() || !dir.isDirectory()) {
-      return;
-    }
-    File[] files = dir.listFiles();
-    for(File f : files) {
-      f.delete();
-    }
-    */
+    
+    problemDao.delete(id);
+    
+  //  String resoursePATH = PRES_PATH + ;
+    
+    //File image = new File(resoursePATH);
+    //image.delete();
+    
+  }
+  
+  
+  private int getImageID(String content){
+	  int flag =  content.indexOf("/course-share/problemset/resource/");
+	  
+	  if(flag!=-1){
+	    String temp = content.substring(flag+1);
+	    flag = temp.indexOf("'");
+	    String imageID = temp.substring(33,flag);
+	    int ID = Integer.parseInt(imageID);
+	    return ID;
+	  }
+	  else{
+		  return 0;
+	  }
+	  
   }
   
   
