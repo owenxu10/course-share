@@ -714,5 +714,41 @@ public class ImplProblemsetService implements ProblemsetService {
       f.delete();
     }
   }
+  
+  
+  @Override
+  public void deleteProblem(int id) {
+   
+    //get image address
+    Problem beanforImage = problemDao.read(id);
+    String problemContent = beanforImage.getProblemContent();
+    String keyContent = beanforImage.getProblemContent();
+   
+    problemContent=" <p class='p1' style='text-align:justify;hyphenate:auto;font-family:Times New Roman;font-size:10pt;'> <img src='/course-share/problemset/resource/21' style='width:5.736111in;height:3.1527777in;vertical-align:text-bottom;' /></p>";
+    int flag =  problemContent.indexOf("/course-share/problemset/resource/");
+    String temp = problemContent.substring(flag+1);
+    flag = temp.indexOf("'");
+    String imageID = temp.substring(33,flag);
+   
+    System.out.println(temp);
+
+    System.out.println(imageID);
+
+    //get image name/id
+    //problemResourceDao.delete(id);
+    //problemDao.delete(id);
+    /*
+    File dir = new File(PRES_PATH);
+    if (!dir.exists() || !dir.isDirectory()) {
+      return;
+    }
+    File[] files = dir.listFiles();
+    for(File f : files) {
+      f.delete();
+    }
+    */
+  }
+  
+  
 
 }

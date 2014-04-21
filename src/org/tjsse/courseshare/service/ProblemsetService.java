@@ -35,4 +35,6 @@ public interface ProblemsetService {
   public DSPicture readPicture(int id);
   
   public byte[] makePaper(Integer[] pids);
+  
+  public void deleteProblem(int id);
 }

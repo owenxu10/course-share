@@ -219,6 +219,17 @@ public class JdbcBaseDao implements BaseDao {
     System.out.println(sql);
     jdbcTemplate.execute(sql);
   }
+  
+  @Override
+  public void delete(int id) {
+    String sql = String.format("DELETE FROM  %s WHERE id=%d;", table, id);
+    System.out.println(sql);
+    jdbcTemplate.execute(sql);
+  }
+  
+  
+  
+  
 
   @Override
   public <E extends Object> E save(E bean) {

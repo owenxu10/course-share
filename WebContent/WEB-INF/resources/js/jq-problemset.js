@@ -41,10 +41,11 @@ $(function() {
   _basket = {};
 
   /***** Local functions *****/
-
   /**
    * Return integer of offset.
    */
+
+  
   var _getOffset = function() {
     var offset = parseInt($('#filter-offset').val(), 10);
     return (isNaN(offset) || offset < 0) ? 0 : offset;
@@ -528,6 +529,7 @@ $(function() {
 
   });
   
+
   
   /* Events in upload problem */
   $("#textkey").click(function(){

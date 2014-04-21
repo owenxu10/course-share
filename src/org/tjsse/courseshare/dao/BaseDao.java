@@ -35,5 +35,8 @@ public interface BaseDao {
   public <E extends Object> E save(E bean);
   
   public void clear();
+  
+  public void delete(int id);
+
 
 }

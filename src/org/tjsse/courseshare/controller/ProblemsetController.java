@@ -171,6 +171,23 @@ public class ProblemsetController {
   
   
   /*
+   * Action: '/deleteProblem', Method: POST
+   * Clear all problem records in DB and files on disk.
+   */
+  @RequestMapping(value="/deleteProblem", method = RequestMethod.POST)
+  @ResponseBody
+  public String deleteProblem(@RequestParam("problemID") String problemID) {
+
+	System.out.println(problemID);
+	
+	int id = Integer.parseInt(problemID);
+	problemsetService.deleteProblem(id);
+    return "All problems are cleared!";
+  }
+  
+  
+  
+  /*
    * Action: '/clear', Method: GET
    * Clear all problem records in DB and files on disk.
    */

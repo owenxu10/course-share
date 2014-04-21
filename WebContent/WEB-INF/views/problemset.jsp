@@ -214,8 +214,8 @@
       
       <div class="modal-body">
          <button type="button" class="close" id="closeUploadSuccess" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="uploadModalLabel">上传成功</h4>
-	     </div>
+         <h4 class="modal-title" id="uploadModalLabel">上传成功</h4>
+	  	</div>
       
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -285,9 +285,26 @@
       【答案】 <span class="glyphicon glyphicon-hand-right"></span> 
     </div>
     <div class="ps-key-right"><%=p.getKeyContent() %></div>
+    <button  name="<%=p.getId() %>" id="<%=p.getId() %>" class="btn btn-danger ps-btn-style" onclick="deleteProblem(this.name)">删除</button>
   </div>
   </div>   
   <% } %>
+  <script language="javascript">
+   function deleteProblem(name){
+ 		var deleteAddress = ROOT + 'problemset/deleteProblem';
+ 		
+ 		$.ajax({
+ 			  type: "POST",
+ 			  url: deleteAddress,
+ 			  data: {problemID:name}
+ 			})
+ 			  .done(function( msg ) {
+ 			    alert( "Data deleted: " + msg );
+ 			  });
+ 		
+	  
+  }
+  </script>
   <!--  
 	<ul class="pagination">
 	  <li><a href="#">&laquo;</a></li>
@@ -336,9 +353,7 @@
     </div>
     <div class="ps-col ps-action">   
       <button id="<@=id @>" class="basket-add btn btn-success ps-btn-style">放入试题篮</button>
-      <!--
-      <button id="<@=id @>" class="key btn btn-primary ps-btn-style ps-hidden">答案</button>
-      -->
+     
     </div>
   </div>
   <div id="<@=id @>" class="ps-key ps-hidden">
@@ -346,7 +361,10 @@
       【答案】 <span class="glyphicon glyphicon-hand-right"></span> 
     </div>
     <div class="ps-key-right"><@=key @></div>
+ <button  name="<@=id @>" id="<@=id @>" class="btn btn-danger ps-btn-style" onclick="deleteProblem(this.name)">删除</button>
+ 
   </div>
+
 </div>
 </script>
 
