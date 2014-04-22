@@ -1,11 +1,12 @@
 <%@ page import="java.util.Map, java.util.HashMap, java.util.List" %>
 <%@ page import="org.tjsse.courseshare.bean.Problem" %>
+<%@ page import="org.springframework.web.servlet.mvc.support.RedirectAttributes" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <% 
 
   String path = request.getContextPath();
   List<Problem> problems = (List<Problem>) request.getAttribute("problems");
-  String uploadpath = (String) request.getAttribute("path");
   int offset = 0;
   if (problems.size() > 0) {
     for (Problem p : problems) {
@@ -16,12 +17,14 @@
     ++offset;
     
   }
+  
+  String username = (String)request.getAttribute("username");
+  System.out.println("username:");
+  System.out.println(username);
+
 %>
 <jsp:include page="layout-header.jsp" flush="true" />
 
-<div class="ps-hidden">
-	<button id="uploadAddress" value="<%=uploadpath%>">HTML</button>
-</div>
 
 <div id="cs-north-frame" class="row cs-frame-default">
   <div id="cs-problemset-navbar">
@@ -221,6 +224,21 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+         <button type="button" class="close" id="closedelete" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4 class="modal-title" id="uploadModalLabel">删除成功</h4>
+	  	</div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
  <script src="<%=path %>/js/lib/jquery.js"></script>
  <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -299,7 +317,17 @@
  			  data: {problemID:name}
  			})
  			  .done(function( msg ) {
- 			    alert( "Data deleted: " + msg );
+ 				 $('#deleteModal').modal({
+ 			   	    backdrop:true,
+ 			   	    keyboard:true,
+ 			   	    show:true
+ 			 		});
+ 				 
+ 				 
+ 				$('#deleteModal').on('hidden.bs.modal', function (e) {
+ 					 window.location.href = ROOT + 'problemset/';
+ 					})
+ 				 
  			  });
  		
 	  

@@ -5,7 +5,7 @@ public class User {
   private Integer id;
   private String email;
   private String password;
-  private String type;
+  private String username;
 
   public Integer getId() {
     return id;
@@ -31,11 +31,11 @@ public class User {
     this.password = password;
   }
 
-  public String getType() {
-    return type;
+  public String getUsername() {
+    return username;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setUsername(String username) {
+    this.username = username;
   }
 }

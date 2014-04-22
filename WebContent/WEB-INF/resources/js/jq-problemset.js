@@ -528,6 +528,7 @@ $(function() {
 	  window.location.href = ROOT + 'problemset/';
 
   });
+ 
   
 
   
