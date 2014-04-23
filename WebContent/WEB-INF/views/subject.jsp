@@ -4,3 +4,5 @@
 <jsp:include page="layout-header.jsp" flush="true" />
 
 <script type="text/javascript" src="<%=path %>/js/subject.js"></script>
+
+<jsp:include page="layout-footer.jsp" flush="true" />

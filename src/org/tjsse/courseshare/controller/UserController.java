@@ -1,5 +1,7 @@
 package org.tjsse.courseshare.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -7,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.tjsse.courseshare.service.UserService;
 import org.tjsse.courseshare.bean.User;
 
@@ -50,16 +51,13 @@ public class UserController {
 	  public String  register( @RequestParam("username") String username,
 			  						@RequestParam("password") String password,
 			  						@RequestParam("email")    String email, 
-			  						final RedirectAttributes redirectAttributes) { 
+			  						HttpServletRequest request) { 
 		  
 		 // System.out.println(username+"/"+password+"/"+email);
 		  User user = userService.registerUser(username,password,email);
-		  
-		  ModelMap userMap = new ModelMap();
 
-		  redirectAttributes.addFlashAttribute("username", user.getUsername());
-		  redirectAttributes.addFlashAttribute("id", user.getId());
-		  
+		  request.getSession().setAttribute("username", user.getUsername());
+		  request.getSession().setAttribute("id", user.getId());
 	      //return new ModelAndView("userMap", userMap);
 		  //else
 		  return "redirect:/problemset";

@@ -18,13 +18,10 @@
     
   }
   
-  String username = (String)request.getAttribute("username");
-  System.out.println("username:");
-  System.out.println(username);
+  
 
 %>
 <jsp:include page="layout-header.jsp" flush="true" />
-
 
 <div id="cs-north-frame" class="row cs-frame-default">
   <div id="cs-problemset-navbar">

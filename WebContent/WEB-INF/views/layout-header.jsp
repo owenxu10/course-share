@@ -5,6 +5,10 @@
   LibType libType = (LibType) request.getAttribute("libType");
   String pageTitle = "计算机系统结构资源 —— " + libType.getName();
   String devName = "同济大学软件学院系统结构课程组开发";
+  
+  String username = (String)request.getAttribute("username");
+  System.out.println("username:");
+  System.out.println(username);
 %>
 
 <!DOCTYPE html>
@@ -59,6 +63,16 @@
               <span class="glyphicon glyphicon-inbox"></span> <%=LibType.RESOURCE.getName() %>
             </a>
           </li>
+          
+          
+			<li class="dropdown active">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%=username %> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">用户资料</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">登出</a></li>
+	          </ul>
+	        </li>
          
         </ul> <!-- #cs-header-nav -->
       </div> <!-- #cs-header-collapse -->
