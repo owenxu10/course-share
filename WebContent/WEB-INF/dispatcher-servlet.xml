@@ -23,8 +23,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 	
-    
-    
 	<bean id="utf8Charset" class="java.nio.charset.Charset"
 		factory-method="forName">
 		<constructor-arg value="UTF-8"/>

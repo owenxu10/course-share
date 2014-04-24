@@ -23,6 +23,7 @@
 %>
 <jsp:include page="layout-header.jsp" flush="true" />
 
+
 <div id="cs-north-frame" class="row cs-frame-default">
   <div id="cs-problemset-navbar">
     <div id="ps-searchbar" class="input-group">
@@ -235,13 +236,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
- <script src="<%=path %>/js/lib/jquery.js"></script>
- <!-- Include all compiled plugins (below), or include individual files as needed -->
- <script src="<%=path %>/js/lib/bootstrap.min.js"></script>
-
-
 
 
 <div id="cs-center-frame">

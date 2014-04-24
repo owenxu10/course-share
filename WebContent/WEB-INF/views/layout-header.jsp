@@ -9,6 +9,7 @@
   String username = (String)request.getAttribute("username");
   System.out.println("username:");
   System.out.println(username);
+  
 %>
 
 <!DOCTYPE html>
@@ -65,12 +66,16 @@
           </li>
           
           
-			<li class="dropdown active">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%=username %> <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="#">用户资料</a></li>
-	            <li class="divider"></li>
-	            <li><a href="#">登出</a></li>
+			<li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown"> <%=username %> <b class="caret"></b></a>
+	          <ul  id ="drowline" class="dropdown-menu  inverse-dropdown">
+	            <li>
+	            	<a href="#" >修改信息</a>
+	            </li>
+            	<li class="divider"></li>
+	            <li>
+	            	<a href="#" >登出</a>
+	            </li>
 	          </ul>
 	        </li>
          

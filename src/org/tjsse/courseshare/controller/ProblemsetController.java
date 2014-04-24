@@ -67,7 +67,6 @@ public class ProblemsetController {
     
     
     System.out.println("problem set index");
-    System.out.println(username);
     return new ModelAndView("problemset", problemMap);
     
   }

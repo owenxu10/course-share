@@ -48,6 +48,11 @@ $(function() {
 		 			  url: loginAddress,
 		 			  data: {username:loginusername,
 		 				  	 password:loginpassword}
+		 			}).error(function(){
+		 				 window.location.href = ROOT + 'user/';
+		 			})
+		 			.done(function(){
+		 				 window.location.href = ROOT + 'problemset/';
 		 			});
 		 			 
 	     });
@@ -69,10 +74,13 @@ $(function() {
 		 				  	 password:registerpassword,
 		 				  	 email:registeremail
 		 				  	 }
-		 			}).done(function( data ) {
+		 			})
+		 			.error(function(){
+		 				 window.location.href = ROOT + 'user/';
+		 			})
+		 			.done(function(){
 		 				 window.location.href = ROOT + 'problemset/';
-		 			     
-		 			   });
+		 			});
 		 			
 	     });
 	  
