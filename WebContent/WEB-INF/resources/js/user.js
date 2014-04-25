@@ -41,15 +41,26 @@ $(function() {
 
 		  var loginpassword= $("#loginpassword").val();
 		  
+		  var rememberMe;
+		  
+		 if($("#rememberMe").is(':checked'))
+			 rememberMe=true;
+		 else
+			 rememberMe=false;
+			 
+		 
+		  
+		  
 			var loginAddress = ROOT + 'user/login';
 		 		
 		 		$.ajax({
 		 			  type: "POST",
 		 			  url: loginAddress,
 		 			  data: {username:loginusername,
-		 				  	 password:loginpassword}
+		 				  	 password:loginpassword,
+		 				  	 rememberMe:rememberMe}
 		 			}).error(function(){
-		 				 window.location.href = ROOT + 'user/';
+		 				_show('#logintext');
 		 			})
 		 			.done(function(){
 		 				 window.location.href = ROOT + 'problemset/';
@@ -76,7 +87,8 @@ $(function() {
 		 				  	 }
 		 			})
 		 			.error(function(){
-		 				 window.location.href = ROOT + 'user/';
+		 				_show('#registertext');
+		 				 
 		 			})
 		 			.done(function(){
 		 				 window.location.href = ROOT + 'problemset/';
@@ -84,6 +96,5 @@ $(function() {
 		 			
 	     });
 	  
-	 
 
 });

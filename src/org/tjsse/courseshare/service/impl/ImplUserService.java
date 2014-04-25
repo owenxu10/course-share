@@ -33,7 +33,7 @@ public class ImplUserService implements UserService {
 	
 	public int loginUser(String username, String password){
 		
-		String condition="username="+username+" and password="+password;
+		String condition="username='"+username+"' and password='"+password+"'";
 		
 		List<User> result = userDao.find(condition);
 		
@@ -46,7 +46,7 @@ public class ImplUserService implements UserService {
 	
 	public boolean checkUser(String username){
 		
-		String condition="username="+username;
+		String condition="username='"+username+"'";
 		
 		List<User> result = userDao.find(condition);
 		

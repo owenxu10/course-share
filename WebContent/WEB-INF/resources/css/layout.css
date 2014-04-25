@@ -82,6 +82,14 @@ footer.navbar-fixed-bottom {
   padding: 10px;
 }
 
+
+#center-frame {
+	position: absolute;
+    top:50%;
+    padding: 10px;
+}
+
+
 #cs-west-frame {
   margin: 0 10px 10px 0;
   float: left;
@@ -280,8 +288,19 @@ footer.navbar-fixed-bottom {
   width: 100%;
 }
 
+#cs-image-navbar  {
+  width: 100%;
+}
+
+
 #ps-searchbar {
   width: 480px;
+  float: left;
+  margin-right: 10px;
+}
+
+#image-searchbar {
+  width: 900px;
   float: left;
   margin-right: 10px;
 }

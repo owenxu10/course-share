@@ -6,7 +6,7 @@
   String pageTitle = "计算机系统结构资源 —— " + libType.getName();
   String devName = "同济大学软件学院系统结构课程组开发";
   
-  String username = (String)request.getAttribute("username");
+  String username = (String)request.getSession().getAttribute("username");
   System.out.println("username:");
   System.out.println(username);
   
@@ -23,6 +23,11 @@
   <link href="<%=path %>/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=path %>/css/layout.css" rel="stylesheet">
   <link href="<%=path %>/css/jquery.qtip.min.css" rel="stylesheet">
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="<%=path %>/js/lib/jquery.js"></script>
+   <script language="javascript" src="<%=path %>/js/header.js"></script>
+   
   <!--[if lte IE 6]>
     <link href="<%=path %>/css/bootstrap-ie6.css" rel="stylesheet" >
     <script src="<%=path %>/js/lib/bootstrap-ie.js"></script>
@@ -65,16 +70,15 @@
             </a>
           </li>
           
-          
 			<li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown"> <%=username %> <b class="caret"></b></a>
 	          <ul  id ="drowline" class="dropdown-menu  inverse-dropdown">
 	            <li>
-	            	<a href="#" >修改信息</a>
+	            	<a id="modifyInfo" >修改信息</a>
 	            </li>
             	<li class="divider"></li>
 	            <li>
-	            	<a href="#" >登出</a>
+	            	<a id="logout" >登出</a>
 	            </li>
 	          </ul>
 	        </li>

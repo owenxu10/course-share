@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
   String path = request.getContextPath();
-  int ID = ((Integer)request.getAttribute("ID")).intValue();
-  System.out.println("ID");
-  System.out.println(ID);
+ 
+  Cookie cookies[] = request.getCookies() ;
+  Cookie c1 = null ;
+  if(cookies != null){
+	  if(request.getSession().getAttribute("logout")==null){
+		  //have cookie but no session logout ---first open
+	      for(int i=0;i<cookies.length;i++){
+	         c1 = cookies[i] ;
+	         if(c1.getName().equals("username")) 
+	        	 request.getSession().setAttribute("username",c1.getValue());
+	      }
+	      response.sendRedirect(path+"/problemset"); 
+	  }
+ }
+  
+
+  
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,7 +55,6 @@
 	      </div> <!-- #cs-header-collapse -->
 	    </div> <!-- .container -->
 	  </div> <!-- #cs-header -->
-	<button id="setID" class="ps-hidden" value="<%=ID%>"></button>
 <div id="loginForm" >
 
     <div id="login-wraper" class="login-form"">
@@ -53,16 +66,19 @@
                  
                  <label>密码</label>
                  <input type="password" id="loginpassword" class="form-control">
+                 <br/>
+                 <div  class="errortext ps-hidden" id="logintext">*用户名或密码错误</div>
+                  <br/>
              </div>
           </form> 
+         
              <div class="footer">
                  <label class="checkbox inline">
-                     <input type="checkbox" id="inlineCheckbox1" value="option1">记住我
+                     <input type="checkbox" id="rememberMe" name="rememberMe" value="rememeber">记住我
                  </label>
                            
                  <button id="login" class="btn btn-success">登陆</button>
-             </div>
-         
+             </div>         
          
   	 </div>
        
@@ -87,6 +103,9 @@
                  
                  <label >邮箱</label>
                  <input type="email" class="form-control" id="registeremail">
+                 <br/>
+                 <div class="errortext  ps-hidden" id="registertext">*该用户名已存在</div>
+                  <br/>
              </div>
            </form>
              <div class="footer">
@@ -101,6 +120,5 @@
   	 </div>
 </div>
      
- 
   </body>
 </html>
