@@ -85,7 +85,7 @@ footer.navbar-fixed-bottom {
 
 #center-frame {
 	position: absolute;
-    top:50%;
+    top:10%;
     padding: 10px;
 }
 
@@ -300,7 +300,7 @@ footer.navbar-fixed-bottom {
 }
 
 #image-searchbar {
-  width: 900px;
+  width: 800px;
   float: left;
   margin-right: 10px;
 }

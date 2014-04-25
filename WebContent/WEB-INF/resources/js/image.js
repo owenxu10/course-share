@@ -210,4 +210,6 @@ Ext.onReady(function() {
     items : [ searchPanel, filterForm, listForm ]
   });
 
+  
+  alert("A");
 });
