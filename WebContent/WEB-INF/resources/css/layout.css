@@ -84,11 +84,15 @@ footer.navbar-fixed-bottom {
 
 
 #center-frame {
-	position: absolute;
-    top:10%;
-    padding: 10px;
+  position: absolute;
+  top: 10%;	
+  left:19.5%;
+  padding: 10px;
 }
 
+#image-content{
+  margin: 130px auto;
+}
 
 #cs-west-frame {
   margin: 0 10px 10px 0;
@@ -300,7 +304,7 @@ footer.navbar-fixed-bottom {
 }
 
 #image-searchbar {
-  width: 800px;
+  width: 700px;
   float: left;
   margin-right: 10px;
 }
@@ -441,4 +445,6 @@ footer.navbar-fixed-bottom {
   margin-right: 10px;
 }
 
-
+.image-author,.image-knowledge{
+	font-size:12px;
+}

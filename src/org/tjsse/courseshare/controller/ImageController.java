@@ -41,8 +41,29 @@ public class ImageController {
     imageMap.addAttribute("libType", LibType.RESOURCE);
     return new ModelAndView("image", imageMap);
   }
+ 
+  /* 
+   * Action: '/search', Method: POST
+   * Search index page.
+   */
+  @RequestMapping(value = "/search", method = RequestMethod.POST)
+  public String search(@RequestParam("searchKeyWord") String searchKeyWord) { 
+	 
+      
+	  System.out.println(searchKeyWord);
+	  
+	  //get the list of result from the service;
+	  
+	  
+	  
+	  
+	  return "redirect:/image"; //done
+  }
 
-
+  
+  
+  
+  
   @RequestMapping(value = "/import", method = RequestMethod.GET)
   @ResponseBody
   public String importImages() {
