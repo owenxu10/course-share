@@ -7,8 +7,6 @@
   String devName = "同济大学软件学院系统结构课程组开发";
   
   String username = (String)request.getSession().getAttribute("username");
-  System.out.println("username:");
-  System.out.println(username);
   
 %>
 

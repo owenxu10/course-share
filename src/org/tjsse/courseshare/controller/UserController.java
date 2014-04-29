@@ -48,6 +48,7 @@ public class UserController {
 		  System.out.println(username+"/"+password+"   "+rememberMe);
 		  int ID = userService.loginUser(username,password);
 		  request.getSession().setAttribute("username", username);
+		  request.getSession().setAttribute("id", ID);
 		  if(ID==0)
 		    return "false";
 		  else{
@@ -76,6 +77,7 @@ public class UserController {
 		  User user = userService.registerUser(username,password,email);
 		  boolean NoSame = userService.checkUser(username);
 		  request.getSession().setAttribute("username", user.getUsername());
+		  request.getSession().setAttribute("id", user.getId());
 		  Cookie cusername = new Cookie("username",user.getUsername());
 		  
 		  response.addCookie(cusername);

@@ -5,7 +5,8 @@ public class Image {
   private String name;
   private String knowledge;
   private String url;
-
+  private Integer userid;
+  private String username;
   public Integer getId() {
     return id;
   }
@@ -37,5 +38,27 @@ public class Image {
   public void setUrl(String url) {
     this.url = url;
   }
+  
+  public Integer getUserId() {
+	return userid;
+  }
+
+  public void setUserId(Integer userid) {
+	this.userid = userid;
+  }
+
+/**
+ * @return the username
+ */
+public String getUserName() {
+	return username;
+}
+
+/**
+ * @param username the username to set
+ */
+public void setUserName(String username) {
+	this.username = username;
+}
 
 }

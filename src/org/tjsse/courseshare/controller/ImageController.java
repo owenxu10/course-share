@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.Image;
-import org.tjsse.courseshare.bean.Problem;
 import org.tjsse.courseshare.service.ImageService;
 import org.tjsse.courseshare.util.Config;
 import org.tjsse.courseshare.util.LibType;
@@ -30,6 +29,7 @@ public class ImageController {
 
   @Autowired
   private ImageService imageService;
+ 
 
   /* 
    * Action: '/index', Method: GET
@@ -39,6 +39,8 @@ public class ImageController {
   public ModelAndView index() { 
     ModelMap imageMap = new ModelMap();
     imageMap.addAttribute("libType", LibType.RESOURCE);
+    System.out.println("in /image");
+	  
     return new ModelAndView("image", imageMap);
   }
  
@@ -47,22 +49,24 @@ public class ImageController {
    * Search index page.
    */
   @RequestMapping(value = "/search", method = RequestMethod.POST)
-  public String search(@RequestParam("searchKeyWord") String searchKeyWord) { 
+  public String search(@RequestParam("searchKeyWord") String searchKeyWord,HttpServletRequest request) { 
 	 
-      
-	  System.out.println(searchKeyWord);
+	  System.out.println("in /search");
 	  
+	  String[] str ={searchKeyWord} ;
 	  //get the list of result from the service;
+	 List<Image> images = imageService.findImages(str);
+	    if (images == null) {
+	    	images = new ArrayList<Image>();
+	    }
 	  
-	  
-	  
-	  
+	  for (Image p : images) {
+		  System.out.println(p.getId());
+	    }
+
+	  request.getSession().setAttribute("images", images);
 	  return "redirect:/image"; //done
   }
-
-  
-  
-  
   
   @RequestMapping(value = "/import", method = RequestMethod.GET)
   @ResponseBody

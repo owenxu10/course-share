@@ -37,10 +37,8 @@ $(function() {
 	   var searchKeyWord = $("#image-keyword").val();
 	   var searchAddress = ROOT + 'image/search';
 	   
-	   alert(searchKeyWord);
 	   
 	   if(searchKeyWord!=""){
-		   alert("1");
 		   $.ajax({
 	 			  type: "POST",  
 	 			  url: searchAddress,
@@ -48,10 +46,8 @@ $(function() {
 	 				 searchKeyWord:searchKeyWord
 	 				  },
 	 				  
-	 			}).done(function(response){
-	 				alert("2");
- 					var obj = JSON.parse(response);
- 					alert(obj);
+	 			}).done(function(){
+	 				  location.reload();
 	 			});
 		   
 	   }
