@@ -117,6 +117,24 @@ footer.navbar-fixed-bottom {
   padding: 0;
 }
 
+#page-nav{
+	float: left;
+	
+	margin: 0 0 0 200px;
+}
+
+#pagniation{
+	float: left;
+}
+
+#page-goto{
+	width:160px;
+}
+
+.pagniation-improve{
+	margin:0 5px 0 0;
+	
+}
 #cs-center-dialog {
   margin: 0 0 10px 0;
   clear: both;

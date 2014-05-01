@@ -236,7 +236,7 @@ $(function() {
         return false;
       }
       _makeProblems(data);
-      _enableScroll();
+    //  _enableScroll();
     });
   };
 
@@ -271,7 +271,7 @@ $(function() {
   /**********************************/
   
   var init = function() {
-    _enableScroll();
+   // _enableScroll();
     _eAdd2Basket($('#problemset-list button.basket-add'));
     _eViewImage($('#problemset-list img'));
   }();
@@ -458,7 +458,7 @@ $(function() {
   });
 	
   $('input[name=typeRadio]').change(function() {       
-	    alert("a");
+	    //alert("a");
 	});
 
  $("#uploadFile").change(function() {
@@ -545,6 +545,24 @@ $(function() {
 		  _show('#uploadkey');
 	  else
 		  _hide('#uploadkey');
+  });
+  
+  $("[name$='goto']").attr("onclick","").click(function(){
+	  alert(this.title);
+	  $('#problemset-list').empty();
+
+  
+	  $.ajax({
+		    url: URL,
+		    data: _getParams(),
+		    dataType: 'text',
+		    processData: false,
+		    contentType: false,
+		    type: 'GET',
+		    success: function(data){
+		    	console.log(data);
+		    }
+		  });
   });
 
 });

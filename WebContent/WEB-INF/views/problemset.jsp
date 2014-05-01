@@ -23,7 +23,6 @@
 %>
 <jsp:include page="layout-header.jsp" flush="true" />
 
-
 <div id="cs-north-frame" class="row cs-frame-default">
   <div id="cs-problemset-navbar">
     <div id="ps-searchbar" class="input-group">
@@ -289,6 +288,7 @@
       <button id="<%=p.getId() %>" class="basket-add btn btn-success ps-btn-style">放入试题篮</button>
     </div>
   </div>
+  
   <div id="<%=p.getId() %>" class="ps-key ps-hidden">
     <div class="ps-key-left">
       【答案】 <span class="glyphicon glyphicon-hand-right"></span> 
@@ -296,7 +296,9 @@
     <div class="ps-key-right"><%=p.getKeyContent() %></div>
     <button  name="<%=p.getId() %>" id="<%=p.getId() %>" class="btn btn-danger ps-btn-style" onclick="deleteProblem(this.name)">删除</button>
   </div>
-  </div>   
+  
+  
+  </div>  
   <% } %>
   <script language="javascript">
    function deleteProblem(name){
@@ -324,18 +326,35 @@
 	  
   }
   </script>
-  <!--  
-	<ul class="pagination">
-	  <li><a href="#">&laquo;</a></li>
-	  <li><a href="#">1</a></li>
-	  <li><a href="#">2</a></li>
-	  <li><a href="#">3</a></li>
-	  <li><a href="#">4</a></li>
-	  <li><a href="#">5</a></li>
-	  <li><a href="#">&raquo;</a></li>
-	</ul>
-  -->
   </div>
+   
+   <div id="page-nav">
+  	<div id="pagniation">
+	  	<ul class="pagination pagniation-improve">
+		  <li><a  title="start" name="goto">&laquo;</a></li>
+		  <li><a  title="1" name="goto">1</a></li>
+		  <li><a  title="2" name="goto">2</a></li>
+		  <li><a  title="3" name="goto">3</a></li>
+		  <li><a  title="4" name="goto">4</a></li>
+		  <li><a  title="5" name="goto">5</a></li>
+		  <li><a  title="end" name="goto">&raquo;</a></li>
+		</ul>	
+	</div>
+	
+
+	<div class="input-group" id="page-goto">
+	 	 <span class="input-group-addon">跳转到</span>
+	  	 <input type="text" class="form-control">
+	  	 <span class="input-group-addon">/size页</span>
+	  	 <span class="input-group-btn">
+         	<button id="page-goto-btn" class="btn btn-default" type="button">Go</button>
+         </span>
+	</div>
+	
+	 <div id="example"></div>
+	
+  </div>
+   
   <div id="problemset-loading" class="loading">Loading ......</div>
   <input type="hidden" id="filter-offset" value="<%=offset %>">
   <input type="hidden" id="filter-contents" value="">
@@ -353,6 +372,8 @@
   </div>
   <div id="paperbasket-list"></div>
 </div>
+
+  
 
 
 <script type="text/template" id="problem-tpl">
