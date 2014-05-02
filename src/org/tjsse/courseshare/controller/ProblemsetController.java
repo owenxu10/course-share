@@ -211,6 +211,7 @@ public class ProblemsetController {
       @RequestParam(value = "knowledge", required = false) String knowledge,
       @RequestParam(value = "offset", required = false) Integer offset) {
 
+	System.out.println("in list");
     System.out.println("type:" + problemType);
     System.out.println("difficulty:" + difficulty);
     System.out.println("content:" + problemContent);
@@ -274,7 +275,6 @@ public class ProblemsetController {
 
     if (offset == null)
       offset = 0;
-
     return problemsetService.findProblems(pts, pds, pcs, pks, offset);
   }
 

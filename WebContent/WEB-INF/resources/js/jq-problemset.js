@@ -154,6 +154,7 @@ $(function() {
    * Visualize problems, bind events and add to problem list.
    */
   var _makeProblems = function(problems) {
+	  console.log("make probemm");
     var list = [], max = -1;
     $.each(problems, function(k, v) {
       var p = _.template($('#problem-tpl').html(), {
@@ -271,7 +272,7 @@ $(function() {
   /**********************************/
   
   var init = function() {
-   // _enableScroll();
+    //_enableScroll();
     _eAdd2Basket($('#problemset-list button.basket-add'));
     _eViewImage($('#problemset-list img'));
   }();
@@ -395,6 +396,8 @@ $(function() {
       }
     }
     _refresh();
+    options.currentPage=1;
+    $('#pagniation').bootstrapPaginator(options);
     return;
   });
 
@@ -412,6 +415,8 @@ $(function() {
       }
     }
     _refresh();
+    options.currentPage=1;
+    $('#pagniation').bootstrapPaginator(options);
     return;
   });
 
@@ -546,24 +551,48 @@ $(function() {
 	  else
 		  _hide('#uploadkey');
   });
-  
-  $("[name$='goto']").attr("onclick","").click(function(){
-	  alert(this.title);
-	  $('#problemset-list').empty();
+ 
+  var options = {
+          currentPage: 1,
+          totalPages: 10,
+          size:'normal',
+          alignment:'center',
+          onPageClicked: function(e,originalEvent,type,page){
+          	
+          	  var URL = ROOT + 'problemset/list';
+          	  var problem_type = $('#filter-types').val();
+          	  var difficulty  = $('#filter-diffs').val();
+          	  var problem_content = $('#filter-contents').val();
+          	  var knowledge = $('#filter-knows').val();
+          	  var offset =  page;
+          	  offset = offset*20 -19;
+          	              	  
+          	  $('#problemset-list').empty();
+          	  
+          	  $.ajax({
+          		    url: URL,
+          		    data:{
+          		    	 problem_type : problem_type,
+          			      difficulty : difficulty,
+          			      problem_content : problem_content,
+          			      knowledge : knowledge,
+          			      offset : offset
+          			    },
+          		    dataType: 'json',
+          		    type: 'GET',
+          		    success: function(data){
+          		    	console.log(data);
+          		   		_makeProblems(data);
+          		    }
+          		  });
+          }
+  	};
+	 
+  	$('#pagniation').bootstrapPaginator(options);    
 
-  
-	  $.ajax({
-		    url: URL,
-		    data: _getParams(),
-		    dataType: 'text',
-		    processData: false,
-		    contentType: false,
-		    type: 'GET',
-		    success: function(data){
-		    	console.log(data);
-		    }
-		  });
-  });
+  	
+  	
+  	
 
 });
 
