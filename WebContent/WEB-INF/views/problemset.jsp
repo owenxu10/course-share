@@ -8,6 +8,7 @@
   String path = request.getContextPath();
   List<Problem> problems = (List<Problem>) request.getAttribute("problems");
   int count = (Integer) request.getAttribute("count");
+  count=count/20+1;
   System.out.println(count);
   int offset = 0;
   if (problems.size() > 0) {
@@ -335,8 +336,8 @@
 <div id="pagniation"></div>
 	<div class="input-group" id="page-goto">
 	 	 <span class="input-group-addon">跳转到</span>
-	  	 <input type="text" class="form-control text-width">
-	  	 <span class="input-group-addon" id="count">/<%=count/20%>页</span>
+	  	 <input type="text" class="form-control text-width" id="pagetogo" value="1">
+	  	 <span class="input-group-addon" id="countOfPage">/<%=count%>页</span>
 	  	 <span class="input-group-btn">
          	<button id="page-goto-btn" class="btn btn-default" type="button">Go</button>
          </span>
