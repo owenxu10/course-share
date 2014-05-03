@@ -7,6 +7,8 @@
 
   String path = request.getContextPath();
   List<Problem> problems = (List<Problem>) request.getAttribute("problems");
+  int count = (Integer) request.getAttribute("count");
+  System.out.println(count);
   int offset = 0;
   if (problems.size() > 0) {
     for (Problem p : problems) {
@@ -334,7 +336,7 @@
 	<div class="input-group" id="page-goto">
 	 	 <span class="input-group-addon">跳转到</span>
 	  	 <input type="text" class="form-control text-width">
-	  	 <span class="input-group-addon">/size页</span>
+	  	 <span class="input-group-addon" id="count">/<%=count/20%>页</span>
 	  	 <span class="input-group-btn">
          	<button id="page-goto-btn" class="btn btn-default" type="button">Go</button>
          </span>
@@ -343,7 +345,6 @@
   
 
     <script type='text/javascript'>
-   
     </script>
    
 
@@ -353,6 +354,7 @@
   <input type="hidden" id="filter-knows" value="">
   <input type="hidden" id="filter-types" value="">
   <input type="hidden" id="filter-diffs" value="">
+  <input type="hidden" id="count" value="<%=count%>">
 </div>
 
 <div id="cs-center-dialog" class="ps-hidden">

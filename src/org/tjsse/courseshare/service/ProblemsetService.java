@@ -29,6 +29,9 @@ public interface ProblemsetService {
 
   public List<Problem> findProblems(String[] types, Integer[] diffs,
       String[] contents, String[] knows, int offset);
+  
+  public int CountOfProblems(String[] types, Integer[] diffs,
+	      String[] contents, String[] knows, int offset);
 
 //  public List<Problem> findProblemsByTypes(String[] types);
   

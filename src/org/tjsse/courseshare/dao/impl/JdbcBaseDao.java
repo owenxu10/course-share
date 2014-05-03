@@ -326,4 +326,14 @@ public class JdbcBaseDao implements BaseDao {
     // TODO Auto-generated method stub
     return null;
   }
+
+@Override
+public int getCount(String condition, int offset) {
+	String sql = String.format("SELECT count(*) FROM %s WHERE id>=%d", table, offset);
+    if (condition != null && !condition.isEmpty()) {
+      sql += String.format(" AND (%s)", condition);
+    }
+    System.out.println(sql);
+    return (int) jdbcTemplate.queryForInt(sql);
+}
 }

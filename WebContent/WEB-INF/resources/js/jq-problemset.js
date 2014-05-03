@@ -39,6 +39,9 @@ $(function() {
   var PSW = '666888';
 
   _basket = {};
+  
+  var totalPages=$("#count").val();
+  console.log(totalPages);
 
   /***** Local functions *****/
   /**
@@ -236,9 +239,21 @@ $(function() {
         _disableScroll();
         return false;
       }
+      
       _makeProblems(data);
-    //  _enableScroll();
     });
+      
+    var countURL = ROOT + 'problemset/count';
+    $.getJSON(countURL, _getParams(), function(data) {
+    	
+    	data=data/20;
+      options.totalPages=data;
+      options.currentPage=1;
+      $('#pagniation').bootstrapPaginator(options);
+    });
+    //  _enableScroll();
+
+         
   };
 
   /**
@@ -396,8 +411,6 @@ $(function() {
       }
     }
     _refresh();
-    options.currentPage=1;
-    $('#pagniation').bootstrapPaginator(options);
     return;
   });
 
@@ -415,8 +428,6 @@ $(function() {
       }
     }
     _refresh();
-    options.currentPage=1;
-    $('#pagniation').bootstrapPaginator(options);
     return;
   });
 
@@ -552,9 +563,10 @@ $(function() {
 		  _hide('#uploadkey');
   });
  
+ 
   var options = {
           currentPage: 1,
-          totalPages: 10,
+          totalPages: $("#count").val(),
           size:'normal',
           alignment:'center',
           onPageClicked: function(e,originalEvent,type,page){
