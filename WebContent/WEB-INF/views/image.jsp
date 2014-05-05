@@ -37,7 +37,7 @@
 	 <script src="<%=path %>/js/lib/jquery.js"></script>
 	 <!-- Include all compiled plugins (below), or include individual files as needed -->
 	 <script src="<%=path %>/js/lib/bootstrap.min.js"></script>
-     <script type="text/javascript" src="<%=path %>/js/jq-image.js"></script>
+  <script type="text/javascript" src="<%=path %>/js/jq-image.js"></script>
    
    
 <div id="<%=cssheader%>" class="row cs-frame-default">
