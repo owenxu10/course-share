@@ -54,6 +54,7 @@ public class ProblemsetController {
   @RequestMapping(value = "", method = RequestMethod.GET)
   public ModelAndView index(HttpServletRequest request) {
     List<Problem> problems = problemsetService.findProblems(null, null, null, null, 0);
+    int count=problemsetService.CountOfProblems(null, null, null, null, 0);
     if (problems == null) {
       problems = new ArrayList<Problem>();
     }
@@ -62,6 +63,7 @@ public class ProblemsetController {
     ModelMap problemMap = new ModelMap();
     problemMap.addAttribute("problems", problems);
     problemMap.addAttribute("username", username);
+    problemMap.addAttribute("count", count);
     problemMap.addAttribute("libType", LibType.PROBLEMSET);
     problemMap.addAttribute("path",PROBLEM_PATH);
     
@@ -211,6 +213,7 @@ public class ProblemsetController {
       @RequestParam(value = "knowledge", required = false) String knowledge,
       @RequestParam(value = "offset", required = false) Integer offset) {
 
+	System.out.println("in list");
     System.out.println("type:" + problemType);
     System.out.println("difficulty:" + difficulty);
     System.out.println("content:" + problemContent);
@@ -274,8 +277,89 @@ public class ProblemsetController {
 
     if (offset == null)
       offset = 0;
-
     return problemsetService.findProblems(pts, pds, pcs, pks, offset);
+  }
+
+  
+  
+  /*
+   * Action: '/list', Method: GET
+   * List all problems under certain condition.
+   */
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  @ResponseBody
+  public int CountOfProblems(
+      @RequestParam(value = "problem_type", required = false) String problemType,
+      @RequestParam(value = "difficulty", required = false) String difficulty,
+      @RequestParam(value = "problem_content", required = false) String problemContent,
+      @RequestParam(value = "knowledge", required = false) String knowledge,
+      @RequestParam(value = "offset", required = false) Integer offset) {
+
+	System.out.println("in list");
+    System.out.println("type:" + problemType);
+    System.out.println("difficulty:" + difficulty);
+    System.out.println("content:" + problemContent);
+    System.out.println("knowledge:" + knowledge);
+    System.out.println("offset:" + offset);
+
+    // Get problems for specific types
+    List<String> types = new ArrayList<String>();
+    String[] pts = null;
+    if (problemType != null) {
+      StringTokenizer st = new StringTokenizer(problemType, ",");
+      while (st.hasMoreTokens()) {
+        String t = TYPES.get(st.nextToken().trim());
+        if (!t.isEmpty())
+          types.add(t);
+      }
+      if (!types.isEmpty())
+        pts = types.toArray(new String[types.size()]);
+    }
+
+    // Get problems for specific difficulty
+    List<Integer> diffs = new ArrayList<Integer>();
+    Integer[] pds = null;
+    if (difficulty != null) {
+      StringTokenizer st = new StringTokenizer(difficulty, ",");
+      while (st.hasMoreTokens()) {
+        Integer d = Integer.parseInt(st.nextToken().trim());
+        diffs.add(d);
+      }
+      if (!diffs.isEmpty())
+        pds = diffs.toArray(new Integer[diffs.size()]);
+    }
+
+    // Get problems for specific contents
+    List<String> contents = new ArrayList<String>();
+    String[] pcs = null;
+    if (problemContent != null) {
+      StringTokenizer st = new StringTokenizer(problemContent, ",");
+      while (st.hasMoreTokens()) {
+        String c = st.nextToken().trim();
+        if (!c.isEmpty())
+          contents.add(c);
+      }
+      if (!contents.isEmpty())
+        pcs = contents.toArray(new String[contents.size()]);
+    }
+
+    // Get problems for specific knowledge
+    List<String> knows = new ArrayList<String>();
+    String[] pks = null;
+    if (knowledge != null) {
+      StringTokenizer st = new StringTokenizer(knowledge, ",");
+      while (st.hasMoreTokens()) {
+        String k = st.nextToken().trim();
+        if (!k.isEmpty())
+          knows.add(k);
+      }
+      if (!knows.isEmpty())
+        pks = knows.toArray(new String[knows.size()]);
+    }
+
+    if (offset == null)
+      offset = 0;
+    return problemsetService.CountOfProblems(pts, pds, pcs, pks, offset);
   }
 
   /*

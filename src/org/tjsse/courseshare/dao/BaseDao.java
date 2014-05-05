@@ -32,6 +32,8 @@ public interface BaseDao {
   
   public List<Map<String, Object>> query(String sql);
   
+  public int getCount(String condition, int offset);
+  
   public <E extends Object> E save(E bean);
   
   public void clear();

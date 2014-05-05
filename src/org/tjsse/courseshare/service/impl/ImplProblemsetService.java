@@ -781,6 +781,73 @@ public class ImplProblemsetService implements ProblemsetService {
 	  }
 	  
   }
+
+@Override
+public int CountOfProblems(String[] types, Integer[] diffs, String[] contents,
+		String[] knows, int offset) {
+	  StringBuffer typeCondition = new StringBuffer();
+	    if (types != null && types.length > 0) {
+	      for (String t : types) {
+	        if (t == null || t.isEmpty())
+	          continue;
+	        if (typeCondition.length() > 0)
+	          typeCondition.append(" OR ");
+	        typeCondition.append(String.format("(problem_type='%s')", t));
+	      }
+	    }
+
+	    StringBuffer diffCondition = new StringBuffer();
+	    if (diffs != null && diffs.length > 0) {
+	      for (Integer d : diffs) {
+	        if (d == null)
+	          continue;
+	        if (diffCondition.length() > 0)
+	          diffCondition.append(" OR ");
+	        diffCondition.append(String.format("(difficulty=%d)", d));
+	      }
+	    }
+
+	    StringBuffer contentCondition = new StringBuffer();
+	    if (contents != null && contents.length > 0) {
+	      for (String c : contents) {
+	        if (c == null || c.isEmpty())
+	          continue;
+	        if (contentCondition.length() > 0) {
+	          contentCondition.append(" AND ");
+	        }
+	        contentCondition
+	            .append(String.format(
+	                "(problem_content LIKE '%%%s%%' OR knowledge LIKE '%%%s%%')",
+	                c, c));
+	      }
+	    }
+
+	    StringBuffer knowCondition = new StringBuffer();
+	    if (knows != null && knows.length > 0) {
+	      for (String k : knows) {
+	        if (k == null || k.isEmpty())
+	          continue;
+	        if (knowCondition.length() != 0) {
+	          knowCondition.append(" AND ");
+	        }
+	        knowCondition.append(String.format("(knowledge LIKE '%%%s%%')", k));
+	      }
+	    }
+
+	    StringBuffer condition = new StringBuffer();
+	    if (typeCondition.length() > 0)
+	      condition.append("(" + typeCondition + ")AND");
+	    if (diffCondition.length() > 0)
+	      condition.append("(" + diffCondition + ")AND");
+	    if (contentCondition.length() > 0)
+	      condition.append("(" + contentCondition + ")AND");
+	    if (knowCondition.length() > 0)
+	      condition.append("(" + knowCondition + ")AND");
+	    String cond = condition.toString();
+	    if (cond.endsWith("AND"))
+	      cond = cond.substring(0, condition.lastIndexOf("AND"));
+	    return problemDao.getCount(cond, offset);
+}
   
   
 

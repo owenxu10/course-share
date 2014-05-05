@@ -32,6 +32,7 @@ _.templateSettings = {
 </script>
 <script src="<%=path%>/js/lib/scrollpagination.js"></script>
 <script src="<%=path%>/js/jq-<%=jsName %>.js"></script> 
+<script src="<%=path %>/js/lib/bootstrap-paginator.js"></script>
 
 </body>
 </html>

@@ -39,6 +39,7 @@ $(function() {
   var PSW = '666888';
 
   _basket = {};
+  
 
   /***** Local functions *****/
   /**
@@ -154,6 +155,7 @@ $(function() {
    * Visualize problems, bind events and add to problem list.
    */
   var _makeProblems = function(problems) {
+	  console.log("make probemm");
     var list = [], max = -1;
     $.each(problems, function(k, v) {
       var p = _.template($('#problem-tpl').html(), {
@@ -235,9 +237,22 @@ $(function() {
         _disableScroll();
         return false;
       }
+      
       _makeProblems(data);
-      _enableScroll();
     });
+      
+    var countURL = ROOT + 'problemset/count';
+    $.getJSON(countURL, _getParams(), function(data) {
+    	
+      data=Math.ceil(data/20);
+      $('#countOfPage').html("/"+data+"页");
+      options.currentPage=1;
+      options.totalPages=data;
+      $('#pagniation').bootstrapPaginator(options);
+    });
+    //  _enableScroll();
+
+         
   };
 
   /**
@@ -271,7 +286,7 @@ $(function() {
   /**********************************/
   
   var init = function() {
-    _enableScroll();
+    //_enableScroll();
     _eAdd2Basket($('#problemset-list button.basket-add'));
     _eViewImage($('#problemset-list img'));
   }();
@@ -458,7 +473,7 @@ $(function() {
   });
 	
   $('input[name=typeRadio]').change(function() {       
-	    alert("a");
+	    //alert("a");
 	});
 
  $("#uploadFile").change(function() {
@@ -546,6 +561,83 @@ $(function() {
 	  else
 		  _hide('#uploadkey');
   });
+ 
+ 
+  var options = {
+          currentPage: 1,
+          totalPages: $("#count").val(),
+          size:'normal',
+          alignment:'center',
+          onPageClicked: function(e,originalEvent,type,page){
+          	
+          	  var URL = ROOT + 'problemset/list';
+          	  var problem_type = $('#filter-types').val();
+          	  var difficulty  = $('#filter-diffs').val();
+          	  var problem_content = $('#filter-contents').val();
+          	  var knowledge = $('#filter-knows').val();
+          	  var offset =  page;
+          	  
+          	  offset = offset*20 -19;
+          	  $('#pagetogo').val(page);            	  
+          	  $('#problemset-list').empty();
+          	  
+          	  $.ajax({
+          		    url: URL,
+          		    data:{
+          		    	 problem_type : problem_type,
+          			      difficulty : difficulty,
+          			      problem_content : problem_content,
+          			      knowledge : knowledge,
+          			      offset : offset
+          			    },
+          		    dataType: 'json',
+          		    type: 'GET',
+          		    success: function(data){
+          		   		_makeProblems(data);
+          		    }
+          		  });
+          }
+  	};
+	 
+  	$('#pagniation').bootstrapPaginator(options);    
+
+  	
+  	$('#page-goto-btn').click(function(){
+  		var topage=$('#pagetogo').val();
+  		var totalpage=$('#count').val();
+  		if(topage>0){
+	  		if(topage<=totalpage){
+	  			
+	  			 var problem_type = $('#filter-types').val();
+	         	  var difficulty  = $('#filter-diffs').val();
+	         	  var problem_content = $('#filter-contents').val();
+	         	  var knowledge = $('#filter-knows').val();
+	         	  var offset = topage;
+	         	  offset = offset*20 -19;
+	  			
+	  			$.ajax({
+	      		    url: URL,
+	      		    data:{
+	      		    	 problem_type : problem_type,
+	      			      difficulty : difficulty,
+	      			      problem_content : problem_content,
+	      			      knowledge : knowledge,
+	      			      offset : offset
+	      			    },
+	      		    dataType: 'json',
+	      		    type: 'GET',
+	      		    success: function(data){
+	
+	                	  $('#problemset-list').empty();
+	      		   		_makeProblems(data);
+	      		    }
+	      		  });
+	  			 options.currentPage=topage;
+	  		      $('#pagniation').bootstrapPaginator(options);
+	  		}
+  	   }
+  	});
+  	
 
 });
 
