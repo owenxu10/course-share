@@ -127,10 +127,10 @@ DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL  AUTO_INCREMENT,
-   `order` varchar(50) COLLATE utf8_bin NOT NULL,
+   `orderlist` varchar(50) COLLATE utf8_bin NOT NULL,
   `userid` int(11) NOT NULL,
    `theme_id` int(11) NOT NULL  ,
-	PRIMARY KEY (`order_id`)
+	PRIMARY KEY (`order_id`,`userid`,`theme_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 

@@ -2,8 +2,9 @@ package org.tjsse.courseshare.bean;
 
 public class Orders {
 	private Integer order_id;
-	private String order;
+	private String orderlist;
 	private Integer userid;
+	private Integer theme_id;
 	public Integer getOrder_id() {
 		return order_id;
 	}
@@ -11,11 +12,11 @@ public class Orders {
 		this.order_id = orderid;
 	}
 	
-	public String getOrder() {
-		return order;
+	public String getorderlist() {
+		return orderlist;
 	}
-	public void setOrder(String order) {
-		this.order = order;
+	public void setorderlist(String order) {
+		this.orderlist = order;
 	}
 	
 	public Integer getUserid() {
@@ -23,5 +24,11 @@ public class Orders {
 	}
 	public void setUserid(Integer userid) {
 		this.userid = userid;
+	}
+	public Integer getTheme_id() {
+		return theme_id;
+	}
+	public void setTheme_id(Integer theme_id) {
+		this.theme_id = theme_id;
 	}
 }

@@ -261,6 +261,7 @@ public class JdbcBaseDao implements BaseDao {
     values.deleteCharAt(values.length() - 1);
     final String sql = String.format("INSERT INTO %s(%s) VALUES (%s);",
         this.table, attrs, values);
+    System.out.println(sql);
     KeyHolder keyHolder = new GeneratedKeyHolder();
     int result = 0;
     try {

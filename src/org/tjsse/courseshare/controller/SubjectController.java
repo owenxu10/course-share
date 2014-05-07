@@ -2,7 +2,6 @@ package org.tjsse.courseshare.controller;
 
 import java.util.List;
 import java.util.StringTokenizer;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,6 +36,7 @@ public class SubjectController {
     
     //List<Subject> subjects = subjectService.findSubjects(themeid);
     List<Subject> subjects = subjectService.findSubjects();
+    List<Subject> temp = subjectService.findSubjects();
     int ID=2;
     ID = (int) request.getSession().getAttribute("id");
     String order;
@@ -45,7 +45,13 @@ public class SubjectController {
     int size = subjectService.getOrder(themeid, ID).size();
     if(size!=0){
     	 List<Orders> orders = subjectService.getOrder(themeid, ID);
-    	 System.out.println(orders.get(0).getOrder());
+    	 order = orders.get(0).getorderlist();
+    	 subjects= adjustOrder(subjects,temp, order);
+    	 for(Subject s:subjects){
+    			System.out.println(s.getSubject_id());
+    		}
+   	  	System.out.println(order);
+   
     }
     
     List<Theme> themes = subjectService.getTheme();
@@ -82,5 +88,49 @@ public class SubjectController {
     }
     return subjectService.findSubjects(contents);
   }
+  
+  @RequestMapping(value = "/order", method = RequestMethod.GET)
+  public void setOrder(@RequestParam(value = "order") String order,
+		  			   @RequestParam(value = "theme_id") int theme_id,
+		  			 HttpServletRequest request,HttpServletResponse response){
+	  String orderlist = "";
+   // System.out.println(order);
+    String[] array = order.split("[\r\n]+");
+    for(int i =0 ;i<array.length;i++){
+    	if(i%10==2){
+    		orderlist=orderlist+array[i].trim()+"/";
+    	}
+    }
+    int userid= (int) request.getSession().getAttribute("id");
+    System.out.println(userid);
+    System.out.println(theme_id);
+    System.out.println(orderlist);
+    
+    subjectService.setOrder(userid, theme_id, orderlist);
+    
+  }
+  
+private List<Subject> adjustOrder(List<Subject> subject,List<Subject> temp,  String order){
+	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	  String [] orderlist=order.split("/") ;
+	  int toInt;
+	  for(int i = 0; i<orderlist.length; i++){
+		toInt=Integer.parseInt(orderlist[i]);
+		Subject s =getSubjectByid(temp,toInt);
+		 System.out.println(s.getSubject_id());
+		 subject.set(i, getSubjectByid(temp,toInt));
+	  }
+	  return subject;
+  }
+
+private Subject getSubjectByid(List<Subject> subject, int sid){
+	 System.out.println("aaaaaa");
+	  for(Subject s: subject){
+		  if(s.getSubject_id()==sid)
+			  return s;
+	  }
+	  
+	  return null;
+}
 
 }

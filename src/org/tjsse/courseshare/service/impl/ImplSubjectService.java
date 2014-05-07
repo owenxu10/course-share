@@ -57,6 +57,7 @@ public class ImplSubjectService implements SubjectService {
     return count;
   }
 
+  
   @Override
   public List<Subject> findSubjects() {
     return subjectDao.find();
@@ -115,4 +116,30 @@ public class ImplSubjectService implements SubjectService {
 	}
 
 
+	  @Override
+	  public void setOrder(int userid,int themeid,String orderlist){
+		  int findsize;
+		  Orders orders=new Orders();
+		  orders.setorderlist(orderlist);
+		  orders.setUserid(userid);
+		  orders.setTheme_id(themeid);
+		  
+		  
+		  //find if there exists
+		  List<Orders> ordersfind = orderDao.find("userid="+userid+" and theme_id="+themeid);
+		  findsize = ordersfind.size();
+		  if(findsize!=0){
+		  //update
+			  orders = ordersfind.get(0);
+			  orders.setorderlist(orderlist);
+			  orders.setUserid(userid);
+			  orders.setTheme_id(themeid);
+			  orderDao.update(orders);
+		  }else
+		  //insert
+			  orderDao.save(orders);
+		  
+		  
+		  
+	  }
 }

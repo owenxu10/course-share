@@ -19,4 +19,6 @@ public interface SubjectService {
   public List<Theme> getTheme();
   
   public List<Orders> getOrder(int themeid, int userid);
+  
+  public void setOrder(int userid,int themeid,String order);
 }

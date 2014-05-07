@@ -40,5 +40,4 @@ public interface BaseDao {
   
   public void delete(int id);
 
-
 }

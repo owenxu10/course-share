@@ -4,6 +4,7 @@
 <%@ page import="org.tjsse.courseshare.bean.Theme" %>
 <% String path = request.getContextPath(); 
 List<Subject> subjects = (List<Subject>) request.getAttribute("subjects");
+
 List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 %>
 
@@ -100,7 +101,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		          <div class="list-group">
 		            
 		          <% for (Theme t : themes) {%>
-		            <a href="#" class="list-group-item"><%=t.getName() %></a>
+		            <a href="#" class="list-group-item" name="modify-order" title=<%=t.gettheme_id()%>><%=t.getName() %></a>
 		            <%} %>
 		          </div>
 		    </div>
@@ -111,6 +112,8 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		<div >
 		  <button class="btn btn-default" type="button" id="manager-button">增加</button>
 		   <button class="btn btn-default" type="button" id="manager-button-order">调整顺序</button>
+		   <button class="btn btn-default" type="button" id="order-ok">确定</button>
+		   <button class="btn btn-default" type="button" id="order-cancel">取消</button>
 		</div>
 		
 	
@@ -141,15 +144,13 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 				<% for (Subject s : subjects) {%>
 				<li >
 				<div class="s-row">
+				  <div class="ps-hidden"><%=s.getSubject_id() %></div>
 				  <h4>
 					<%=s.getTitle() %>
 				  </h4>
 				  <p>
 					<%=s.getDescription() %>
 				  </p>    
-				  <div class="ps-action">   
-				    <button class="btn btn-default" type="button">删除</button>
-				  </div>
 				</div>
 				</li>
 				<%}%>
@@ -159,9 +160,6 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 			
 			
 		</div>
-		
-	
-		
 		
 		</div>
 		<br/>
