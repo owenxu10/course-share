@@ -1,7 +1,7 @@
 $(function  () {
 
-	var group = $("ol.limited_drop_targets").sortable({
-		  group: 'limited_drop_targets',
+	var group = $("ol.subject-adjust-order-list").sortable({
+		  group: 'subject-adjust-order-list',
 		  onDrop: function (item, container, _super) {
 		    alert(group.sortable("serialize").get().join("\n"));
 		    _super(item, container);
@@ -10,4 +10,8 @@ $(function  () {
 		    return isContainer ? children.join() : parent.text()
 		  },
 		});
+	
 });
+
+
+

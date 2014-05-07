@@ -136,10 +136,10 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		
 		
 		
-			<div id="subject-adjust-order" class="ps-hidden">
-			<ol class='example'>
+			<div id="subject-adjust-order" >
+			<ol class='subject-adjust-order-list vertical'>
 				<% for (Subject s : subjects) {%>
-				<li>
+				<li >
 				<div class="s-row">
 				  <h4>
 					<%=s.getTitle() %>
@@ -156,18 +156,11 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 			</ol>
 			</div>
 			
-			<div>
-              <ol class="limited_drop_targets vertical">
-                <li class="highlight">Item 1</li>
-                
-                <li class="highlight">Item 3</li>
-                
-                <li class="highlight">Item 5</li>
-                <li class="">Item 2</li><li class="">Item 4</li><li class="">Item 6</li>
-              </ol>
-            </div>
+			
 			
 		</div>
+		
+	
 		
 		
 		</div>
