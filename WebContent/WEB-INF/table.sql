@@ -102,7 +102,37 @@ CREATE TABLE `image` (
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-SELECT * FROM `course-share`.image;
+
+DROP TABLE IF EXISTS `subject`;
+
+CREATE TABLE `subject` (
+  `subject_id` int(11) NOT NULL  AUTO_INCREMENT,
+   `title` varchar(500) COLLATE utf8_bin NOT NULL,
+   `description` varchar(500) COLLATE utf8_bin NOT NULL,
+  `url` varchar(500) COLLATE utf8_bin NOT NULL,
+  `themeid`  int(11) NOT NULL ,
+	PRIMARY KEY (`subject_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `theme`;
+
+CREATE TABLE `theme` (
+  `theme_id` int(11) NOT NULL  AUTO_INCREMENT,
+   `name` varchar(50) COLLATE utf8_bin NOT NULL,
+   
+	PRIMARY KEY (`theme_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `orders`;
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL  AUTO_INCREMENT,
+   `order` varchar(50) COLLATE utf8_bin NOT NULL,
+  `userid` int(11) NOT NULL,
+   `theme_id` int(11) NOT NULL  ,
+	PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

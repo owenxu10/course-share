@@ -1,6 +1,5 @@
 <%@ page import="java.util.Map, java.util.HashMap, java.util.List" %>
 <%@ page import="org.tjsse.courseshare.bean.Problem" %>
-<%@ page import="org.springframework.web.servlet.mvc.support.RedirectAttributes" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <% 

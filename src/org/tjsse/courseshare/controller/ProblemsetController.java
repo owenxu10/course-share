@@ -60,6 +60,7 @@ public class ProblemsetController {
     }
 
     String username=(String) request.getSession().getAttribute("username");
+    
     ModelMap problemMap = new ModelMap();
     problemMap.addAttribute("problems", problems);
     problemMap.addAttribute("username", username);
@@ -69,6 +70,7 @@ public class ProblemsetController {
     
     
     System.out.println("problem set index");
+    System.out.println(username);
     return new ModelAndView("problemset", problemMap);
     
   }

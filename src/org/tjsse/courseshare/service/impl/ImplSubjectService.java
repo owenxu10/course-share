@@ -8,9 +8,12 @@ import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tjsse.courseshare.bean.Problem;
+import org.tjsse.courseshare.bean.Orders;
 import org.tjsse.courseshare.bean.Subject;
+import org.tjsse.courseshare.bean.Theme;
+import org.tjsse.courseshare.dao.OrdersDao;
 import org.tjsse.courseshare.dao.SubjectDao;
+import org.tjsse.courseshare.dao.ThemeDao;
 import org.tjsse.courseshare.service.SubjectService;
 import org.tjsse.courseshare.util.Config;
 
@@ -19,7 +22,11 @@ public class ImplSubjectService implements SubjectService {
 
   @Autowired
   private SubjectDao subjectDao;
-
+  @Autowired
+  private OrdersDao orderDao;
+  @Autowired
+  private ThemeDao themeDao;
+  
   @Override
   public int importSubject(String path) {
     int count = 0;
@@ -32,13 +39,10 @@ public class ImplSubjectService implements SubjectService {
         Subject subject = new Subject();
         if (!st.hasMoreTokens())
           continue;
-        subject.setName(st.nextToken());
+        subject.setTitle(st.nextToken());
         if (!st.hasMoreTokens())
           continue;
         subject.setDescription(st.nextToken());
-        if (!st.hasMoreTokens())
-          continue;
-        subject.setSubjectName(st.nextToken());
         if (!st.hasMoreTokens())
           continue;
         subject.setUrl(st.nextToken());
@@ -82,4 +86,33 @@ public class ImplSubjectService implements SubjectService {
     ImplSubjectService iss = new ImplSubjectService();
     iss.importSubject(Config.ROOT_PATH + "subject1.txt");
   }
+
+	@Override
+	public List<Subject> findSubjects(int themeid) {
+		    StringBuffer condition = new StringBuffer();
+		      condition
+		          .append(String
+		              .format(
+		                  "(themeid = '%d')",
+		                  themeid));
+		    return subjectDao.find(condition.toString());
+	}
+	
+	@Override
+	public List<Orders> getOrder(int themeid, int userid) {
+		    StringBuffer condition = new StringBuffer();
+		      condition
+		          .append(String
+		              .format(
+		                  "(theme_id ='%d' AND userid = '%d')",
+		                  themeid, userid));
+		    return orderDao.find(condition.toString());
+	}
+
+	@Override
+	public List<Theme> getTheme() {
+		return themeDao.find();
+	}
+
+
 }

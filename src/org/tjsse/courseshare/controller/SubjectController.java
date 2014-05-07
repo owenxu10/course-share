@@ -3,6 +3,9 @@ package org.tjsse.courseshare.controller;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.Subject;
+import org.tjsse.courseshare.bean.Orders;
+import org.tjsse.courseshare.bean.Theme;
 import org.tjsse.courseshare.service.SubjectService;
 import org.tjsse.courseshare.util.Config;
 import org.tjsse.courseshare.util.LibType;
@@ -22,11 +27,31 @@ public class SubjectController {
 
   @Autowired
   private SubjectService subjectService;
+  
 
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ModelAndView index() {
+  public ModelAndView index(HttpServletRequest request,HttpServletResponse response) {
     ModelMap subjectMap = new ModelMap();
+    int themeid=1;
     subjectMap.addAttribute("libType", LibType.SUBJECT);
+    
+    //List<Subject> subjects = subjectService.findSubjects(themeid);
+    List<Subject> subjects = subjectService.findSubjects();
+    int ID=2;
+    ID = (int) request.getSession().getAttribute("id");
+    String order;
+   
+    
+    int size = subjectService.getOrder(themeid, ID).size();
+    if(size!=0){
+    	 List<Orders> orders = subjectService.getOrder(themeid, ID);
+    	 System.out.println(orders.get(0).getOrder());
+    }
+    
+    List<Theme> themes = subjectService.getTheme();
+    
+    subjectMap.addAttribute("subjects", subjects);
+    subjectMap.addAttribute("themes", themes);
     return new ModelAndView("subject", subjectMap);
   }
 
