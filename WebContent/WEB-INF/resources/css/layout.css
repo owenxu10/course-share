@@ -148,12 +148,12 @@ footer.navbar-fixed-bottom {
 
 #subject-manage-center-frame{
 	float: right;
-	margin-top: -60px;
 }
 
-#manager-button{
+.manage-button{
 	margin-left: 25px;
 }
+
 #west-frame{
 	float: left;
 	width: 300px;

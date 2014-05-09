@@ -155,7 +155,6 @@ $(function() {
    * Visualize problems, bind events and add to problem list.
    */
   var _makeProblems = function(problems) {
-	  console.log("make probemm");
     var list = [], max = -1;
     $.each(problems, function(k, v) {
       var p = _.template($('#problem-tpl').html(), {

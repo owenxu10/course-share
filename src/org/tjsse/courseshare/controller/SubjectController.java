@@ -47,10 +47,10 @@ public class SubjectController {
     	 List<Orders> orders = subjectService.getOrder(themeid, ID);
     	 order = orders.get(0).getorderlist();
     	 subjects= adjustOrder(subjects,temp, order);
-    	 for(Subject s:subjects){
-    			System.out.println(s.getSubject_id());
-    		}
-   	  	System.out.println(order);
+//    	 for(Subject s:subjects){
+//    			System.out.println(s.getSubject_id());
+//    		}
+//   	  	System.out.println(order);
    
     }
     
@@ -90,24 +90,49 @@ public class SubjectController {
   }
   
   @RequestMapping(value = "/order", method = RequestMethod.GET)
+  @ResponseBody
   public void setOrder(@RequestParam(value = "order") String order,
 		  			   @RequestParam(value = "theme_id") int theme_id,
 		  			 HttpServletRequest request,HttpServletResponse response){
 	  String orderlist = "";
-   // System.out.println(order);
-    String[] array = order.split("[\r\n]+");
-    for(int i =0 ;i<array.length;i++){
-    	if(i%10==2){
-    		orderlist=orderlist+array[i].trim()+"/";
-    	}
-    }
-    int userid= (int) request.getSession().getAttribute("id");
-    System.out.println(userid);
-    System.out.println(theme_id);
-    System.out.println(orderlist);
-    
-    subjectService.setOrder(userid, theme_id, orderlist);
-    
+    System.out.println("order--"+order);
+	if(!order.equals("null")){
+	    String[] array = order.split("[\r\n]+");
+	    for(int i =0 ;i<array.length;i++){
+	    	if(i%10==2){
+	    		orderlist=orderlist+array[i].trim()+"/";
+	    	}
+	    }
+	    int userid= (int) request.getSession().getAttribute("id");
+	    System.out.println(userid);
+	    System.out.println(theme_id);
+	    System.out.println(orderlist);
+	    
+	    subjectService.setOrder(userid, theme_id, orderlist);
+	}
+  }
+  
+  
+  @RequestMapping(value = "/orderedlist", method = RequestMethod.GET)
+  @ResponseBody
+  public List<Subject> listOrder(@RequestParam(value = "order") String order){
+	String orderlist = "";
+
+	List<Subject> subjects = subjectService.findSubjects();
+	List<Subject> temp = subjectService.findSubjects();
+	if(!order.equals("null")){
+		System.out.println("order=null --- "+ order);
+	    String[] array = order.split("[\r\n]+");
+	    for(int i =0 ;i<array.length;i++){
+	    	if(i%10==2){
+	    		orderlist=orderlist+array[i].trim()+"/";
+	    	}
+	    }
+	    subjects= adjustOrder(subjects,temp, orderlist);
+	}
+		
+	return subjects;
+	
   }
   
 private List<Subject> adjustOrder(List<Subject> subject,List<Subject> temp,  String order){

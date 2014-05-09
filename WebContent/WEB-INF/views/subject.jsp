@@ -22,7 +22,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
   </div>
 </div>
 
-<div id="show-page" class="ps-hidden">
+<div id="show-page" >
 	<div id="east-frame">
 		<div class="col-xs-6 col-sm-3 sidebar">
 	          <div class="list-group">
@@ -34,7 +34,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	          </div>
 	          
 	           <div class="sidebutton">
-			    <button type="button" class="btn btn-default btn-lg ">
+			    <button type="button" class="btn btn-default btn-lg" id="toManage">
 			 	  <span class="glyphicon glyphicon-cog"></span>管理文章 
 				</button>
 				</div>	
@@ -61,17 +61,17 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 </div>
 
 
-<div id="mamage">
+<div id="mamage-page" class="ps-hidden">
 	<div id="manage-menu">
 		<ul class="nav nav-tabs nav-justified">
-		  <li class="active"><a href="#">专题管理</a></li>
-		  <li ><a href="#">文章管理</a></li>
+		  <li id="li-menu-t" class="active"><a title="totheme" name="manage-menu" >专题管理</a></li>
+		  <li id="li-menu-s" ><a title="tosubject" name="manage-menu" >文章管理</a></li>
 		</ul>
 	</div>
 	
 	<br/>
 	
-	<div id="manage-theme"  class="ps-hidden">
+	<div id="manage-theme" >
 		<div class="btn-group">
 		  <button class="btn btn-default" type="button">增加</button>
 		</div>
@@ -94,7 +94,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	</div>
 	
 	
-	<div id="manage-subject">
+	<div id="manage-subject"  class="ps-hidden">
 	
 		<div id="west-frame">
 			<div class="col-xs-6 col-sm-3 sidebar">
@@ -110,41 +110,25 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	
 	
 		<div >
-		  <button class="btn btn-default" type="button" id="manager-button">增加</button>
+		  <button class="btn btn-default manage-button" type="button" id="manager-button">增加</button>
 		   <button class="btn btn-default" type="button" id="manager-button-order">调整顺序</button>
-		   <button class="btn btn-default" type="button" id="order-ok">确定</button>
-		   <button class="btn btn-default" type="button" id="order-cancel">取消</button>
+		   <button class="btn btn-default manage-button ps-hidden" type="button" id="order-ok">确定</button>
+		   <button class="btn btn-default ps-hidden" type="button" id="order-cancel">取消</button>
 		</div>
 		
 	
 		<div id="subject-manage-center-frame" >
 		
-		<div id="subject-list">
-		
-		    <div id="subject-modify" class="ps-hidden">
-				<% for (Subject s : subjects) {%>
-				<div class="s-row">
-				  <h4>
-					<%=s.getTitle() %>
-				  </h4>
-				  <p>
-					<%=s.getDescription() %>
-				  </p>    
-				  <div class="ps-action">   
-				    <button class="btn btn-default" type="button">删除</button>
-				  </div>
-				</div>
-				<%}%>
+			<div id="subject-list">
+			
 			</div>
 		
-		
-		
-			<div id="subject-adjust-order" >
+			<div id="subject-adjust-order"  class="ps-hidden">
 			<ol class='subject-adjust-order-list vertical'>
 				<% for (Subject s : subjects) {%>
-				<li >
-				<div class="s-row">
-				  <div class="ps-hidden"><%=s.getSubject_id() %></div>
+				<li>
+				<div class="s-row thumbnail">
+				<div class="ps-hidden"> <%=s.getSubject_id()%></div>
 				  <h4>
 					<%=s.getTitle() %>
 				  </h4>
@@ -158,8 +142,6 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 			</div>
 			
 			
-			
-		</div>
 		
 		</div>
 		<br/>
@@ -170,5 +152,20 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	
 </div>
 
+<script type="text/template" id="subject-tpl">
+<div class="s-row">
+	<h4>
+		<@=title @>
+	</h4>
+	<p>
+		<@=description @>
+	</p>    				 
+	<div class="ps-action">   				    
+		<button class="btn btn-default" type="button" id="<@=id @>">删除</button>			  
+	</div>				
+</div>
+
+
+</script>
 
 <jsp:include page="layout-footer.jsp" flush="true" />
