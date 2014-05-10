@@ -21,4 +21,12 @@ public interface SubjectService {
   public List<Orders> getOrder(int themeid, int userid);
   
   public void setOrder(int userid,int themeid,String order);
+
+  public int importSubject(String title,int theme_id,String description,String url);
+  
+  public void importOrder(int subject_id, int theme_id,int user_id);
+  
+  public void deleteTheme(int themeid);
+  public void addTheme(String name);
+  
 }

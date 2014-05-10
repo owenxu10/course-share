@@ -34,9 +34,9 @@ public class SubjectController {
     int themeid=1;
     subjectMap.addAttribute("libType", LibType.SUBJECT);
     
-    //List<Subject> subjects = subjectService.findSubjects(themeid);
-    List<Subject> subjects = subjectService.findSubjects();
-    List<Subject> temp = subjectService.findSubjects();
+    List<Subject> subjects = subjectService.findSubjects(themeid);
+    //List<Subject> subjects = subjectService.findSubjects();
+    List<Subject> temp = subjectService.findSubjects(themeid);
     int ID=2;
     ID = (int) request.getSession().getAttribute("id");
     String order;
@@ -115,41 +115,71 @@ public class SubjectController {
   
   @RequestMapping(value = "/orderedlist", method = RequestMethod.GET)
   @ResponseBody
-  public List<Subject> listOrder(@RequestParam(value = "order") String order){
-	String orderlist = "";
-
-	List<Subject> subjects = subjectService.findSubjects();
-	List<Subject> temp = subjectService.findSubjects();
-	if(!order.equals("null")){
-		System.out.println("order=null --- "+ order);
-	    String[] array = order.split("[\r\n]+");
-	    for(int i =0 ;i<array.length;i++){
-	    	if(i%10==2){
-	    		orderlist=orderlist+array[i].trim()+"/";
-	    	}
-	    }
-	    subjects= adjustOrder(subjects,temp, orderlist);
-	}
-		
-	return subjects;
+  public List<Subject> listOrder(@RequestParam(value = "themeid") int themeid,
+		  HttpServletRequest request,HttpServletResponse response){
+	    String order;
+		int ID = (int) request.getSession().getAttribute("id");
+		List<Subject> subjects = subjectService.findSubjects(themeid);
+		List<Subject> temp = subjectService.findSubjects(themeid);
+		  int size = subjectService.getOrder(themeid, ID).size();
+		    if(size!=0){
+		    	 List<Orders> orders = subjectService.getOrder(themeid, ID);
+		    	 order = orders.get(0).getorderlist();
+		    	 subjects= adjustOrder(subjects,temp, order);
+		    }
+		return subjects;
+  }
+  
+  @RequestMapping(value = "/themelist", method = RequestMethod.GET)
+  @ResponseBody
+  public List<Theme> listOrder(){
+	    List<Theme> themes = subjectService.getTheme();
+		return themes;
 	
   }
   
+  @RequestMapping(value = "/importSubject", method = RequestMethod.GET)
+  @ResponseBody
+  public void importSubject(@RequestParam(value = "title") String title,
+								  @RequestParam(value = "theme_id") int theme_id,
+								  @RequestParam(value = "description") String description,
+								  @RequestParam(value = "url") String url,
+								  HttpServletRequest request,HttpServletResponse response){
+	  
+	  int ID = (int) request.getSession().getAttribute("id");
+	  
+	  int subjectID=subjectService.importSubject(title,theme_id,description,url); 
+	  subjectService.importOrder(subjectID,theme_id, ID);
+  }
+  
+  @RequestMapping(value = "/deleteTheme", method = RequestMethod.GET)
+  @ResponseBody
+  public void deleteTheme(@RequestParam(value = "theme_id") int theme_id){
+	  
+	  subjectService.deleteTheme(theme_id);
+  }
+  
+  @RequestMapping(value = "/addTheme", method = RequestMethod.GET)
+  @ResponseBody
+  public void importSubject(@RequestParam(value = "name") String name){
+
+	  subjectService.addTheme(name);
+  }
+  
+  
+  
 private List<Subject> adjustOrder(List<Subject> subject,List<Subject> temp,  String order){
-	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	  String [] orderlist=order.split("/") ;
 	  int toInt;
 	  for(int i = 0; i<orderlist.length; i++){
 		toInt=Integer.parseInt(orderlist[i]);
 		Subject s =getSubjectByid(temp,toInt);
-		 System.out.println(s.getSubject_id());
 		 subject.set(i, getSubjectByid(temp,toInt));
 	  }
 	  return subject;
   }
 
 private Subject getSubjectByid(List<Subject> subject, int sid){
-	 System.out.println("aaaaaa");
 	  for(Subject s: subject){
 		  if(s.getSubject_id()==sid)
 			  return s;

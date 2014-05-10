@@ -137,9 +137,52 @@ public class ImplSubjectService implements SubjectService {
 			  orderDao.update(orders);
 		  }else
 		  //insert
-			  orderDao.save(orders);
+			  orderDao.save(orders); 
+		 }
+	  
+	  @Override
+	  public int importSubject(String title,int theme_id,String description,String url){
+		  Subject subject=new Subject();
+		  subject.setDescription(description);
+		  subject.setThemeid(theme_id);
+		  subject.setTitle(title);
+		  subject.setUrl(url);
 		  
+		  subjectDao.save(subject);
 		  
-		  
+		  List<Subject> subjects = subjectDao.find("description='"+description+"' and themeid='"+theme_id+"' and url='"+url+"' and title='"+title+"';");
+		  return subjects.get(0).getSubject_id();
+		  }
+	  
+	  @Override
+	  public void importOrder(int subject_id, int theme_id,int user_id){
+		  Orders orders=new Orders();
+		  List<Orders> ordersfind = orderDao.find("userid="+user_id+" and theme_id="+theme_id);
+		  int findsize = ordersfind.size();
+		  if(findsize!=0){
+		  //insert this to the end
+			  orders = ordersfind.get(0);
+			  String orderlist = orders.getorderlist();
+			  orders.setorderlist(orderlist+subject_id+"/");
+			  orderDao.update(orders);
+		  }else{
+		  //first
+			  orders.setorderlist(subject_id+"/");
+			  orders.setUserid(user_id);
+			  orders.setTheme_id(theme_id);
+			  orderDao.save(orders); 
+		  }
+	  }
+	  
+	  @Override
+	  public void deleteTheme(int themeid){
+		  themeDao.delete(themeid);
+	  }
+	  
+	  @Override
+	  public void addTheme(String name){
+		  Theme theme = new Theme();
+		  theme.setName(name);
+		  themeDao.save(theme);
 	  }
 }

@@ -14,12 +14,22 @@ body {
   max-width: 1024px;
 }
 
+#subject-adjust-order{
+  margin-top: -320px;
+}
+
 #cs-header {
   border-radius: 0;
   margin: 0;
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+#insert-theme{
+	
+	float: right;
+	width:600px;
 }
 
 #cs-header-brand {

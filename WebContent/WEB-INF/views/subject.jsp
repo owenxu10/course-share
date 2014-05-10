@@ -28,9 +28,11 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	          <div class="list-group">
 	            
 	            <a href="#" class="list-group-item active">专题分类</a>
+	          <div id="show-theme-list">
 	          <% for (Theme t : themes) {%>
-	            <a href="#" class="list-group-item"><%=t.getName() %></a>
+	            <a class="list-group-item"  name="showlist" title="<%=t.gettheme_id()%>"><%=t.getName() %></a>
 	            <%} %>
+	          </div>
 	          </div>
 	          
 	           <div class="sidebutton">
@@ -73,24 +75,40 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	
 	<div id="manage-theme" >
 		<div class="btn-group">
-		  <button class="btn btn-default" type="button">增加</button>
+		  <button class="btn btn-default" type="button" id="add-theme">增加</button>
+		  
 		</div>
 		
-		<div id="subject-center-frame">
+		
+		<div id="insert-theme" class="ps-hidden">
+				 <div class="form-group">
+				    <label >专题名称</label>
+				    <input type="text" class="form-control" id="t-title" name="title" placeholder="专题名称...">
+				  </div>
+				 
+			    <div class="modal-footer">
+			      <button type="button" class="btn btn-primary" id='themeUpload'>上传</button>
+			       <button type="button" class="btn btn-danger" id='themeUploadcancel'>取消</button>
+			    </div>
+			    
+  	</div>
+		<div id="theme-list">
 		<% for (Theme t : themes) {%>
 		<div class="m-row">
-		 
 		 <div class="ps-col">   
 		     <h4>
 			<%=t.getName() %>
 		  </h4>
 		  </div>
 		  <div class="ps-col ps-action">   
-		    <a class="btn btn-default" name="delete">删除</a>
+		    <a class="btn btn-default" name="delete" title=<%=t.gettheme_id()%>>删除</a>
 		  </div>
 		</div>
 		<%}%>
 		</div>
+		
+		
+	  
 	</div>
 	
 	
@@ -98,10 +116,10 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	
 		<div id="west-frame">
 			<div class="col-xs-6 col-sm-3 sidebar">
-		          <div class="list-group">
+		          <div class="list-group" id="manage-theme-list">
 		            
 		          <% for (Theme t : themes) {%>
-		            <a href="#" class="list-group-item" name="modify-order" title=<%=t.gettheme_id()%>><%=t.getName() %></a>
+		            <a class="list-group-item" name="modify-order" title=<%=t.gettheme_id()%>><%=t.getName() %></a>
 		            <%} %>
 		          </div>
 		    </div>
@@ -110,21 +128,51 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	
 	
 		<div >
-		  <button class="btn btn-default manage-button" type="button" id="manager-button">增加</button>
+		  <button class="btn btn-default manage-button" type="button" id="add-button">增加</button>
+		   <button class="btn btn-default ps-hidden manage-button" type="button" id="add-cancel">取消</button>
 		   <button class="btn btn-default" type="button" id="manager-button-order">调整顺序</button>
 		   <button class="btn btn-default manage-button ps-hidden" type="button" id="order-ok">确定</button>
 		   <button class="btn btn-default ps-hidden" type="button" id="order-cancel">取消</button>
+		   
 		</div>
 		
 	
 		<div id="subject-manage-center-frame" >
-		
+			<div id="add-subject" class="ps-hidden">
+				<div class="s-row">
+					
+			      	<div class="modal-body">
+					  
+				    
+					 <div class="form-group">
+					    <label >题目</label>
+					    <input type="text" class="form-control" id="s-title" name="title" placeholder="题目...">
+					  </div>
+					  
+					 <div class="form-group">
+					    <label >简介</label>
+					    <input type="text" class="form-control" id="s-description" name="description" placeholder="简介...">
+					 </div>
+
+					 <div class="form-group">
+					    <label >URL</label>
+					    <input type="text" class="form-control" id="s-url" name="url" placeholder="URL...">
+					 </div>
+					 
+				    <div class="modal-footer">
+				      <button type="button" class="btn btn-primary" id='subjectUpload'>上传</button>
+				    </div>
+				    
+				    </div>
+			  </div>
+			</div>
+			
 			<div id="subject-list">
 			
 			</div>
 		
-			<div id="subject-adjust-order"  class="ps-hidden">
-			<ol class='subject-adjust-order-list vertical'>
+			<div id="subject-adjust-order"  class="ps-hidden ">
+			<ol id="order-adjust-list" class='subject-adjust-order-list vertical'>
 				<% for (Subject s : subjects) {%>
 				<li>
 				<div class="s-row thumbnail">
@@ -165,7 +213,57 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	</div>				
 </div>
 
+</script>
+
+<script type="text/template" id="subject-show-tpl">
+	<div class="s-row">
+	  <h4>
+		<@=title @>
+	  </h4>
+	  <p>
+		<@=description @>
+	  </p>    
+	  <div class="ps-action">   
+	    <a class="btn btn-default" href=<@=url @> target="_blank">原文链接</a>
+	  </div>
+	</div>
 
 </script>
+
+
+
+<script type="text/template" id="theme-tpl">
+	<a class="list-group-item" name="modify-order" title=<@=themeid @> ><@=name @></a>
+</script>
+
+<script type="text/template" id="theme-manage-tpl">
+		<div class="m-row">
+		 
+		 <div class="ps-col">   
+		     <h4>
+			<@=name @>
+		  </h4>
+		  </div>
+		  <div class="ps-col ps-action">   
+		    <a class="btn btn-default" name="delete" title=<@=themeid @>>删除</a>
+		  </div>
+		</div>
+</script>
+		
+<script type="text/template" id="subject-adjust-tpl">
+		<li>
+		<div class="s-row thumbnail">
+		<div class="ps-hidden"> <@=id @></div>
+		  <h4>
+			<@=title @>
+		  </h4>
+		  <p>
+			<@=description @>
+		  </p>    
+		</div>
+		</li>
+</script>
+
+
 
 <jsp:include page="layout-footer.jsp" flush="true" />
