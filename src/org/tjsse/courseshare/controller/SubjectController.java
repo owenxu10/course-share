@@ -166,7 +166,17 @@ public class SubjectController {
 	  subjectService.addTheme(name);
   }
   
-  
+  @RequestMapping(value = "/deletesubject", method = RequestMethod.GET)
+  @ResponseBody
+  public void deleteSubject(@RequestParam(value = "subjectid") int subjectid,
+		  			HttpServletRequest request,HttpServletResponse response){
+	  
+	  List<Subject> subjects = subjectService.findSubjectbyid(subjectid);
+	  int theme_id= subjects.get(0).getThemeid();
+	  int ID = (int) request.getSession().getAttribute("id");
+	  subjectService.deleteSubject(subjectid);
+	  subjectService.deleteOrder(subjectid,theme_id, ID);
+  }
   
 private List<Subject> adjustOrder(List<Subject> subject,List<Subject> temp,  String order){
 	  String [] orderlist=order.split("/") ;

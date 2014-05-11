@@ -45,6 +45,22 @@ $(function  () {
 		  		    }
 		  		    list = $(list.join(''));
 		  		    $(argument).append(list);
+		  		    
+		  		    $("a[name='deletesubject']").click(function(){
+		  				var subjectid=this.id;
+		  				$.ajax({
+			  				  type: "GET",
+			  				  url: ROOT+"subject/deletesubject",
+			  				  data: {
+			  					  subjectid:subjectid
+			  		  		    	 }
+			  				}).done(function(){
+			  					//refresh list
+			  					_makeSubjects("#subject-list");
+			  				});
+		  				
+		  			});
+		  		    
 	  		    }
 	  		  });
 	  };
@@ -133,7 +149,7 @@ $(function  () {
 		  		    $(argument).append(list);
 		  		    
 		  		    $("a[name='modify-order']").click(function(){
-		  				theme_id = this.title;
+		  				theme_id = this.id;
 		  				if(mode=="show")
 		  				_makeSubjects("#subject-list");
 		  				else
@@ -168,7 +184,7 @@ $(function  () {
 		  		    
 		  		  $("a[name='delete']").click(function(){
 		  			
-		  			var deleteThemeid = this.title;
+		  			var deleteThemeid = this.id;
 		  			
 		  			var delThemeAddress=ROOT+"subject/deleteTheme";
 		  			$.ajax({
@@ -205,8 +221,8 @@ $(function  () {
 		});
 	
 	$("a[name='showlist']").click(function(){
-		theme_id = this.title;
-		_makeShowSubjects("#subject-center-frame");
+		theme_id = this.id;
+		_makeAdjunstSubjects("#subject-center-frame");
 	});
 	
 //	$("a[name='modify-order']").click(function(){
@@ -318,7 +334,7 @@ $(function  () {
 	
 	$("a[name='delete']").click(function(){
 		
-		var deleteThemeid = this.title;
+		var deleteThemeid = this.id;
 		
 		var delThemeAddress=ROOT+"subject/deleteTheme";
 		$.ajax({

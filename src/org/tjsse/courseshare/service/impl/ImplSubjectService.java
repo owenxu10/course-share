@@ -100,6 +100,17 @@ public class ImplSubjectService implements SubjectService {
 	}
 	
 	@Override
+	 public List<Subject> findSubjectbyid(int subjectid){
+			StringBuffer condition = new StringBuffer();
+		      condition
+		          .append(String
+		              .format(
+		                  "(subject_id = '%d')",
+		                  subjectid));
+		    return subjectDao.find(condition.toString());
+	}
+	
+	@Override
 	public List<Orders> getOrder(int themeid, int userid) {
 		    StringBuffer condition = new StringBuffer();
 		      condition
@@ -177,6 +188,27 @@ public class ImplSubjectService implements SubjectService {
 	  @Override
 	  public void deleteTheme(int themeid){
 		  themeDao.delete(themeid);
+	  }
+	  
+	  @Override
+	  public void deleteSubject(int subjectid){
+		  subjectDao.delete(subjectid);
+	  }
+	  
+	  @Override
+	  public void deleteOrder(int subjectid,int theme_id,int ID){
+		  List<Orders> ordersfind = orderDao.find("userid="+ID+" and theme_id="+theme_id);
+		  Orders orders = ordersfind.get(0);
+		  String orderlist = orders.getorderlist();
+		  String neworderlist = "";
+		  String[] array = orderlist.split("/");
+		  for(String s : array){
+			  if(Integer.parseInt(s)!=subjectid){
+				  neworderlist=neworderlist+s+"/";
+			  }  
+		  }
+		  orders.setorderlist(neworderlist);
+		  orderDao.update(orders);
 	  }
 	  
 	  @Override

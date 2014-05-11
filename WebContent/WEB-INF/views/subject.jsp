@@ -30,7 +30,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 	            <a href="#" class="list-group-item active">专题分类</a>
 	          <div id="show-theme-list">
 	          <% for (Theme t : themes) {%>
-	            <a class="list-group-item"  name="showlist" title="<%=t.gettheme_id()%>"><%=t.getName() %></a>
+	            <a class="list-group-item"  name="showlist" id="<%=t.gettheme_id()%>"><%=t.getName() %></a>
 	            <%} %>
 	          </div>
 	          </div>
@@ -101,7 +101,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		  </h4>
 		  </div>
 		  <div class="ps-col ps-action">   
-		    <a class="btn btn-default" name="delete" title=<%=t.gettheme_id()%>>删除</a>
+		    <a class="btn btn-default" name="delete" id=<%=t.gettheme_id()%>>删除</a>
 		  </div>
 		</div>
 		<%}%>
@@ -209,7 +209,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		<@=description @>
 	</p>    				 
 	<div class="ps-action">   				    
-		<button class="btn btn-default" type="button" id="<@=id @>">删除</button>			  
+		<a class="btn btn-default" type="button" id="<@=id @>" name="deletesubject">删除</a>			  
 	</div>				
 </div>
 
@@ -233,7 +233,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 
 
 <script type="text/template" id="theme-tpl">
-	<a class="list-group-item" name="modify-order" title=<@=themeid @> ><@=name @></a>
+	<a class="list-group-item" name="modify-order" id=<@=themeid @> ><@=name @></a>
 </script>
 
 <script type="text/template" id="theme-manage-tpl">
@@ -245,7 +245,7 @@ List<Theme> themes = (List<Theme>) request.getAttribute("themes");
 		  </h4>
 		  </div>
 		  <div class="ps-col ps-action">   
-		    <a class="btn btn-default" name="delete" title=<@=themeid @>>删除</a>
+		    <a class="btn btn-default" name="delete" id=<@=themeid @>>删除</a>
 		  </div>
 		</div>
 </script>

@@ -32,4 +32,11 @@ public class JdbcSubjectDao extends JdbcBaseDao implements SubjectDao {
 		    }
 		    return null;
 		  }
+	 
+	 @Override
+	  public void delete(int id) {
+	    String sql = String.format("DELETE FROM  %s WHERE subject_id=%d;", table, id);
+	    System.out.println(sql);
+	    jdbcTemplate.execute(sql);
+	  }
 }
