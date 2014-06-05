@@ -16,7 +16,15 @@
     <!-- Register Annotation Handler -->
     <mvc:annotation-driven /> 
     
+    <!-- HandlerMapping -->  
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>  
+	   
+	<!-- HandlerAdapter -->  
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>  
+    
     <mvc:view-controller path="/" view-name="user"/>
+    
+    
     <!-- Register View Resolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>

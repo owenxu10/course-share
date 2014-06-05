@@ -74,20 +74,34 @@ public class UserController {
 			  						HttpServletRequest request,HttpServletResponse response) { 
 		  
 		  System.out.println(username+"/"+password+"/"+email);
-		  User user = userService.registerUser(username,password,email);
+		
 		  boolean NoSame = userService.checkUser(username);
-		  request.getSession().setAttribute("username", user.getUsername());
-		  request.getSession().setAttribute("id", user.getId());
-		  Cookie cusername = new Cookie("username",user.getUsername());
 		  
-		  response.addCookie(cusername);
 		  
-          if(NoSame==true)
-		  return "redirect:/problemset";
+          if(NoSame==true){
+        	  //new user
+        	  User user = userService.registerUser(username,password,email);
+        	  request.getSession().setAttribute("username", user.getUsername());
+    		  request.getSession().setAttribute("id", user.getId());
+    		  Cookie cusername = new Cookie("username",user.getUsername());
+    		  response.addCookie(cusername);
+        	  return "redirect:/problemset";
+          }
+		 
           else 
 		  return "false";
 	  }
 
+	  
+	  
+	  
+	  @RequestMapping(value = "/info", method = RequestMethod.GET)
+	  public ModelAndView info(HttpServletRequest request,HttpServletResponse response) {
+		  ModelMap userMap = new ModelMap();
+		 int userid =  (int) request.getSession().getAttribute("id");
+		 userMap.addAttribute("ID", userid);
+		 return new ModelAndView("info", userMap);
+	  }
 	  /* 
 	   * Action: '/logout', Method: POST
 	   * register.

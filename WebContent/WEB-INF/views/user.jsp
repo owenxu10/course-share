@@ -115,10 +115,13 @@
        
          
           <footer class="white navbar-fixed-bottom">
-	   	  还没有注册用户？ <button id="toLogin" class="btn btn-success">登录</button>
+	   	  已注册用户？ <button id="toLogin" class="btn btn-success">登录</button>
 	      </footer>
   	 </div>
 </div>
+
+
+
      
   </body>
 </html>
