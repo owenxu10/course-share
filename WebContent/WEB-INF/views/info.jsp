@@ -58,9 +58,7 @@ Integer userid = (Integer) request.getSession().getAttribute("id");
               <span class="glyphicon glyphicon-list-alt"></span> 专题库
             </a>
           </li>
-          
-          
-          
+           
            <li >
             <a href="<%=path%>/image">
               <span class="glyphicon glyphicon-inbox"></span>资源库
