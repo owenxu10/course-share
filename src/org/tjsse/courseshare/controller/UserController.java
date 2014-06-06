@@ -1,5 +1,7 @@
 package org.tjsse.courseshare.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.service.UserService;
+import org.tjsse.courseshare.bean.Orders;
 import org.tjsse.courseshare.bean.User;
 
 
@@ -47,19 +50,20 @@ public class UserController {
 		  
 		  System.out.println(username+"/"+password+"   "+rememberMe);
 		  int ID = userService.loginUser(username,password);
-		  request.getSession().setAttribute("username", username);
-		  request.getSession().setAttribute("id", ID);
+		  System.out.println("id:"+ID);
 		  if(ID==0)
-		    return "false";
+		    return "error";
 		  else{
+			  System.out.println("id!=0");
+			  request.getSession().setAttribute("username", username);
+			  request.getSession().setAttribute("id", ID);
 			  if(rememberMe=true) {
 				  Cookie cusername = new Cookie("username",username);
 				  cusername.setMaxAge(3600);
 				  cusername.setPath("/");
 				  response.addCookie(cusername);
 			  }
-				 
-			  return "redirect:/problemset";   
+			  return "success";   
 		  }
 	  }
 	  
@@ -81,7 +85,7 @@ public class UserController {
           if(NoSame==true){
         	  //new user
         	  User user = userService.registerUser(username,password,email);
-        	  request.getSession().setAttribute("username", user.getUsername());
+        	  request.getSession().setAttribute("usernameuser.getId()", user.getUsername());
     		  request.getSession().setAttribute("id", user.getId());
     		  Cookie cusername = new Cookie("username",user.getUsername());
     		  response.addCookie(cusername);
@@ -93,13 +97,42 @@ public class UserController {
 	  }
 
 	  
-	  
+	  /* 
+	   * Action: '/register', Method: POST
+	   * register.
+	   */
+	  @RequestMapping(value = "/modify", method = RequestMethod.POST)
+	  public String modify(@RequestParam("userid") int userid, 
+			  				@RequestParam("username") String username,
+			  				@RequestParam("password") String password,
+			  				@RequestParam("email")    String email, 
+			  				HttpServletRequest request,HttpServletResponse response) { 
+		  
+		  	
+			  
+        	  User user = userService.modifyUser(userid,username,password,email);
+    		  
+        	  return "redirect:/user/info";
+         
+	  }
+
 	  
 	  @RequestMapping(value = "/info", method = RequestMethod.GET)
 	  public ModelAndView info(HttpServletRequest request,HttpServletResponse response) {
 		  ModelMap userMap = new ModelMap();
 		 int userid =  (int) request.getSession().getAttribute("id");
+		 String email;
+		 String password;
+		// String username;
+		 //get user info by id
+		 List<User> Users = userService.getUser(userid);
+		 email = Users.get(0).getEmail();
+		 password = Users.get(0).getPassword();
+		// username = Users.get(0).getUsername();
 		 userMap.addAttribute("ID", userid);
+		 //userMap.addAttribute("username", username);
+		 userMap.addAttribute("email", email);
+		 userMap.addAttribute("password", password);
 		 return new ModelAndView("info", userMap);
 	  }
 	  /* 

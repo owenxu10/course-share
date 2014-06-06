@@ -19,7 +19,7 @@ $(function() {
 	
 	$("#modifyInfo").click(function() {
 		//to /modify
-		
+		window.location.href = ROOT + 'user/info';
      });
 	
 	

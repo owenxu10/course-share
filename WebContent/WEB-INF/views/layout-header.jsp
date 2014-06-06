@@ -50,17 +50,19 @@
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
         <ul id="cs-header-nav" class="nav navbar-nav">
+         
+           <li class="<%=libType.isEqual(LibType.PROBLEMSET, "active") %>">
+            <a href="<%=path%>/problemset">
+              <span class="glyphicon glyphicon-book"></span> <%=LibType.PROBLEMSET.getName() %>
+            </a>
+          </li> 
+          
           <li class="<%=libType.isEqual(LibType.SUBJECT, "active") %>">
             <a href="<%=path%>/subject">
               <span class="glyphicon glyphicon-list-alt"></span> <%=LibType.SUBJECT.getName() %>
             </a>
           </li>
           
-           <li class="<%=libType.isEqual(LibType.PROBLEMSET, "active") %>">
-            <a href="<%=path%>/problemset">
-              <span class="glyphicon glyphicon-book"></span> <%=LibType.PROBLEMSET.getName() %>
-            </a>
-          </li>
           
            <li class="<%=libType.isEqual(LibType.RESOURCE, "active") %>">
             <a href="<%=path%>/image">
@@ -69,7 +71,7 @@
           </li>
           
 			<li class="dropdown">
-	          <a class="dropdown-toggle" data-toggle="dropdown"> <%=username %> <b class="caret"></b></a>
+	          <a class="dropdown-toggle" data-toggle="dropdown"><span class=" glyphicon glyphicon-user"></span> <%=username %> <b class="caret"></b></a>
 	          <ul  id ="drowline" class="dropdown-menu  inverse-dropdown">
 	            <li>
 	            	<a id="modifyInfo" >修改信息</a>

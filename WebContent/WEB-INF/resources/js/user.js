@@ -58,14 +58,14 @@ $(function() {
 		 			  url: loginAddress,
 		 			  data: {username:loginusername,
 		 				  	 password:loginpassword,
-		 				  	 rememberMe:rememberMe}
-		 			}).error(function(){
-		 				_show('#logintext');
-		 			})
-		 			.done(function(){
-		 				 window.location.href = ROOT + 'problemset/';
-		 			});
-		 			 
+		 				  	 rememberMe:rememberMe},
+		 			  success:function(data){
+		 				  if(data=="success")
+		 					 window.location.href = ROOT + 'problemset/';
+		 				  else
+		 					  _show("#logintext");
+			 			}
+		 		});
 	     });
 	  
 	  $('#register').click(function() {
@@ -96,5 +96,37 @@ $(function() {
 		 			
 	     });
 	  
+	  $('#canModify').click(function(){
+		  _show("#modifyform");
+		  _hide("#infoform");
+	  });
+	  
+	  $('#sureModify').click(function() {
+		  
+		  var userid = $("#userid").val();
+  		  
+		  var modifyusername= $("#modifyusername").val();
+		  
+		  var modifypassword= $("#modifypassword").val();
+
+		  var modifyemail= $("#modifyemail").val();
+		  
+		  var modifyAddress = ROOT + 'user/modify';
+		  
+		 		$.ajax({
+		 			  type: "POST",
+		 			  url: modifyAddress,
+		 			  data: {
+		 				     userid:userid,
+		 				  	 username:modifyusername,
+		 				  	 password:modifypassword,
+		 				  	 email:modifyemail
+		 			  		},
+		 			  success:function(){
+		 					 window.location.href = ROOT + 'user/info';
+			 			}
+		 		});
+	 			
+	     });
 
 });
