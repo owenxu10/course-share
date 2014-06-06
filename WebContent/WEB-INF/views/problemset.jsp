@@ -118,7 +118,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
      <!-- form of uploading problem -->
-		<form role="form" id="uploadForm" " method="POST" enctype="multipart/form-data" action="/course-share/problemset/upload">
+		<form role="form" id="uploadForm" " method="POST" enctype="multipart/form-data" >
       <div class="modal-header">
         <button type="button" id="ps-uploadClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="uploadModalLabel">上传题目</h4>

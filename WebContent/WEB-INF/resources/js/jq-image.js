@@ -51,11 +51,14 @@ $(function() {
 	 			});
 		   
 	   }
-		   
-		
-		
-		
-		
 	});
+	
+	$('button#image-upload').click(function(){
+		  $('#uploadModal').modal({
+			    backdrop:true,
+			    keyboard:true,
+			    show:true
+			});
+	  });
 	
 });

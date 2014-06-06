@@ -64,7 +64,7 @@ public class ImplImageService implements ImageService {
         condition.append(" AND ");
       }
       condition.append(String.format(
-          "(name LIKE '%%%s%%' OR knowledge LIKE '%%%s%%' OR user_name LIKE '%%%s%%')", contents[i],
+          "(name LIKE '%%%s%%' OR knowledge LIKE '%%%s%%' OR username LIKE '%%%s%%')", contents[i],
           contents[i], contents[i]));
       
     }
