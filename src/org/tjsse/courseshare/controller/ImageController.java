@@ -1,5 +1,8 @@
 package org.tjsse.courseshare.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -17,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.tjsse.courseshare.bean.Image;
+import org.tjsse.courseshare.service.FlashService;
 import org.tjsse.courseshare.service.ImageService;
 import org.tjsse.courseshare.util.Config;
 import org.tjsse.courseshare.util.LibType;
@@ -29,7 +34,7 @@ public class ImageController {
 
   @Autowired
   private ImageService imageService;
- 
+  private FlashService flashService;
 
   /* 
    * Action: '/index', Method: GET
@@ -107,5 +112,70 @@ public class ImageController {
       e.printStackTrace();
     }
   }
+  
+  /* 
+   * Action: '/upload', Method: POST
+   * Upload problems from web page.
+   */
+  @RequestMapping(value="/upload", method=RequestMethod.POST)
+  public @ResponseBody boolean uploadProblems( @RequestParam("resourceName") String resourceName,
+											@RequestParam("resourceknowledge") String resourceknowledge,
+											@RequestParam("resourceType") String resourceType,
+											@RequestParam("resourceURL") String resourceURL,
+								            @RequestParam("resourceImage") MultipartFile file){
+ 
+	 
+	boolean result = false;
+	
+	System.out.println(resourceName);
+	System.out.println(resourceknowledge);
+	System.out.println(resourceType);
+	System.out.println(resourceURL);
+	 // 获取文件类型  
+    System.out.println(file.getContentType());  
+    // 获取文件大小  
+    System.out.println(file.getSize());  
+    // 获取文件名称  
+    System.out.println(file.getOriginalFilename());  
+
+	if (!file.isEmpty()) {
+         try {
+             byte[] bytes = file.getBytes();
+             BufferedOutputStream stream =
+                     new BufferedOutputStream(new FileOutputStream(new File(resourceName + "-uploaded")));
+             stream.write(bytes);
+             stream.close(); 
+            
+         } catch (Exception e) {}
+     } else {}
+	
+	
+	if(resourceType=="image"){
+		imageService.uploadImage(resourceName, resourceknowledge, file);
+	}
+	else
+		flashService.uploadFlash(resourceName, resourceknowledge, resourceURL);
+	
+//	problemsetService.uploadProblem(problemType,
+//		    problemDiff,
+//			problemKnowledge,
+//		    problemContent,
+//			keyTypeText,
+//			keyTypePic,
+//			keyContent,
+//			file);
+
+	
+	//if success 
+	result= true;
+	return result;
+  }
+  
+  
+  
+  
+  
+  
+  
 
 }

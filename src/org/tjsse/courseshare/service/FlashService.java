@@ -2,6 +2,7 @@ package org.tjsse.courseshare.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.tjsse.courseshare.bean.Flash;
 import org.tjsse.courseshare.util.Config;
 
@@ -19,4 +20,5 @@ public interface FlashService {
   
   public byte[] readFlash(String flashNo);
 
+  public boolean uploadFlash(String resourceName, String resourceknowledge, String resourceURL);
 }

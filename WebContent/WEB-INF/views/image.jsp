@@ -69,7 +69,7 @@
 		
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
-	        <a href="#">
+	        <a href="<%=i0.getUrl() %>">
 	        <img  src='<%=i0.getUrl() %>'  alt="...">
 	        <p><%=i0.getName()%></p>
 	      </a>
@@ -79,7 +79,7 @@
 	    </div>
 		<div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
-	        <a href="#">
+	        <a href="<%=i1.getUrl() %>">
 	        <img  src='<%=i1.getUrl() %>'  alt="...">
 	        <p><%=i1.getName()%></p>
 	      </a>
@@ -89,7 +89,7 @@
 	    </div>
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
-	        <a href="#">
+	        <a href="<%=i2.getUrl() %>">
 	        <img  src='<%=i2.getUrl() %>'  alt="...">
 	        <p><%=i2.getName()%></p>
 	      </a>
@@ -99,7 +99,7 @@
 	    </div>
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
-	        <a href="#">
+	        <a href="<%=i3.getUrl() %>">
 	        <img  src='<%=i3.getUrl() %>'  alt="...">
 	        <p><%=i3.getName()%></p>
 	      </a>
@@ -123,7 +123,7 @@
 
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
-	        <a href="#">
+	        <a href="<%=temp.getUrl() %>">
 	        <img  src='<%=temp.getUrl() %>'  alt="...">
 	        <p><%=temp.getName()%></p>
 	      </a>
@@ -151,86 +151,49 @@
 		<form role="form" id="uploadForm" " method="POST" enctype="multipart/form-data" >
       <div class="modal-header">
         <button type="button" id="ps-uploadClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="uploadModalLabel">上传题目</h4>
+        <h4 class="modal-title" id="uploadModalLabel">上传资源</h4>
       </div>
       <div class="modal-body">
-		  
-	    <label >题型</label>
-	    <div>
-		 <%
-		  String typediffs[][] = {
-		    {"concept",  "cs-frame-grey", "概念题"},
-		    {"blankfill", "cs-frame-blue", "填空题"},
-		    {"choice",  "cs-frame-green", "选择题"},
-		    {"question",  "cs-frame-yellow", "问答题"},
-		    {"integrate", "cs-frame-red", "综合题"}
-		  };
-		  for(String[] d : typediffs) { %>
-		   <label class="radio-inline">
-		      <input type="radio" name="typeRadio"  value="<%=d[2] %>" id="<%=d[0] %>" >
-		      <span class="btn cs-radio-text <%=d[1] %>"><%=d[2] %></span>
-		   </label>
- 		 <% } %>
-		</div>
-	    <br/>
-		<label >难度</label>
-		<div>
-		 <%
-		  String uploaddiffs[][] = {
-		    {"btn-primary", "1", "1级"},
-		    {"btn-info", "2", "2级"},
-		    {"btn-success", "3", "3级"},
-		    {"btn-warning", "4", "4级"},
-		    {"btn-danger", "5", "5级"}
-		  };
-		  for(String[] d : uploaddiffs) { %>
-		   <label class="radio-inline">
-		      <input type="radio" name="diffRadio"  value="<%=d[1] %>" id="<%=d[1] %>">
-		      <span class="btn cs-radio-text <%=d[0] %>"><%=d[2] %></span>
-		   </label>
- 		 <% } %>
+          <div class="form-group">
+		    <label >资源名称</label>
+			 <input type="text" class="form-control" id="inputname" name="inputname" placeholder="资源名称...">
 		 </div>
-		<br/>
+		 
 		 <div class="form-group">
-		    <label >知识点</label>
+		     <label >知识点</label>
 		    <input type="text" class="form-control" id="inputknowledge" name="inputknowledge" placeholder="知识点...">
 		  </div>
 		  
-		 <div class="form-group">
-		    <label >题目内容</label>
-		    <textarea class="form-control" id="problemContent" name="problemContent" rows="5" placeholder="输入题目内容..."></textarea>
-		  </div>
 		  
-		  <hr>
-		  
-		  <label >答案信息</label>
-		  
+		  <label >资源类型</label>
 		  <div>
-		   <label class="checkbox-inline">
-		      <input type="checkbox" name="keyCheckbox"  value="text" id="textkey"> 
-		      <span class="cs-typecheckbox-text">文字类型</span>
+		   <label class="radio-inline">
+		      <input type="radio" name="keyradio"  value="image" id="imagekey" checked> 
+		      <span class="cs-typecheckbox-text">图片类型</span>
 		   </label>
-		   <label class="checkbox-inline">
-		      <input type="checkbox" name="keyCheckbox"  value="pic" id="filekey"> 
-		      <span class="cs-typecheckbox-text ">图片类型</span>
+		   <label class="radio-inline">
+		      <input type="radio" name="keyradio"  value="flash" id="flashkey"> 
+		      <span class="cs-typecheckbox-text ">Flash类型</span>
 		   </label>
 		 </div>
-		 
-		 <br/>
-		 
-		  <div class="form-group ps-hidden" id="textareakey">
-		    <label for="exampleInputEmail1">答案内容</label>
-		    <textarea class="form-control" name="keyContent" id="keyContent" rows="5" placeholder="输入答案内容..."></textarea>
-		  </div>
-		
-		  <div class="form-group ps-hidden"  id="uploadkey" >
-		    <label for="exampleInputFile" >答案文件</label>
+		  <br/>
+		  <div class="form-group "  id="uploadImage" >
+		    <label for="exampleInputFile" >图片文件</label>
 		    <input type="file" id="uploadFile" name="uploadFile"  accept="image/*|video/*" required>
-		    <p class="help-block">请上传包含答案的文件</p>
+		    <p class="help-block">请上传图片文件</p>
 		  </div> 
+		  
+		  <div class="form-group ps-hidden" id="uploadURL">
+		   	<div class="form-group">
+		     <label >Flash URL</label>
+		   	 <input type="url" class="form-control" id="inputURL" name="inputURL" placeholder="URL..">
+		  	</div>
+		 </div>
+		
+		  
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='problemUpload'>上传</button>
+        <button type="button" class="btn btn-primary" id='resourceUpload'>上传</button>
       </div>
       </form>
     </div><!-- /.modal-content -->
@@ -238,6 +201,19 @@
 </div><!-- /.modal -->
 
   
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+         <button type="button" class="close" id="closeUploadSuccess" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4 class="modal-title" id="uploadModalLabel">上传成功</h4>
+	  	</div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
   
   
   

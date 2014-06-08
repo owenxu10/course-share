@@ -96,4 +96,11 @@ public class ImplFlashService implements FlashService {
     return data;
   }
 
+@Override
+public boolean uploadFlash(String resourceName, String resourceknowledge,
+		String resourceURL) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
 }

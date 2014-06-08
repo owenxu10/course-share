@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.tjsse.courseshare.bean.Image;
 import org.tjsse.courseshare.dao.ImageDao;
 import org.tjsse.courseshare.service.ImageService;
@@ -64,7 +65,7 @@ public class ImplImageService implements ImageService {
         condition.append(" AND ");
       }
       condition.append(String.format(
-          "(name LIKE '%%%s%%' OR knowledge LIKE '%%%s%%' OR username LIKE '%%%s%%')", contents[i],
+          "(name LIKE '%%%s%%' OR knowledge LIKE '%%%s%%' OR user_name LIKE '%%%s%%')", contents[i],
           contents[i], contents[i]));
       
     }
@@ -96,5 +97,12 @@ public class ImplImageService implements ImageService {
     }
     return data;
   }
+
+@Override
+public boolean uploadImage(String resourceName, String resourceknowledge,
+		MultipartFile file) {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 }
