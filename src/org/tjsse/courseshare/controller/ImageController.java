@@ -1,5 +1,7 @@
 package org.tjsse.courseshare.controller;
 
+import java.io.File;
+import java.awt.Image;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,8 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.tjsse.courseshare.bean.Image;
-import org.tjsse.courseshare.service.FlashService;
+import org.tjsse.courseshare.bean.Resource;
 import org.tjsse.courseshare.service.ImageService;
 import org.tjsse.courseshare.util.Config;
 import org.tjsse.courseshare.util.LibType;
@@ -34,18 +36,16 @@ public class ImageController {
 
   @Autowired
   private ImageService imageService;
-  private FlashService flashService;
 
   /* 
    * Action: '/index', Method: GET
    * Default index page.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ModelAndView index() { 
+  public ModelAndView index(HttpServletRequest request) { 
     ModelMap imageMap = new ModelMap();
     imageMap.addAttribute("libType", LibType.RESOURCE);
     System.out.println("in /image");
-	  
     return new ModelAndView("image", imageMap);
   }
  
@@ -60,15 +60,15 @@ public class ImageController {
 	  
 	  String[] str ={searchKeyWord} ;
 	  //get the list of result from the service;
-	 List<Image> images = imageService.findImages(str);
+	 List<Resource> images = imageService.findImages(str);
 	    if (images == null) {
-	    	images = new ArrayList<Image>();
+	    	images = new ArrayList<Resource>();
 	    }
 	  
-	  for (Image p : images) {
+	  for (Resource p : images) {
 		  System.out.println(p.getId());
 	    }
-
+	  request.getSession().setAttribute("keyword", searchKeyWord);
 	  request.getSession().setAttribute("images", images);
 	  return "redirect:/image"; //done
   }
@@ -83,7 +83,7 @@ public class ImageController {
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
-  public List<Image> listImages(
+  public List<Resource> listImages(
       @RequestParam(value = "image_content", required = false) String imageContent) {
     String[] contents = null;
     if (imageContent != null) {
@@ -117,27 +117,24 @@ public class ImageController {
    * Action: '/upload', Method: POST
    * Upload problems from web page.
    */
-  @RequestMapping(value="/upload", method=RequestMethod.POST)
-  public @ResponseBody boolean uploadProblems( @RequestParam("resourceName") String resourceName,
+  @RequestMapping(value="/uploadimage", method=RequestMethod.POST)
+  public @ResponseBody boolean uploadImage( @RequestParam("resourceName") String resourceName,
 											@RequestParam("resourceknowledge") String resourceknowledge,
 											@RequestParam("resourceType") String resourceType,
-											@RequestParam("resourceURL") String resourceURL,
-								            @RequestParam("resourceImage") MultipartFile file){
- 
-	 
+								            @RequestParam("resourceImage") MultipartFile file,
+								            HttpServletRequest request){
 	boolean result = false;
 	
 	System.out.println(resourceName);
 	System.out.println(resourceknowledge);
 	System.out.println(resourceType);
-	System.out.println(resourceURL);
 	 // 获取文件类型  
     System.out.println(file.getContentType());  
     // 获取文件大小  
     System.out.println(file.getSize());  
     // 获取文件名称  
     System.out.println(file.getOriginalFilename());  
-
+  
 	if (!file.isEmpty()) {
          try {
              byte[] bytes = file.getBytes();
@@ -149,33 +146,39 @@ public class ImageController {
          } catch (Exception e) {}
      } else {}
 	
+	  String username = (String) request.getSession().getAttribute("username");
+	  Integer id = (Integer) request.getSession().getAttribute("id");
 	
-	if(resourceType=="image"){
-		imageService.uploadImage(resourceName, resourceknowledge, file);
-	}
-	else
-		flashService.uploadFlash(resourceName, resourceknowledge, resourceURL);
 	
-//	problemsetService.uploadProblem(problemType,
-//		    problemDiff,
-//			problemKnowledge,
-//		    problemContent,
-//			keyTypeText,
-//			keyTypePic,
-//			keyContent,
-//			file);
+    imageService.uploadImage(resourceName, resourceknowledge, file,username,id);
+	result= true;
+	return result;
+	
+	
+  }
+  
+  @RequestMapping(value="/uploadflash", method=RequestMethod.POST)
+  public @ResponseBody boolean uploadFlash( @RequestParam("resourceName") String resourceName,
+											@RequestParam("resourceknowledge") String resourceknowledge,
+											@RequestParam("resourceType") String resourceType,
+											@RequestParam("resourceURL") String resourceURL,
+								            HttpServletRequest request){	 
+	boolean result = false;
+	
+	System.out.println(resourceName);
+	System.out.println(resourceknowledge);
+	System.out.println(resourceType);
+	System.out.println(resourceURL);
+	
+    String username = (String) request.getSession().getAttribute("username");
+    Integer id = (Integer) request.getSession().getAttribute("id");
+  
+    imageService.uploadFlash(resourceName, resourceknowledge, resourceURL,username,id);
 
 	
 	//if success 
 	result= true;
 	return result;
+  
   }
-  
-  
-  
-  
-  
-  
-  
-
 }

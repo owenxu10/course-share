@@ -1,78 +1,73 @@
 package org.tjsse.courseshare.bean;
 
 public class Resource {
-  
-  public static final String DOC = "document";
-  public static final String SWF = "flash";
-  public static final String ZIP = "zipfile";
-  public static final String URL = "url";
-  public static final String JPG = "picture";
-  
-  private Integer id;
-  private String name;
-  private String description;
-  private String mediaType;
-  private String fileFormat;
-  private Double fileSize;
-  private Integer isSubject;
-  private String url;
+	 private Integer id;
+	  private String name;
+	  private String knowledge;
+	  private String url;
+	  private String address;
+	  private Integer user_id;
+	  private String user_name;
+	  
+	  public Integer getId() {
+	    return id;
+	  }
 
-  public Integer getId() {
-    return id;
-  }
+	  public void setId(Integer id) {
+	    this.id = id;
+	  }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	  public String getName() {
+	    return name;
+	  }
 
-  public String getName() {
-    return name;
-  }
+	  public void setName(String name) {
+	    this.name = name;
+	  }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	  public String getKnowledge() {
+	    return knowledge;
+	  }
 
-  public String getDescription() {
-    return description;
-  }
+	  public void setKnowledge(String knowledge) {
+	    this.knowledge = knowledge;
+	  }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	  public String getUrl() {
+	    return url;
+	  }
 
-  public String getMediaType() {
-    return mediaType;
-  }
+	  public void setUrl(String url) {
+	    this.url = url;
+	  }
+	  
+	  public Integer getUserId() {
+		return user_id;
+	  }
 
-  public void setMediaType(String mediaType) {
-    this.mediaType = mediaType;
-  }
+	  public void setUserId(Integer userid) {
+		this.user_id = userid;
+	  }
 
-  public String getFileFormat() {
-    return fileFormat;
-  }
+	/**
+	 * @return the username
+	 */
+	public String getUserName() {
+		return user_name;
+	}
 
-  public void setFileFormat(String fileFormat) {
-    this.fileFormat = fileFormat;
-  }
+	/**
+	 * @param username the username to set
+	 */
+	public void setUserName(String username) {
+		this.user_name = username;
+	}
 
-  public Double getFileSize() {
-    return fileSize;
-  }
+	public String getAddress() {
+		return address;
+	}
 
-  public void setFileSize(Double fileSize) {
-    this.fileSize = fileSize;
-  }
-
-
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }

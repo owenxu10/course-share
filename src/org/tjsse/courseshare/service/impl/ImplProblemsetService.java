@@ -1,6 +1,5 @@
 package org.tjsse.courseshare.service.impl;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,7 +35,6 @@ import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.tjsse.courseshare.bean.DSPicture;
 import org.tjsse.courseshare.bean.Problem;

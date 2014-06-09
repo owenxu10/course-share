@@ -1,18 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="org.tjsse.courseshare.util.LibType"%>
 <%@ page import="java.util.Map, java.util.HashMap, java.util.List,java.util.ArrayList" %>
-<%@ page import="org.tjsse.courseshare.bean.Image" %>
+<%@ page import="org.tjsse.courseshare.bean.Resource" %>
 
 <%   String path = request.getContextPath(); 
    LibType libType = (LibType) request.getAttribute("libType");
-   List<Image> images= new ArrayList<Image>();
+   List<Resource> images= new ArrayList<Resource>();
    String cssfooter="image-footer";
    String cssheader="image-frame";
+   String keyWord = "";
 	int end=-1;
 	int start=0;
-   if( (List<Image>) request.getSession().getAttribute("images")!=null){
+	if( (String) request.getSession().getAttribute("keyword")!=null)
+		 keyWord = (String)request.getSession().getAttribute("keyword");
+
+   if( (List<Resource>) request.getSession().getAttribute("images")!=null){
 		
-		images = (List<Image>)  request.getSession().getAttribute("images");
+		images = (List<Resource>)  request.getSession().getAttribute("images");
 		end = images.size()-1;
 		
 	     cssfooter="cs-footer";
@@ -43,7 +47,7 @@
 <div id="<%=cssheader%>" class="row cs-frame-default">
   <div id="cs-image-navbar">
     <div id="image-searchbar" class="input-group input-group-lg">
-      <input type="text" id="image-keyword" class="form-control" placeholder="输入资源关键词">
+      <input type="text" id="image-keyword" class="form-control" placeholder="输入资源关键词" value=<%=keyWord %>>
     </div>
     <button type="button" id="image-search" class="btn btn-lg btn-primary">
       <span class="glyphicon glyphicon-search"></span> 搜索资源
@@ -60,51 +64,51 @@
  
 <div id="image-content">
 <% while(end-start>=3){
-	Image i0=images.get(start);
-	Image i1=images.get(start+1);
-	Image i2=images.get(start+2);
-	Image i3=images.get(start+3);
+	Resource i0=images.get(start);
+	Resource i1=images.get(start+1);
+	Resource i2=images.get(start+2);
+	Resource i3=images.get(start+3);
 %>
 	<div class="row">
 		
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
 	        <a href="<%=i0.getUrl() %>">
-	        <img  src='<%=i0.getUrl() %>'  alt="...">
+	        <img  src='<%=i0.getAddress() %>'  alt="...">
 	        <p><%=i0.getName()%></p>
 	      </a>
 	       <p class="image-knowledge">知识点：<%=i0.getKnowledge()%></p> 
-	      <p class="image-author">上传者：<%=i0.getUserId()%></p> 
+	      <p class="image-author">上传者：<%=i0.getUserName()%></p> 
 	      </div>
 	    </div>
 		<div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
 	        <a href="<%=i1.getUrl() %>">
-	        <img  src='<%=i1.getUrl() %>'  alt="...">
+	        <img  src='<%=i1.getAddress()  %>'  alt="...">
 	        <p><%=i1.getName()%></p>
 	      </a>
 	       <p class="image-knowledge">知识点：<%=i1.getKnowledge()%></p> 
-	      <p class="image-author">上传者：<%=i1.getUserId()%></p> 
+	      <p class="image-author">上传者：<%=i1.getUserName()%></p> 
 	      </div>
 	    </div>
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
 	        <a href="<%=i2.getUrl() %>">
-	        <img  src='<%=i2.getUrl() %>'  alt="...">
+	        <img  src='<%=i2.getAddress()  %>'  alt="...">
 	        <p><%=i2.getName()%></p>
 	      </a>
 	       <p class="image-knowledge">知识点：<%=i2.getKnowledge()%></p> 
-	      <p class="image-author">上传者：<%=i2.getUserId()%></p> 
+	      <p class="image-author">上传者：<%=i2.getUserName()%></p> 
 	      </div>
 	    </div>
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
 	        <a href="<%=i3.getUrl() %>">
-	        <img  src='<%=i3.getUrl() %>'  alt="...">
+	        <img  src='<%=i3.getAddress() %>'  alt="...">
 	        <p><%=i3.getName()%></p>
 	      </a>
 	       <p class="image-knowledge">知识点：<%=i3.getKnowledge()%></p> 
-	      <p class="image-author">上传者：<%=i3.getUserId()%></p> 
+	      <p class="image-author">上传者：<%=i3.getUserName()%></p> 
 	      </div>
 	    </div>
 	
@@ -118,17 +122,17 @@
 <div class="row">
 
 <% for(int i= start; i<=end;i++) { 
- Image temp=images.get(i);
+	Resource temp=images.get(i);
  %>
 
 	    <div class="col-xs-6 col-md-3">
 	      <div class="thumbnail">
 	        <a href="<%=temp.getUrl() %>">
-	        <img  src='<%=temp.getUrl() %>'  alt="...">
+	        <img  src='<%=temp.getAddress() %>'  alt="...">
 	        <p><%=temp.getName()%></p>
 	      </a>
 	       <p class="image-knowledge">知识点：<%=temp.getKnowledge()%></p> 
-	      <p class="image-author">上传者：<%=temp.getUserId()%></p> 
+	      <p class="image-author">上传者：<%=temp.getUserName()%></p> 
 	      </div>
 	    </div>
 	    
@@ -193,7 +197,8 @@
 		  
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='resourceUpload'>上传</button>
+        <button type="button" class="btn btn-primary" id='imageUpload'>上传</button>
+        <button type="button" class="btn btn-primary ps-hidden" id='flashUpload'>上传</button>
       </div>
       </form>
     </div><!-- /.modal-content -->

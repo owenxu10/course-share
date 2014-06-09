@@ -54,21 +54,6 @@ CREATE TABLE `problem` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/*Table structure for table `resource` */
-
-DROP TABLE IF EXISTS `resource`;
-
-CREATE TABLE `resource` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_bin NOT NULL,
-  `description` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  `media_type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `file_format` varchar(20) COLLATE utf8_bin NOT NULL,
-  `file_size` double NOT NULL,
-  `link_type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `url` varchar(1000) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Table structure for table `user` */
 
@@ -92,16 +77,19 @@ CREATE TABLE `problem_resource` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE `image` (
+DROP TABLE IF EXISTS `resource`;
+CREATE TABLE `resource` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `knowledge` varchar(45) NOT NULL,
-  `url` varchar(45) NOT NULL,
+  `url` varchar(200) NOT NULL,
+  `address` varchar(45) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `username` varchar(45) NOT NULL,
+  `user_name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
 
 DROP TABLE IF EXISTS `subject`;
 

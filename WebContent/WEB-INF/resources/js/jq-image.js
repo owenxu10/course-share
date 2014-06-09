@@ -23,6 +23,7 @@ $(function() {
 	  
 	  
 	$("#image-search").click(function(){
+	
 		//UI change
 		if(atTopPosition == false){
 		//	$("#center-frame").animate({top: "-=40%"}, "slow");
@@ -36,7 +37,6 @@ $(function() {
 	   // do some transactions
 	   var searchKeyWord = $("#image-keyword").val();
 	   var searchAddress = ROOT + 'image/search';
-	   
 	   
 	   if(searchKeyWord!=""){
 		   $.ajax({
@@ -63,46 +63,39 @@ $(function() {
 	
 	 $("#imagekey").click(function(){
 		  if ($("#imagekey").is(":checked"))  {        
-			  _show('#uploadImage');
-			  _hide('#uploadURL');
+			  _show('#uploadImage',"#imageUpload");
+			  _hide('#uploadURL',"#flashUpload");
 		  }
 		  else{
-			  _hide('#uploadImage');
-			  _show('#uploadURL');
+			  _hide('#uploadImage',"#imageUpload");
+			  _show('#uploadURL',"#flashUpload");
 		  }
 		});
 	  
 	  $("#flashkey").click(function(){
 		  if ($("#flashkey").is(":checked"))  {
-			  _hide('#uploadImage');
-			  _show('#uploadURL');
+			  _hide('#uploadImage',"#imageUpload");
+			  _show('#uploadURL',"#flashUpload");
 			 }
 		  else{
-			  _show('#uploadImage');
-			  _hide('#uploadURL');
+			  _show('#uploadImage',"#imageUpload");
+			  _hide('#uploadURL',"#flashUpload");
 		  }
 			 
 	  });
 	
-	  $('button#resourceUpload').click(function() {
+	  $('button#imageUpload').click(function() {
 		  
-		  var updateAddress = ROOT + 'image/upload';
+		  var updateAddress = ROOT + 'image/uploadimage';
 		  var uploadForm = new FormData();
 		  
 		  //get the data from page
 		  var inputname = $("#inputname").val();
 		  var inputknowledge= $("#inputknowledge").val();
 		  
-		  var inputtype = "null";
-		  
-		  var inputURL= $("#inputURL").val();
-		  
+		  var inputtype = "image";
 		  var inputImage = uploadFile.files[0] ;
 		  
-		  if(uploadFile.files[0]==null){
-			  inputImage = null;
-		  }
-		 
 		  
 		  $("#uploadFile").change(function() {
 			  var ext = $('#uploadFile').val().split('.').pop().toLowerCase();
@@ -120,7 +113,6 @@ $(function() {
 		  uploadForm.append("resourceName", inputname);
 		  uploadForm.append("resourceknowledge", inputknowledge);
 		  uploadForm.append("resourceType", inputtype);
-		  uploadForm.append("resourceURL",  inputURL);
 		  uploadForm.append("resourceImage", inputImage);
 		  
 		  $.ajax({
@@ -144,5 +136,48 @@ $(function() {
 			  });
 	});
 	
+	  
+	  $('button#flashUpload').click(function() {
+		  
+		  var updateAddress = ROOT + 'image/uploadflash';
+		  var uploadForm = new FormData();
+		  
+		  //get the data from page
+		  var inputname = $("#inputname").val();
+		  var inputknowledge= $("#inputknowledge").val();
+		  
+		  var inputtype = "flash";
+		  
+		  var inputURL= $("#inputURL").val();
+		  
+		  if(uploadFile.files[0]==null){
+			  inputImage = null;
+		  }
+			 
+		  uploadForm.append("resourceName", inputname);
+		  uploadForm.append("resourceknowledge", inputknowledge);
+		  uploadForm.append("resourceType", inputtype);
+		  uploadForm.append("resourceURL",  inputURL);
+		  
+		  $.ajax({
+			    url: updateAddress,
+			    data: uploadForm,
+			    dataType: 'text',
+			    processData: false,
+			    contentType: false,
+			    type: 'POST',
+			    success: function(data){
+			    	$('#uploadModal').modal('hide');
+			 		$('#successModal').modal({
+			   	    backdrop:true,
+			   	    keyboard:true,
+			   	    show:true
+			 		});
+			    },
+			    error: function(request) {
+	                alert("Connection error");
+	            }
+			  });
+	});
 	
 });
