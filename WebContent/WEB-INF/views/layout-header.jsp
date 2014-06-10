@@ -3,8 +3,8 @@
 <%
   String path = request.getContextPath();
   LibType libType = (LibType) request.getAttribute("libType");
-  String pageTitle = "计算机系统结构资源 —— " + libType.getName();
-  String devName = "同济大学软件学院系统结构课程组开发";
+  String pageTitle = "教育资源管理系统 —— " + libType.getName();
+  String devName = "Learning Resource Management System";
   
   String username = (String)request.getSession().getAttribute("username");
   

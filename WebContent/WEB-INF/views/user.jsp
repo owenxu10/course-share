@@ -46,9 +46,9 @@
 	    <div class="container">
 	      <div class="navbar-header">
 	        <div id="cs-header-brand" class="navbar-brand">
-	          <span id="cs-header-title">计算机系统结构资源 </span>
+	          <span id="cs-header-title">教育资源管理系统</span>
 	          <br>
-	          <span id="cs-header-subtitle">同济大学软件学院系统结构课程组开发</span>
+	          <span id="cs-header-subtitle">Learning Resource Management System </span>
 	        </div>
 	      </div>
 	    
@@ -59,7 +59,7 @@
 
     <div id="login-wraper" class="login-form"">
          <form class="form">
-             <legend>登陆计算机系统结构资源 </legend>
+             <legend>登陆LRMS </legend>
              <div class="body">
                  <label>用户名</label>
                  <input type="text" id="loginusername" class="form-control">
@@ -93,7 +93,7 @@
  <div id="registerForm"  class="ps-hidden register-form">
  	    <div id="register-wraper" >
          <form class="form">
-             <legend>注册计算机系统结构资源 </legend>
+             <legend>注册LRMS </legend>
              <div class="body">
                  <label >用户名</label>
                  <input type="text" class="form-control" id="registerusername">
