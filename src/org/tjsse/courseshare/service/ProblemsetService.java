@@ -23,6 +23,15 @@ public interface ProblemsetService {
 			String keyTypePic,
 			String keyContent,
 			MultipartFile file) ;
+  
+  public boolean  uploadProblemWithoutImage( String problemType,
+		    String problemDiff,
+			String problemKnowledge,
+		    String problemContent,
+			String keyTypeText,
+			String keyTypePic,
+			String keyContent) ;
+
 //  public List<Problem> findProblems();
 
 //  public List<Problem> findProblems(String[] contents);

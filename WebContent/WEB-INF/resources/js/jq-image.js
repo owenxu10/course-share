@@ -131,7 +131,7 @@ $(function() {
 			 		});
 			    },
 			    error: function(request) {
-	                alert("Connection error");
+	                alert("请输入完整的资源信息！");
 	            }
 			  });
 	});
@@ -175,7 +175,7 @@ $(function() {
 			 		});
 			    },
 			    error: function(request) {
-	                alert("Connection error");
+	                alert("请输入完整的资源信息！");
 	            }
 			  });
 	});

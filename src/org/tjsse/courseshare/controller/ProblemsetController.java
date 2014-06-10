@@ -171,6 +171,32 @@ public class ProblemsetController {
 	return result;
   }
   
+  @RequestMapping(value="/uploadwithoutimage", method=RequestMethod.POST)
+  public @ResponseBody boolean uploadProblemswithoutimage( @RequestParam("problemType") String problemType,
+											@RequestParam("problemDiff") String problemDiff,
+											@RequestParam("problemKnowledge") String problemKnowledge,
+											@RequestParam("problemContent") String problemContent,
+											@RequestParam("keyTypeText") String keyTypeText,
+											@RequestParam("keyTypePic") String keyTypePic,
+											@RequestParam("keyContent") String keyContent){
+ 
+	 
+	boolean result = false;
+	
+	
+	problemsetService.uploadProblemWithoutImage(problemType,
+		    problemDiff,
+			problemKnowledge,
+		    problemContent,
+			keyTypeText,
+			keyTypePic,
+			keyContent);
+
+	
+	//if success 
+	result= true;
+	return result;
+  }
   
   
   

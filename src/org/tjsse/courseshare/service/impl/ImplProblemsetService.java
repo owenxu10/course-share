@@ -360,6 +360,40 @@ public class ImplProblemsetService implements ProblemsetService {
 		
   }
   
+  
+  
+  
+  @Override
+  public boolean uploadProblemWithoutImage(String problemType,
+  		String problemDiff, String problemKnowledge, String problemContent,
+  		String keyTypeText, String keyTypePic, String keyContent) {
+	    System.out.println(problemType);
+		System.out.println(problemDiff);
+		System.out.println(problemKnowledge);
+		System.out.println(problemContent);
+		System.out.println(keyTypeText);
+		System.out.println(keyTypePic);
+		System.out.println(keyContent);
+		
+		ProblemInfo pi = new ProblemInfo();
+		
+		String prefix = "<p class='p1' style='text-align:justify;hyphenate:auto;font-family:Times New Roman;font-size:10pt;'>";
+		String suffix = "</p>";
+		String TextPrefix = "<span class='s1' style='color:black;'>";
+		String TextSuffix =	"</span>";	
+			
+		pi.difficulty = Integer.parseInt(problemDiff);
+		pi.problemType = problemType;
+		pi.problemContent = new StringBuffer(prefix+TextPrefix+problemContent+TextSuffix+suffix);
+		pi.keyContent = new StringBuffer(prefix+TextPrefix+keyContent+TextSuffix+suffix);
+		pi.knowledge = problemKnowledge; 
+		
+		return problemDao.save(pi.toProblem()) == null ?true : false;
+			
+  }
+  
+  
+  
 
   // @Override
   // public List<Problem> findProblems() {
@@ -846,6 +880,8 @@ public int CountOfProblems(String[] types, Integer[] diffs, String[] contents,
 	      cond = cond.substring(0, condition.lastIndexOf("AND"));
 	    return problemDao.getCount(cond, offset);
 }
+
+
   
   
 

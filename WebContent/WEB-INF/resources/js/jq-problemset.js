@@ -478,7 +478,7 @@ $(function() {
  $("#uploadFile").change(function() {
 	  var ext = $('#uploadFile').val().split('.').pop().toLowerCase();
 	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-	      alert('invalid extension!');
+	      alert('请上传正确的图片文件!');
 	  }
  });
 	
@@ -531,16 +531,69 @@ $(function() {
 		 		});
 		    },
 		    error: function(request) {
-                alert("Connection error");
+                alert("请输入完整题目信息！");
             }
 		  });
 	
 });
 
+  
+$('button#problemUploadWithoutImage').click(function() {
+	  
+	  var updateAddress = ROOT + 'problemset/uploadwithoutimage';
+	  var uploadForm = new FormData();
+	  
+	  //get the data from page
+	  var problemType= $("input[name='typeRadio']:checked").val();
+	  var problemDiff= $("input[name='diffRadio']:checked").val();
+	  var problemKnowledge= $("#inputknowledge").val();
+	  var problemContent = $("#problemContent").val();
+	 // alert(problemContent);
+	//  problemContent= encodeURI(encodeURI(problemContent));
+	  
+	  var keyTypeText = "null";
+	  var keyTypePic = "null";
+	  var keyContent = $("#keyContent").val(); 
+	  
+	  $("input[name='keyCheckbox']:checked").each(function() {
+			 console.log($(this).val());
+			 if($(this).val()=="text") keyTypeText="text";
+			 if($(this).val()=="pic") keyTypePic="pic";
+		    });
+		 
+	  
+	  uploadForm.append("problemType", problemType);
+	  uploadForm.append("problemDiff", problemDiff);
+	  uploadForm.append("problemKnowledge", problemKnowledge);
+	  uploadForm.append("problemContent", problemContent);
+	  uploadForm.append("keyTypeText", keyTypeText);
+	  uploadForm.append("keyTypePic", keyTypePic);
+	  uploadForm.append("keyContent", keyContent);
+	  
+	  $.ajax({
+		    url: updateAddress,
+		    data: uploadForm,
+		    dataType: 'text',
+		    processData: false,
+		    contentType: false,
+		    type: 'POST',
+		    success: function(data){
+		    	$('#uploadModal').modal('hide');
+		 		$('#successModal').modal({
+		   	    backdrop:true,
+		   	    keyboard:true,
+		   	    show:true
+		 		});
+		    },
+		    error: function(request) {
+                alert("请输入完整题目信息！");
+            }
+		  });
+	
+});
  
   $('button#closeUploadSuccess').click(function() {
-	  window.location.href = ROOT + 'problemset/';
-
+	  _refresh();
   });
  
   
@@ -548,17 +601,51 @@ $(function() {
   
   /* Events in upload problem */
   $("#textkey").click(function(){
-	  if ($("#textkey").is(":checked"))          
-		  _show('#textareakey');
-	  else
-		  _hide('#textareakey');
+	  
+	  if(($("#filekey").is(":checked"))  && ($("#textkey").is(":checked"))  ){
+		  _show('#problemUpload');
+		  _hide('#problemUploadWithoutImage');
+		}
+	  
+	  if(!($("#filekey").is(":checked"))  && !($("#textkey").is(":checked"))  ){
+		  _hide('#problemUpload');
+		  _show('#problemUploadWithoutImage');
+		}
+	  
+	  if ($("#textkey").is(":checked")){   
+		  _show('#textareakey','#problemUploadWithoutImage');
+		  _show('#problemUploadWithoutImage');
+		  _hide('#problemUpload');
+		   
+	  }else{
+		  _hide('#textareakey','#problemUpload');
+		  _hide('#problemUploadWithoutImage');
+		  _show('#problemUpload');
+		  
+	  }
 	});
   
   $("#filekey").click(function(){
-	  if ($("#filekey").is(":checked"))      
+	  
+	  if(($("#filekey").is(":checked"))  && ($("#textkey").is(":checked"))  ){
+		  _show('#problemUpload');
+		  _hide('#problemUploadWithoutImage');
+		}
+	  
+	  if(!($("#filekey").is(":checked"))  && !($("#textkey").is(":checked"))  ){
+		  _hide('#problemUpload');
+		  _show('#problemUploadWithoutImage');
+		}
+	  	  
+	  if ($("#filekey").is(":checked")){
 		  _show('#uploadkey');
-	  else
-		  _hide('#uploadkey');
+		  _show('#problemUpload');
+		  _hide('#problemUploadWithoutImage');
+	  }else{
+		  _hide('#uploadkey','#problemUploadWithoutImage');
+		  _hide('#problemUpload');
+		  _show('#problemUploadWithoutImage');
+	  }
   });
  
  
@@ -636,7 +723,10 @@ $(function() {
 	  		}
   	   }
   	});
-  	
+	 
+	$('#deleteModal').on('hidden.bs.modal', function (e) {
+	 _refresh();
+	})
 
 });
 

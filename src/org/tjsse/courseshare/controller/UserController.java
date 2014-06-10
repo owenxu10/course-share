@@ -57,6 +57,7 @@ public class UserController {
 			  System.out.println("id!=0");
 			  request.getSession().setAttribute("username", username);
 			  request.getSession().setAttribute("id", ID);
+			  request.getSession().setMaxInactiveInterval(0); 
 			  if(rememberMe=true) {
 				  Cookie cusername = new Cookie("username",username);
 				  cusername.setMaxAge(3600);
@@ -85,8 +86,9 @@ public class UserController {
           if(NoSame==true){
         	  //new user
         	  User user = userService.registerUser(username,password,email);
-        	  request.getSession().setAttribute("usernameuser.getId()", user.getUsername());
+        	  request.getSession().setAttribute("username", user.getUsername());
     		  request.getSession().setAttribute("id", user.getId());
+    		  request.getSession().setMaxInactiveInterval(0); 
     		  Cookie cusername = new Cookie("username",user.getUsername());
     		  response.addCookie(cusername);
         	  return "redirect:/problemset";

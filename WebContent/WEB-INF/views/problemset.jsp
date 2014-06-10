@@ -200,7 +200,8 @@
 		  </div> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='problemUpload'>上传</button>
+        <button type="button" class="btn btn-primary ps-hidden" id='problemUpload'>上传</button>
+        <button type="button" class="btn btn-primary " id='problemUploadWithoutImage'>上传</button>
       </div>
       </form>
     </div><!-- /.modal-content -->
@@ -318,10 +319,7 @@
  			   	    show:true
  			 		});
  				 
- 				 
- 				$('#deleteModal').on('hidden.bs.modal', function (e) {
- 					 window.location.href = ROOT + 'problemset/';
- 					})
+ 		
  				 
  			  });
  		
